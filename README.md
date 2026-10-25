@@ -11,6 +11,7 @@
   <img alt="Acceptance tests 12/12" src="https://img.shields.io/badge/acceptance%20tests-12%2F12%20passed-2DD4BF">
   <img alt="Failure drills recovered" src="https://img.shields.io/badge/failure%20drills-all%20recovered-4ADE80">
   <img alt="22 devices, 26 cables" src="https://img.shields.io/badge/lab-22%20devices%20%C2%B7%2026%20cables-38BDF8">
+  <a href="https://youtu.be/VVfJT8srvqo"><img alt="Watch on YouTube" src="https://img.shields.io/badge/YouTube-watch%20the%20walkthrough-FF0000?logo=youtube&logoColor=white"></a>
 </p>
 
 <p align="center">
@@ -26,9 +27,15 @@
 
 ## Watch the walkthrough
 
-A narrated video tour of the whole network covers what each part is, why it is there and why it matters. It then shows live tests and failure drills.
+<p align="center">
+  <a href="https://youtu.be/VVfJT8srvqo">
+    <img src="docs/images/video-thumbnail.jpg" alt="Watch: Data Center Network Explained on YouTube" width="85%">
+  </a>
+</p>
 
-**▶ Video:** the YouTube link will be added here once the walkthrough is published.
+A 16-minute narrated tour of the whole network. It covers what each part is, why it is there and why it matters. Then it shows live tests and failure drills.
+
+**▶ [Watch on YouTube](https://youtu.be/VVfJT8srvqo)**. The video has chapters for every topic and English captions.
 
 ---
 
@@ -152,6 +159,14 @@ The lab passed **12/12 before saving** and **12/12 again after the saved file wa
 | 5 | Core 2 powered off | 222 / 250 | Core 1 took over; internet traffic lost nothing |
 
 These are simulator results. They show behavior, not real-world speed.
+
+<p align="center">
+  <a href="https://youtu.be/VVfJT8srvqo">
+    <img src="docs/images/video-preview.gif" alt="Failure-drill results, from the walkthrough video" width="85%">
+  </a>
+  <br>
+  <sub>From the walkthrough video: packets delivered while each failure was active.</sub>
+</p>
 
 | Public website through static NAT | Internal website by DNS name |
 | --- | --- |
