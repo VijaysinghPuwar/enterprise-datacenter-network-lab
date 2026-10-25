@@ -1,0 +1,194 @@
+Drill F04 phase during collected @sim 4208972
+S5 | SERVICES -> Internet (PAT + BGP) | SVC-MON -> 203.0.113.10 | expect permit | sent=50 received=40 lost=10 (80% delivered)
+S7 | DMZ -> Internet (static NAT) | DMZ-DNS -> 203.0.113.10 | expect permit | sent=50 received=40 lost=10 (80% delivered)
+S1 | MGMT -> WEB-01 (routed, HSRP) | NOC-PC -> 10.10.20.11 | expect permit | sent=50 received=50 lost=0 (100% delivered)
+TOTAL permitted-stream delivery: 130/150
+
+### S5 SVC-MON> ping -n 50 203.0.113.10
+ping -n 50 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=6ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=16ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=7ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=12ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=11ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 50, Received = 40, Lost = 10 (20% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 16ms, Average = 1ms
+
+C:\>
+
+### S7 DMZ-DNS> ping -n 50 203.0.113.10
+ping -n 50 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time=10ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time=5ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time=6ms TTL=124
+Reply from 203.0.113.10: bytes=32 time=9ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 50, Received = 40, Lost = 10 (20% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 10ms, Average = 0ms
+
+C:\>
+
+### S1 NOC-PC> ping -n 50 10.10.20.11
+ping -n 50 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=7ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=5ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=9ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=11ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=29ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=29ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=5ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=7ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=11ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=7ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 50, Received = 50, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 29ms, Average = 2ms
+
+C:\>

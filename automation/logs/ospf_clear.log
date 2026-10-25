@@ -1,0 +1,2 @@
+clear => clear ip ospf process Reset ALL OSPF processes? [no]: 
+answered yes; prompt CORE-1#

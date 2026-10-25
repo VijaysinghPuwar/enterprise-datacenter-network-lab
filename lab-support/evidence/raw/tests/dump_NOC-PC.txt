@@ -1,0 +1,140 @@
+
+Cisco Packet Tracer PC Command Line 1.0
+C:\>ipconfig /renew
+DHCP request failed. 
+
+C:\>
+DHCP request failed. 
+
+C:\>DHCP request failed. 
+
+C:\>DHCP request failed. 
+
+C:\>DHCP request failed. 
+
+C:\>
+   IP Address......................: 10.10.10.100
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: 10.10.10.1
+   DNS Server......................: 10.10.50.10
+
+C:\>ipconfig /renew
+
+   IP Address......................: 10.10.10.100
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: 10.10.10.1
+   DNS Server......................: 10.10.50.10
+
+C:\>ping -n 6 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=6ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 6, Received = 4, Lost = 2 (34% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 6ms, Average = 1ms
+
+C:\>ping -n 6 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=8ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=4ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 8ms, Average = 2ms
+
+C:\>ping -n 6 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=4ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=11ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 11ms, Average = 2ms
+
+C:\>ping -n 6 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ssh -l netadmin 10.10.10.2
+
+Password: 
+
+AUTHORIZED SIMULATOR LAB ONLY
+
+CORE-1#show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   110 P Active   local           10.10.10.3      10.10.10.1     
+Vl20        20   100 P Standby  10.10.20.3      local           10.10.20.1     
+Vl30        30   110 P Active   local           10.10.30.3      10.10.30.1     
+Vl50        50   110 P Active   local           10.10.50.3      10.10.50.1     
+Vl900       900  110 P Active   local           10.255.0.3      10.255.0.1     
+CORE-1#exit
+
+[Connection to 10.10.10.2 closed by foreign host]
+C:\>DcLabOnly2026!
+Invalid Command.
+
+C:\>show interfaces trunk
+Invalid Command.
+
+C:\>exit
+C:\>ssh -l netadmin 10.10.10.11
+
+Password: 
+
+AUTHORIZED SIMULATOR LAB ONLY
+
+ACC-1>show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      99
+Gig0/2      on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,30,50
+Gig0/2      20,40,99
+
+ACC-1>

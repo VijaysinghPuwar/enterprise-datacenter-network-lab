@@ -1,0 +1,134 @@
+Drill F01 phase after_restore collected @sim 3769785
+S1 | MGMT -> WEB-01 (routed, HSRP) | NOC-PC -> 10.10.20.11 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S2 | APP -> WEB-02 (routed, cross-rack) | APP-02 -> 10.10.20.12 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S3 | APP -> DB-02 (through FW-1 db zone) | APP-01 -> 10.10.40.12 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S5 | SERVICES -> Internet (PAT + BGP) | SVC-MON -> 203.0.113.10 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S9 | DB-01 -> DB-02 (L2 cross-rack VLAN 40) | DB-01 -> 10.10.40.12 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S10 | WEB -> APP-01 (routed, cross-rack) | WEB-02 -> 10.10.30.11 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+TOTAL permitted-stream delivery: 48/48
+
+### S1 NOC-PC> ping -n 8 10.10.20.11
+ping -n 8 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### S2 APP-02> ping -n 8 10.10.20.12
+ping -n 8 10.10.20.12
+
+Pinging 10.10.20.12 with 32 bytes of data:
+
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=2ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=11ms TTL=127
+
+Ping statistics for 10.10.20.12:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 11ms, Average = 1ms
+
+C:\>
+
+### S3 APP-01> ping -n 8 10.10.40.12
+ping -n 8 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=6ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 6ms, Average = 1ms
+
+C:\>
+
+### S5 SVC-MON> ping -n 8 203.0.113.10
+ping -n 8 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=5ms TTL=123
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 5ms, Average = 0ms
+
+C:\>
+
+### S9 DB-01> ping -n 8 10.10.40.12
+ping -n 8 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time=2ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time=7ms TTL=128
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 7ms, Average = 1ms
+
+C:\>
+
+### S10 WEB-02> ping -n 8 10.10.30.11
+ping -n 8 10.10.30.11
+
+Pinging 10.10.30.11 with 32 bytes of data:
+
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.30.11:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>

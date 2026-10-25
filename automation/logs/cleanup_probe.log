@@ -1,0 +1,11 @@
+removed Router0
+removed Router1
+removed ASA0
+removed Multilayer Switch0
+removed Switch0
+removed Server0
+removed PC0
+removed Power Distribution Device0
+removed Power Distribution Device2
+devices now 24 links 26
+ACC-1, ACC-2, APP-01, APP-02, CORE-1, CORE-2, DB-01, DB-02, DMZ-DNS, DMZ-SW, DMZ-WEB, EDGE-R1, FW-1, INET-R, INET-SRV, ISP1-R, ISP2-R, NOC-PC, Power Distribution Device1, Power Distribution Device4, SVC-DNS, SVC-MON, WEB-01, WEB-02

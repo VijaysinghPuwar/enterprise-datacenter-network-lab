@@ -1,0 +1,22 @@
+link L26 FW-1 Gi1/4 <-> CORE-2 Fa0/24 straight => false
+CORE-2 applied 13 lines
+CORE-1 applied 5 lines
+FW-1 REJECT enable => enable ^ % Invalid input detected at '^' marker. FW-1#
+FW-1 applied 32 lines
+show interface ip brief
+Interface              IP-Address      OK? Method Status                Protocol
+Virtual0               127.1.0.1       YES unset  up                    up
+GigabitEthernet1/1     198.51.100.2    YES manual up                    up
+GigabitEthernet1/2     10.255.0.4      YES manual up                    up
+GigabitEthernet1/3     172.16.50.1     YES manual up                    up
+GigabitEthernet1/4     10.10.40.1      YES manual up                    up
+GigabitEthernet1/5     unassigned      YES unset  administratively down down
+GigabitEthernet1/6     unassigned      YES unset  administratively down down
+GigabitEthernet1/7     unassigned      YES unset  administratively down down
+GigabitEthernet1/8     unassigned      YES unset  administratively down down
+Management1/1          unassigned      YES unset  administratively down down
+Internal-Control1/1    127.0.1.1       YES unset  up                    up
+Internal-Data1/1       unassigned      YES unset  up                    up
+Internal-Data1/2       unassigned      YES unset  up                    up
+Internal-Data1/3       unassigned      YES unset  up                    up
+FW-1#

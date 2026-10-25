@@ -1,0 +1,33 @@
+0: NOC-PC | model PC-PT | type 8 | x 615 y 550
+1: INET-SRV | model Server-PT | type 9 | x 620 y 25
+2: Power Distribution Device1 | model Power Distribution Device | type 45 | x 3898 y 3885
+3: INET-R | model 2911 | type 0 | x 770 y 25
+4: ISP1-R | model 2911 | type 0 | x 670 y 110
+5: ISP2-R | model 2911 | type 0 | x 870 y 110
+6: EDGE-R1 | model ISR4331 | type 0 | x 770 y 195
+7: FW-1 | model 5506-X | type 27 | x 770 y 285
+8: DMZ-SW | model 2960-24TT | type 1 | x 1009 y 270
+9: DMZ-WEB | model Server-PT | type 9 | x 1170 y 215
+10: DMZ-DNS | model Server-PT | type 9 | x 1170 y 300
+11: CORE-1 | model 3560-24PS | type 16 | x 650 y 375
+12: CORE-2 | model 3560-24PS | type 16 | x 890 y 375
+13: ACC-1 | model 2960-24TT | type 1 | x 549 y 460
+14: ACC-2 | model 2960-24TT | type 1 | x 1009 y 460
+15: WEB-01 | model Server-PT | type 9 | x 360 y 550
+16: APP-01 | model Server-PT | type 9 | x 445 y 550
+17: Power Distribution Device4 | model Power Distribution Device | type 45 | x 3898 y 3885
+18: DB-01 | model Server-PT | type 9 | x 530 y 550
+19: WEB-02 | model Server-PT | type 9 | x 870 y 550
+20: APP-02 | model Server-PT | type 9 | x 960 y 550
+21: DB-02 | model Server-PT | type 9 | x 1050 y 550
+22: SVC-DNS | model Server-PT | type 9 | x 1140 y 550
+23: SVC-MON | model Server-PT | type 9 | x 1230 y 550
+24: Router0 | model 2911 | type 0 | x 77 y 585
+25: Power Distribution Device0 | model Power Distribution Device | type 45 | x 3899 y 3900
+26: Router1 | model ISR4331 | type 0 | x 167 y 585
+27: ASA0 | model 5506-X | type 27 | x 262 y 574
+28: Multilayer Switch0 | model 3560-24PS | type 16 | x 344 y 582
+29: Switch0 | model 2960-24TT | type 1 | x 434 y 588
+30: Power Distribution Device2 | model Power Distribution Device | type 45 | x 3899 y 3900
+31: Server0 | model Server-PT | type 9 | x 526 y 574
+32: PC0 | model PC-PT | type 8 | x 617 y 582

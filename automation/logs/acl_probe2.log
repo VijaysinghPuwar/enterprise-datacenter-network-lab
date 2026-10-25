@@ -1,0 +1,20 @@
+> configure terminal :: configure terminal Enter configuration commands, one per line. End with CNTL/Z. CORE-2(config)#
+> no ip access-list extended WEB-TIER-IN :: no ip access-list extended WEB-TIER-IN CORE-2(config)#
+> access-list 140 deny ip 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 :: access-list 140 deny ip 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 CORE-2(config)#
+> access-list 140 permit ip any any :: access-list 140 permit ip any any CORE-2(config)#
+> interface Vlan40 :: interface Vlan40 CORE-2(config-if)#
+> ip access-group 140 out :: ip access-group 140 out CORE-2(config-if)#
+> exit :: exit CORE-2(config)#
+> vlan access-map PROBE 10 :: vlan access-map PROBE 10 ^ % Invalid input detected at '^' marker. CORE-2(config)#
+> exit :: exit CORE-2#
+> end :: end Translating "end" % Unknown command or computer name, or unable to find computer address CORE-2#
+Vlan40 section: interface Vlan40
+ description DB
+ mac-address 0007.ec7c.5404
+ ip address 10.10.40.3 255.255.255.0
+ standby version 2
+ standby 40 ip 10.10.40.1
+ standby 40 priority 110
+ standby 40 preempt
+!
+has access-map: false

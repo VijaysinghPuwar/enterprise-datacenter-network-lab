@@ -1,0 +1,667 @@
+DMZ-SW# | enable
+    enable
+    DMZ-SW#
+DMZ-SW(config)# | configure terminal
+    configure terminal
+    Enter configuration commands, one per line.  End with CNTL/Z.
+    DMZ-SW(config)#
+DMZ-SW(config)# | hostname DMZ-SW
+    hostname DMZ-SW
+    DMZ-SW(config)#
+DMZ-SW(config)# | no ip domain-lookup
+    no ip domain-lookup
+    DMZ-SW(config)#
+DMZ-SW(config)# | ip domain-name dc1.lab
+    ip domain-name dc1.lab
+    DMZ-SW(config)#
+DMZ-SW(config)# | service password-encryption
+    service password-encryption
+    DMZ-SW(config)#
+DMZ-SW(config)# | enable secret DcLabOnly2026!
+    enable secret DcLabOnly2026!
+    DMZ-SW(config)#
+DMZ-SW(config)# | username netadmin privilege 15 secret DcLabOnly2026!
+    username netadmin privilege 15 secret DcLabOnly2026!
+    DMZ-SW(config)#
+DMZ-SW(config)# | banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    DMZ-SW(config)#
+DMZ-SW(config)# | crypto key generate rsa general-keys modulus 1024
+    crypto key generate rsa general-keys modulus 1024
+    % You already have RSA keys defined named DMZ-SW.dc1.lab
+    % They will be replaced.
+    
+    % The key modulus size is 1024 bits
+    % Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+    *Mar 1 0:2:41.511: %SSH-5-ENABLED: SSH 2 has been enabled
+    DMZ-SW(config)#
+DMZ-SW(config)# | ip ssh version 2
+    ip ssh version 2
+    DMZ-SW(config)#
+DMZ-SW(config)# | ip ssh time-out 60
+    ip ssh time-out 60
+    DMZ-SW(config)#
+DMZ-SW(config)# | ip ssh authentication-retries 2
+    ip ssh authentication-retries 2
+    DMZ-SW(config)#
+DMZ-SW(config-std-nacl)# | ip access-list standard MGMT-SSH
+    ip access-list standard MGMT-SSH
+    DMZ-SW(config-std-nacl)#
+DMZ-SW(config-std-nacl)# | permit 10.10.10.0 0.0.0.255
+    permit 10.10.10.0 0.0.0.255
+    DMZ-SW(config-std-nacl)#
+DMZ-SW(config-std-nacl)# | deny any
+    deny any
+    DMZ-SW(config-std-nacl)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-line)# | line console 0
+    line console 0
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | logging synchronous
+    logging synchronous
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | exec-timeout 15 0
+    exec-timeout 15 0
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | login local
+    login local
+    DMZ-SW(config-line)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-line)# | line vty 0 4
+    line vty 0 4
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | login local
+    login local
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | transport input ssh
+    transport input ssh
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | access-class MGMT-SSH in
+    access-class MGMT-SSH in
+    DMZ-SW(config-line)#
+DMZ-SW(config-line)# | exec-timeout 10 0
+    exec-timeout 10 0
+    DMZ-SW(config-line)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config)# | vtp mode transparent
+    vtp mode transparent
+    Device mode already VTP TRANSPARENT.
+    DMZ-SW(config)#
+DMZ-SW(config)# | spanning-tree mode rapid-pvst
+    spanning-tree mode rapid-pvst
+    DMZ-SW(config)#
+DMZ-SW(config-vlan)# | vlan 150
+    vlan 150
+    DMZ-SW(config-vlan)#
+DMZ-SW(config-vlan)# | name DMZ
+    name DMZ
+    DMZ-SW(config-vlan)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-vlan)# | vlan 999
+    vlan 999
+    DMZ-SW(config-vlan)#
+DMZ-SW(config-vlan)# | name BLACKHOLE
+    name BLACKHOLE
+    DMZ-SW(config-vlan)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface Vlan150
+    interface Vlan150
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | ip address 172.16.50.5 255.255.255.0
+    ip address 172.16.50.5 255.255.255.0
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | no shutdown
+    no shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config)# | ip default-gateway 172.16.50.1
+    ip default-gateway 172.16.50.1
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description FW-1-DMZ
+    description FW-1-DMZ
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 150
+    switchport access vlan 150
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on GigabitEthernet0/1 but will only
+    have effect when the interface is in a non-trunking mode.
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | no shutdown
+    no shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/1
+    interface FastEthernet0/1
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description DMZ-WEB
+    description DMZ-WEB
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 150
+    switchport access vlan 150
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/1 but will only
+    have effect when the interface is in a non-trunking mode.
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | spanning-tree bpduguard enable
+    spanning-tree bpduguard enable
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security
+    switchport port-security
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security maximum 2
+    switchport port-security maximum 2
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security mac-address sticky
+    switchport port-security mac-address sticky
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security violation restrict
+    switchport port-security violation restrict
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | no shutdown
+    no shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/2
+    interface FastEthernet0/2
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description DMZ-DNS
+    description DMZ-DNS
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 150
+    switchport access vlan 150
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/2 but will only
+    have effect when the interface is in a non-trunking mode.
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | spanning-tree bpduguard enable
+    spanning-tree bpduguard enable
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security
+    switchport port-security
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security maximum 2
+    switchport port-security maximum 2
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security mac-address sticky
+    switchport port-security mac-address sticky
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport port-security violation restrict
+    switchport port-security violation restrict
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | no shutdown
+    no shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/3
+    interface FastEthernet0/3
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/4
+    interface FastEthernet0/4
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/5
+    interface FastEthernet0/5
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/6
+    interface FastEthernet0/6
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/7
+    interface FastEthernet0/7
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/8
+    interface FastEthernet0/8
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/9
+    interface FastEthernet0/9
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/10
+    interface FastEthernet0/10
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/11
+    interface FastEthernet0/11
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/12
+    interface FastEthernet0/12
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/13
+    interface FastEthernet0/13
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/14
+    interface FastEthernet0/14
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/15
+    interface FastEthernet0/15
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/16
+    interface FastEthernet0/16
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/17
+    interface FastEthernet0/17
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/18
+    interface FastEthernet0/18
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/19
+    interface FastEthernet0/19
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/20
+    interface FastEthernet0/20
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/21
+    interface FastEthernet0/21
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/22
+    interface FastEthernet0/22
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/23
+    interface FastEthernet0/23
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface FastEthernet0/24
+    interface FastEthernet0/24
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW(config-if)# | interface GigabitEthernet0/2
+    interface GigabitEthernet0/2
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport mode access
+    switchport mode access
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    DMZ-SW(config-if)#
+DMZ-SW(config-if)# | shutdown
+    shutdown
+    DMZ-SW(config-if)#
+DMZ-SW(config)# | exit
+    exit
+    DMZ-SW(config)#
+DMZ-SW# | end
+    end
+    DMZ-SW#
+DMZ-SW# | write memory
+    write memory
+    Building configuration...
+    [OK]
+    DMZ-SW#

@@ -1,0 +1,40 @@
+  terminal via getConsoleLine
+=== FW-1 start prompt: 'ciscoasa>'
+  FW-1: ready prompt 'ciscoasa>'
+  diag 'enable' outLen 5557->5574 delta='enable Password: '
+  diag 'configure terminal' outLen 5584->5620 delta='configure terminal ciscoasa(config)#'
+  diag 'hostname FW-1' outLen 5620->5647 delta='hostname FW-1 FW-1(config)#'
+  REJECTED line 50: object network DMZ-WEB  =>  object network DMZ-WEB ^ % Invalid input detected at '^' marker. FW-1#
+  REJECTED line 51: host 172.16.50.10  =>  host 172.16.50.10 ^ % Invalid input detected at '^' marker. FW-1#
+  REJECTED line 52: nat (dmz,outside) static 198.51.100.10  =>  nat (dmz,outside) static 198.51.100.10 ^ % Invalid input detected at '^' marker. FW-1#
+  REJECTED line 54: object network DMZ-DNS  =>  object network DMZ-DNS ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 55: host 172.16.50.11  =>  host 172.16.50.11 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 56: nat (dmz,outside) static 198.51.100.11  =>  nat (dmz,outside) static 198.51.100.11 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 58: access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq 80  =>  access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq 80 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 59: access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq 443  =>  access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq 443 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 60: access-list OUTSIDE_IN extended permit udp any host 172.16.50.11 eq 53  =>  access-list OUTSIDE_IN extended permit udp any host 172.16.50.11 eq 53 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 61: access-list OUTSIDE_IN extended permit tcp any host 172.16.50.11 eq 53  =>  access-list OUTSIDE_IN extended permit tcp any host 172.16.50.11 eq 53 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 62: access-group OUTSIDE_IN in interface outside  =>  access-group OUTSIDE_IN in interface outside ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 63: access-list DMZ_IN extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514  =>  access-list DMZ_IN extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 64: access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0  =>  access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 65: access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0  =>  access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 66: access-list DMZ_IN extended permit ip 172.16.50.0 255.255.255.0 any  =>  access-list DMZ_IN extended permit ip 172.16.50.0 255.255.255.0 any ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 67: access-group DMZ_IN in interface dmz  =>  access-group DMZ_IN in interface dmz ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 68: class-map inspection_default  =>  class-map inspection_default ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 69: match default-inspection-traffic  =>  match default-inspection-traffic ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 71: policy-map global_policy  =>  policy-map global_policy ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 72: class inspection_default  =>  class inspection_default ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 73: inspect icmp  =>  inspect icmp ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 74: inspect dns  =>  inspect dns ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 75: inspect http  =>  inspect http ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 78: service-policy global_policy global  =>  service-policy global_policy global ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 79: aaa authentication ssh console LOCAL  =>  aaa authentication ssh console LOCAL ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 80: ssh 10.10.10.0 255.255.255.0 inside  =>  ssh 10.10.10.0 255.255.255.0 inside ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 81: ssh timeout 10  =>  ssh timeout 10 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 82: crypto key generate rsa modulus 1024  =>  crypto key generate rsa modulus 1024 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 83: ntp server 10.10.50.20  =>  ntp server 10.10.50.20 ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 84: end  =>  end ^ % Invalid input detected at '^' marker. FW-1>
+  REJECTED line 85: write memory  =>  write memory ^ % Invalid input detected at '^' marker. FW-1>
+=== FW-1 sent=85 rejected=31 final prompt 'FW-1>'
+SUMMARY
+FW-1: sent 85, rejected 31

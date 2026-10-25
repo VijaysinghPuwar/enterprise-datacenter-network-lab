@@ -1,0 +1,176 @@
+### CORE-1# show lacp neighbor
+show lacp neighbor
+             ^
+% Invalid input detected at '^' marker.
+	
+CORE-1#
+### CORE-1# show interfaces GigabitEthernet0/1
+show interfaces GigabitEthernet0/1
+GigabitEthernet0/1 is up, line protocol is up (connected)
+  Hardware is Lance, address is 000c.cf3d.dc19 (bia 000c.cf3d.dc19)
+  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 100Mb/s
+  input flow-control is off, output flow-control is off
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:08, output 00:00:05, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue :0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     956 packets input, 193351 bytes, 0 no buffer
+     Received 956 broadcasts, 0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     0 watchdog, 0 multicast, 0 pause input
+     0 input packets with dribble condition detected
+     2357 packets output, 263570 bytes, 0 underruns
+     0 output errors, 0 collisions, 10 interface resets
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier
+     0 output buffer failures, 0 output buffers swapped out
+
+CORE-1#
+### CORE-2# show interfaces FastEthernet0/1
+show interfaces FastEthernet0/1
+FastEthernet0/1 is up, line protocol is up (connected)
+  Hardware is Lance, address is 00e0.a363.0501 (bia 00e0.a363.0501)
+  MTU 1500 bytes, BW 100000 Kbit, DLY 100 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 100Mb/s
+  input flow-control is off, output flow-control is off
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:08, output 00:00:05, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue :0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     956 packets input, 193351 bytes, 0 no buffer
+     Received 956 broadcasts, 0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     0 watchdog, 0 multicast, 0 pause input
+     0 input packets with dribble condition detected
+     2357 packets output, 263570 bytes, 0 underruns
+     0 output errors, 0 collisions, 10 interface resets
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier
+     0 output buffer failures, 0 output buffers swapped out
+
+CORE-2#
+### ACC-1# show interfaces GigabitEthernet0/2
+show interfaces GigabitEthernet0/2
+GigabitEthernet0/2 is up, line protocol is up (connected)
+  Hardware is Lance, address is 0005.5e51.ba1a (bia 0005.5e51.ba1a)
+ BW 100000 Kbit, DLY 100 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 100Mb/s
+  input flow-control is off, output flow-control is off
+  ARP type: ARPA, ARP Timeout 00:04:00
+  Last input 00:00:08, output 00:00:05, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue :0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     956 packets input, 193351 bytes, 0 no buffer
+     Received 956 broadcasts, 0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     0 watchdog, 0 multicast, 0 pause input
+     0 input packets with dribble condition detected
+     2357 packets output, 263570 bytes, 0 underruns
+     0 output errors, 0 collisions, 10 interface resets
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier
+     0 output buffer failures, 0 output buffers swapped out
+
+ACC-1#
+### CORE-2# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Fa0/1       on           802.1q         trunking      99
+Fa0/2       on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Fa0/1       10,20,30,40,50,99
+Fa0/2       10,20,30,40,50,99
+
+Port        Vlans allowed and active in management domain
+Fa0/1       10,20,30,40,50,99
+Fa0/2       10,20,30,40,50,99
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       20,40,99
+Fa0/2       10,20,30,40,50,99
+
+CORE-2#
+### ACC-1# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      99
+Gig0/2      on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+ACC-1#
+### CORE-2# show running-config interface FastEthernet0/1
+show running-config interface FastEthernet0/1
+                           ^
+% Invalid input detected at '^' marker.
+	
+CORE-2#
+### ACC-1# show running-config interface GigabitEthernet0/2
+show running-config interface GigabitEthernet0/2
+                          ^
+% Invalid input detected at '^' marker.
+	
+ACC-1#
+### CORE-2# show spanning-tree summary
+show spanning-tree summary
+Switch is in rapid-pvst mode
+Root bridge for: default WEB DB NATIVE-UNUSED FW-TRANSIT BLACKHOLE
+Extended system ID           is enabled
+Portfast Default             is disabled
+PortFast BPDU Guard Default  is disabled
+Portfast BPDU Filter Default is disabled
+Loopguard Default            is disabled
+EtherChannel misconfig guard is disabled
+UplinkFast                   is disabled
+BackboneFast                 is disabled
+Configured Pathcost method used is short
+
+Name                   Blocking Listening Learning Forwarding STP Active
+---------------------- -------- --------- -------- ---------- ----------
+VLAN0001                     0         0        0          4          4
+VLAN0010                     1         0        0          3          4
+VLAN0020                     0         0        0          4          4
+VLAN0030                     1         0        0          3          4
+VLAN0040                     0         0        0          4          4
+VLAN0050                     1         0        0          3          4
+VLAN0099                     0         0        0          4          4
+VLAN0900                     0         0        0          4          4
+VLAN0999                     0         0        0          4          4
+
+---------------------- -------- --------- -------- ---------- ----------
+9 vlans                      3         0        0         33         36
+
+CORE-2#

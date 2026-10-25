@@ -1,0 +1,32 @@
+### FW-1# show xlate
+show xlate
+5 in use, 5 most used
+Flags: D - DNS, e - extended, I - identity, i - dynamic, r - portmap, s - static, T - twice, N - net-to-net
+NAT from dmz:172.16.50.11/32 to outside:198.51.100.11/32 flags s idle 00:20:24,  timeout 0:00:00
+NAT from dmz:172.16.50.10/32 to outside:198.51.100.10/32 flags s idle 00:20:24,  timeout 0:00:00
+TCP-other PAT from inside:10.10.10.100/1028 to outside:198.51.100.2/1028 flags i idle 00:02:07,  timeout 0:00:30
+TCP-other PAT from inside:10.10.10.100/1029 to outside:198.51.100.2/1029 flags i idle 00:01:57,  timeout 0:00:30
+TCP-other PAT from inside:10.10.10.100/1030 to outside:198.51.100.2/1030 flags i idle 00:01:28,  timeout 0:00:30
+
+FW-1#
+### FW-1# show conn
+show conn
+           ^
+% Invalid input detected at '^' marker.
+	
+FW-1#
+### FW-1# configure terminal
+configure terminal
+FW-1(config)#
+### FW-1# no access-group INSIDE_IN in interface inside
+no access-group INSIDE_IN in interface inside
+     ^
+% Invalid input detected at '^' marker.
+	
+FW-1#
+### FW-1# end
+end
+      ^
+% Invalid input detected at '^' marker.
+	
+FW-1#

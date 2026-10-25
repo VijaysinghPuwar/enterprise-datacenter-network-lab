@@ -1,0 +1,175 @@
+### FW-1# show arp
+show arp
+        db 10.10.40.1 0030.F27D.C504
+        db 10.10.40.11 000A.F396.D05A
+        db 10.10.40.12 0002.176D.7E35
+        outside 10.10.50.20 0060.70B6.4403
+        inside 10.255.0.2 00D0.581B.2205
+        inside 10.255.0.3 0007.EC7C.5405
+        inside 10.255.0.4 0030.F27D.C502
+        dmz 172.16.50.1 0030.F27D.C503
+        dmz 172.16.50.10 0001.64EE.BE4C
+        dmz 172.16.50.11 0030.F243.1EC5
+        outside 198.51.100.2 0030.F27D.C501
+        outside 203.0.113.10 0060.70B6.4403
+FW-1#
+### ACC-1# show mac-address-table
+show mac-address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+  10    0000.0c9f.f00a    DYNAMIC     Gig0/1
+  10    0007.ec7c.5401    DYNAMIC     Gig0/1
+  10    000a.f3de.a9d0    STATIC      Fa0/10
+  10    000c.cf3d.dc01    DYNAMIC     Gig0/1
+  10    00d0.581b.2201    DYNAMIC     Gig0/1
+  20    0000.0c9f.f014    DYNAMIC     Gig0/2
+  20    0006.2a86.3d6b    DYNAMIC     Gig0/2
+  20    0007.ec7c.5402    DYNAMIC     Gig0/2
+  20    000c.8542.7282    STATIC      Fa0/1
+  20    00d0.581b.2202    DYNAMIC     Gig0/2
+  20    00e0.a363.0501    DYNAMIC     Gig0/2
+  30    0000.0c9f.f01e    DYNAMIC     Gig0/1
+  30    0002.16c9.391c    STATIC      Fa0/2
+  30    0007.ec7c.5403    DYNAMIC     Gig0/1
+  30    000c.cf3d.dc01    DYNAMIC     Gig0/1
+  30    00d0.581b.2203    DYNAMIC     Gig0/1
+  30    00e0.f9ec.b62d    DYNAMIC     Gig0/1
+  40    0002.176d.7e35    DYNAMIC     Gig0/2
+  40    000a.f396.d05a    STATIC      Fa0/3
+  40    0030.f27d.c504    DYNAMIC     Gig0/2
+  40    00e0.a363.0501    DYNAMIC     Gig0/2
+  50    0007.ec7c.5404    DYNAMIC     Gig0/1
+  50    000c.cf3d.dc01    DYNAMIC     Gig0/1
+  50    00d0.581b.2204    DYNAMIC     Gig0/1
+  99    00e0.a363.0501    DYNAMIC     Gig0/2
+ 900    0007.ec7c.5405    DYNAMIC     Gig0/1
+ 900    000c.cf3d.dc01    DYNAMIC     Gig0/1
+ 900    0030.f27d.c502    DYNAMIC     Fa0/24
+ 900    00d0.581b.2205    DYNAMIC     Gig0/1
+ACC-1#
+### ACC-2# show mac-address-table
+show mac-address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+  10    0007.ec7c.5401    DYNAMIC     Gig0/1
+  10    000a.f3de.a9d0    DYNAMIC     Gig0/1
+  10    000c.cf3d.dc02    DYNAMIC     Gig0/1
+  10    00d0.581b.2201    DYNAMIC     Gig0/1
+  20    0000.0c9f.f014    DYNAMIC     Gig0/2
+  20    0006.2a86.3d6b    STATIC      Fa0/1
+  20    0007.ec7c.5402    DYNAMIC     Gig0/2
+  20    000c.8542.7282    DYNAMIC     Gig0/2
+  20    00d0.581b.2202    DYNAMIC     Gig0/2
+  20    00e0.a363.0502    DYNAMIC     Gig0/2
+  30    0000.0c9f.f01e    DYNAMIC     Gig0/1
+  30    0002.16c9.391c    DYNAMIC     Gig0/1
+  30    0007.ec7c.5403    DYNAMIC     Gig0/1
+  30    000c.cf3d.dc02    DYNAMIC     Gig0/1
+  30    00d0.581b.2203    DYNAMIC     Gig0/1
+  30    00e0.f9ec.b62d    STATIC      Fa0/2
+  40    0002.176d.7e35    STATIC      Fa0/3
+  40    0030.f27d.c504    DYNAMIC     Fa0/24
+  40    00e0.a363.0502    DYNAMIC     Gig0/2
+  50    0007.ec7c.5404    DYNAMIC     Gig0/1
+  50    000c.cf3d.dc02    DYNAMIC     Gig0/1
+  50    000d.bd10.4957    STATIC      Fa0/6
+  50    00d0.581b.2204    DYNAMIC     Gig0/1
+  50    00d0.bce7.39c7    STATIC      Fa0/5
+  99    00e0.a363.0502    DYNAMIC     Gig0/2
+ 900    0007.ec7c.5405    DYNAMIC     Gig0/1
+ 900    000c.cf3d.dc02    DYNAMIC     Gig0/1
+ 900    0030.f27d.c502    DYNAMIC     Gig0/1
+ 900    00d0.581b.2205    DYNAMIC     Gig0/1
+ACC-2#
+### CORE-1# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Po1         on           802.1q         trunking      99
+Fa0/1       on           802.1q         trunking      99
+Fa0/2       on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Po1         10,20,30,40,50,99,900
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+Port        Vlans allowed and active in management domain
+Po1         10,20,30,40,50,99,900
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Po1         10,20,30,40,50,99,900
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+CORE-1#
+### CORE-2# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Po1         on           802.1q         trunking      99
+Fa0/1       on           802.1q         trunking      99
+Fa0/2       on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Po1         10,20,30,40,50,99,900
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+Port        Vlans allowed and active in management domain
+Po1         10,20,30,40,50,99,900
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Po1         10,20,30,40,50,99,900
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+CORE-2#
+### ACC-1# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      99
+Gig0/2      on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40,50,99,900
+Gig0/2      10,20,30,40,50,99,900
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40,50,99,900
+Gig0/2      10,20,30,40,50,99,900
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,30,50,900
+Gig0/2      20,40,99
+
+ACC-1#
+### ACC-2# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      99
+Gig0/2      on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40,50,99,900
+Gig0/2      10,20,30,40,50,99,900
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40,50,99,900
+Gig0/2      10,20,30,40,50,99,900
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,30,50,900
+Gig0/2      20,40,99
+
+ACC-2#

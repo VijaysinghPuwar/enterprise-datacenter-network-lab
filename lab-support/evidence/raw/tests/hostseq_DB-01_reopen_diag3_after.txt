@@ -1,0 +1,94 @@
+
+Cisco Packet Tracer SERVER Command Line 1.0
+C:\>ping -n 8 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 8, Received = 0, Lost = 8 (100% loss),
+
+C:\>
+C:\>arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.1            0030.f27d.c504        dynamic
+  10.10.40.12           0030.f27d.c504        dynamic
+
+C:\>ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Link-local IPv6 Address.........: FE80::20A:F3FF:FE96:D05A
+   IPv6 Address....................: ::
+   IPv4 Address....................: 10.10.40.11
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     10.10.40.1
+
+C:\>
+C:\>arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.1            0030.f27d.c504        dynamic
+  10.10.40.12           0030.f27d.c504        dynamic
+
+C:\>ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Link-local IPv6 Address.........: FE80::20A:F3FF:FE96:D05A
+   IPv6 Address....................: ::
+   IPv4 Address....................: 10.10.40.11
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     10.10.40.1
+
+C:\>
+C:\>arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.1            0030.f27d.c504        dynamic
+  10.10.40.12           0030.f27d.c504        dynamic
+
+C:\>ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Link-local IPv6 Address.........: FE80::20A:F3FF:FE96:D05A
+   IPv6 Address....................: ::
+   IPv4 Address....................: 10.10.40.11
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     10.10.40.1
+
+C:\>
+C:\>arp -d
+C:\>ping -n 4 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+C:\>arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.12           0002.176d.7e35        dynamic
+
+C:\>

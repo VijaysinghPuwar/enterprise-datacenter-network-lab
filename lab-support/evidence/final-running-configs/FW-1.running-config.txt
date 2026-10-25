@@ -1,0 +1,143 @@
+ASA Version 9.6(1)
+!
+hostname FW-1
+domain-name dc1.lab
+enable password xokyNC9ghSpWSVk9 encrypted
+names
+!
+interface GigabitEthernet1/1
+ nameif outside
+ security-level 0
+ ip address 198.51.100.2 255.255.255.248
+!
+interface GigabitEthernet1/2
+ nameif inside
+ security-level 100
+ ip address 10.255.0.4 255.255.255.248
+ ospf hello-interval 1
+ ospf dead-interval 3
+!
+interface GigabitEthernet1/3
+ nameif dmz
+ security-level 50
+ ip address 172.16.50.1 255.255.255.0
+!
+interface GigabitEthernet1/4
+ nameif db
+ security-level 90
+ ip address 10.10.40.1 255.255.255.0
+!
+interface GigabitEthernet1/5
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/6
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/7
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/8
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface Management1/1
+ management-only
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+object network DMZ-DNS
+ host 172.16.50.11
+ nat (dmz,outside) static 198.51.100.11
+object network DMZ-WEB
+ host 172.16.50.10
+ nat (dmz,outside) static 198.51.100.10
+object network NAT-APP
+ subnet 10.10.30.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+object network NAT-MGMT
+ subnet 10.10.10.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+object network NAT-SVC
+ subnet 10.10.50.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+object network NAT-WEB
+ subnet 10.10.20.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+!
+route outside 0.0.0.0 0.0.0.0 198.51.100.1 1
+!
+access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq www
+access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq 443
+access-list OUTSIDE_IN extended permit udp any host 172.16.50.11 eq domain
+access-list OUTSIDE_IN extended permit tcp any host 172.16.50.11 eq domain
+access-list OUTSIDE_IN extended permit icmp any 10.10.0.0 255.255.0.0 echo-reply
+access-list OUTSIDE_IN extended permit icmp any 172.16.50.0 255.255.255.0 echo-reply
+access-list INSIDE_IN extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended deny ip any 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended permit ip any any
+access-list DB_IN extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply
+access-list DB_IN extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain
+access-list DB_IN extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514
+access-list DB_IN extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123
+access-list DB_IN extended deny ip 10.10.40.0 255.255.255.0 any
+access-list DMZ_IN extended permit icmp 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0 echo-reply
+access-list DMZ_IN extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514
+access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0
+access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0
+access-list DMZ_IN extended permit ip 172.16.50.0 255.255.255.0 any
+!
+!
+access-group OUTSIDE_IN in interface outside
+access-group INSIDE_IN in interface inside
+access-group DB_IN in interface db
+access-group DMZ_IN in interface dmz
+aaa authentication ssh console LOCAL
+!
+ntp server 10.10.50.20
+username netadmin password xokyNC9ghSpWSVk9 encrypted
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map
+  inspect ftp 
+  inspect http 
+  inspect icmp 
+  inspect tftp 
+!
+service-policy global_policy global
+!
+telnet timeout 5
+ssh 10.10.10.0 255.255.255.0 inside
+ssh timeout 10
+!
+!
+!
+!
+router ospf 10
+ router-id 10.255.255.4
+ log-adjacency-changes
+ network 10.255.0.0 255.255.255.248 area 0
+ network 10.10.40.0 255.255.255.0 area 0
+ default-information originate
+!

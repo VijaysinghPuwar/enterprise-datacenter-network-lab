@@ -1,0 +1,5 @@
+.DS_Store
+*.swp
+video/.venv/
+video/voice/
+__pycache__/

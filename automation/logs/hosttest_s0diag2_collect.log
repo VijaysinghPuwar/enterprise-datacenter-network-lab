@@ -1,0 +1,2 @@
+db01-arp | DB-01 -> arp -a | expect info | OUTPUT CAPTURED
+db02-arp | DB-02 -> arp -a | expect info | OUTPUT CAPTURED

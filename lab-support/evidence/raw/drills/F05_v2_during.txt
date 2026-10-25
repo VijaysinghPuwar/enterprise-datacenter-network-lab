@@ -1,0 +1,312 @@
+Drill F05_v2 phase during collected @sim 5021168
+S1 | MGMT -> WEB-01 (routed, HSRP) | NOC-PC -> 10.10.20.11 | expect permit | sent=50 received=42 lost=8 (84% delivered)
+S2 | APP -> WEB-02 (routed, cross-rack) | APP-02 -> 10.10.20.12 | expect permit | sent=50 received=63 lost=0 (126% delivered)
+S3 | APP -> DB-02 (through FW-1 db zone) | APP-01 -> 10.10.40.12 | expect permit | IN PROGRESS replies=24 timeouts=26
+S5 | SERVICES -> Internet (PAT + BGP) | SVC-MON -> 203.0.113.10 | expect permit | IN PROGRESS replies=8 timeouts=26
+S10 | WEB -> APP-01 (routed, cross-rack) | WEB-02 -> 10.10.30.11 | expect permit | sent=50 received=51 lost=0 (102% delivered)
+TOTAL permitted-stream delivery: 156/150
+
+### S1 NOC-PC> ping -n 50 10.10.20.11
+ping -n 50 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Request timed out.
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=6ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=8ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=6ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=12ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=16ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=23ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 50, Received = 42, Lost = 8 (16% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 23ms, Average = 1ms
+
+C:\>
+
+### S2 APP-02> ping -n 50 10.10.20.12
+ping -n 50 10.10.20.12
+
+Pinging 10.10.20.12 with 32 bytes of data:
+
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=1ms TTL=127
+Request timed out.
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=10ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=10ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=6ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=8ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=9ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=11ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=11ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=10ms TTL=127
+Reply from 10.10.20.12: bytes=32 time=16ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.12: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.20.12:
+    Packets: Sent = 50, Received = 63, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 16ms, Average = 1ms
+
+C:\>
+
+### S3 APP-01> ping -n 50 10.10.40.12
+ping -n 50 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=2ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=2ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=5ms TTL=126
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+
+### S5 SVC-MON> ping -n 50 203.0.113.10
+ping -n 50 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=2ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+
+### S10 WEB-02> ping -n 50 10.10.30.11
+ping -n 50 10.10.30.11
+
+Pinging 10.10.30.11 with 32 bytes of data:
+
+Request timed out.
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Request timed out.
+Request timed out.
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=10ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=5ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=12ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=16ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=13ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=11ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=5ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.30.11:
+    Packets: Sent = 50, Received = 51, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 16ms, Average = 1ms
+
+C:\>

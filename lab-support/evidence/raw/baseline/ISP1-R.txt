@@ -1,0 +1,62 @@
+### ISP1-R# show ip interface brief
+show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     100.64.0.2      YES manual up                    up 
+GigabitEthernet0/1     100.64.1.1      YES manual up                    up 
+GigabitEthernet0/2     unassigned      YES unset  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+ISP1-R#
+### ISP1-R# show ip bgp summary
+show ip bgp summary
+BGP router identifier 100.64.1.1, local AS number 64501
+BGP table version is 5, main routing table version 6
+4 network entries using 528 bytes of memory
+4 path entries using 208 bytes of memory
+4/4 BGP path/bestpath attribute entries using 736 bytes of memory
+3 BGP AS-PATH entries using 72 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+Bitfield cache entries: current 1 (at peak 1) using 32 bytes of memory
+BGP using 1576 total bytes of memory
+BGP activity 2/0 prefixes, 4/0 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.64.0.1      4 64500       7       5        5    0    0 00:03:42        4
+100.64.1.2      4 65010       7       5        5    0    0 00:03:42        4
+
+ISP1-R#
+### ISP1-R# show ip bgp
+show ip bgp
+BGP table version is 5, local router ID is 100.64.1.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 198.51.100.0/24   100.64.1.2               0     0     0 65010 i
+*                    100.64.0.1               0     0     0 64500 64502 65010 i
+*> 203.0.113.0/24    100.64.0.1               0     0     0 64500 i
+*                    100.64.1.2               0     0     0 65010 64502 64500 i
+
+ISP1-R#
+### ISP1-R# show ip route
+show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     100.0.0.0/8 is variably subnetted, 4 subnets, 2 masks
+C       100.64.0.0/30 is directly connected, GigabitEthernet0/0
+L       100.64.0.2/32 is directly connected, GigabitEthernet0/0
+C       100.64.1.0/30 is directly connected, GigabitEthernet0/1
+L       100.64.1.1/32 is directly connected, GigabitEthernet0/1
+B    198.51.100.0/24 [20/0] via 100.64.1.2, 00:00:00
+B    203.0.113.0/24 [20/0] via 100.64.0.1, 00:00:00
+
+ISP1-R#

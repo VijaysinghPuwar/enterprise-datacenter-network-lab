@@ -1,0 +1,1 @@
+RESTORE: EDGE-R1 :: configure terminal ; interface GigabitEthernet0/0/1 ; no shutdown ; end @sim 4208975

@@ -1,0 +1,10 @@
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   100 P Active   local           unknown         10.10.10.1     
+Vl20        20   110 P Active   local           10.10.20.2      10.10.20.1     
+Vl30        30   100 P Active   local           unknown         10.10.30.1     
+Vl50        50   100 P Active   local           unknown         10.10.50.1     
+Vl900       900  100 P Active   local           unknown         10.255.0.1     
+CORE-2#

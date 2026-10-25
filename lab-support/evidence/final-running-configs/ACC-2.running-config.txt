@@ -1,0 +1,282 @@
+Building configuration...
+
+Current configuration : 5693 bytes
+!
+version 12.2
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname ACC-2
+!
+enable secret 5 $1$mERr$L/vk6gcdNyGnxou3vrULn0
+!
+!
+!
+ip ssh version 2
+ip ssh authentication-retries 2
+ip ssh time-out 60
+no ip domain-lookup
+ip domain-name dc1.lab
+!
+username netadmin secret 5 $1$mERr$L/vk6gcdNyGnxou3vrULn0
+!
+vtp mode transparent
+!
+!
+ip dhcp snooping vlan 10
+no ip dhcp snooping information option
+ip dhcp snooping
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan 10
+ name MGMT
+!
+vlan 20
+ name WEB
+!
+vlan 30
+ name APP
+!
+vlan 40
+ name DB
+!
+vlan 50
+ name SERVICES
+!
+vlan 99
+ name NATIVE-UNUSED
+!
+vlan 900
+ name FW-TRANSIT
+!
+vlan 999
+ name BLACKHOLE
+!
+interface FastEthernet0/1
+ description WEB-02
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0006.2A86.3D6B
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ description APP-02
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 00E0.F9EC.B62D
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ description DB-02
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0002.176D.7E35
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/5
+ description SVC-DNS
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 00D0.BCE7.39C7
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6
+ description SVC-MON
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 000D.BD10.4957
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/7
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/8
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/9
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/10
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/11
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/12
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/13
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/14
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/15
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/16
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/17
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/18
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/19
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/20
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/21
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/22
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/23
+ description UNUSED-PARKED
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface FastEthernet0/24
+ description FW-1-DB-ZONE
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99,900
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet0/2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99,900
+ ip dhcp snooping trust
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 10.10.10.12 255.255.255.0
+!
+ip default-gateway 10.10.10.1
+!
+banner motd ^CAUTHORIZED SIMULATOR LAB ONLY^C
+logging trap debugging
+logging 10.10.50.20
+!
+!
+!
+ip access-list standard MGMT-SSH
+ permit 10.10.10.0 0.0.0.255
+ deny any
+line con 0
+ logging synchronous
+ login local
+ exec-timeout 15 0
+!
+line vty 0 4
+ access-class MGMT-SSH in
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+!
+!
+ntp server 10.10.50.20
+!
+end
+
+

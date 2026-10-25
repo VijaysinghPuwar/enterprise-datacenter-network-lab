@@ -1,0 +1,53 @@
+== DNS
+  ok SVC-DNS dns enable => undefined
+  ok SVC-DNS A web.dc1.lab 10.10.20.11 => true
+  ok SVC-DNS A web01.dc1.lab 10.10.20.11 => true
+  ok SVC-DNS A web02.dc1.lab 10.10.20.12 => true
+  ok SVC-DNS A app.dc1.lab 10.10.30.11 => true
+  ok SVC-DNS A app02.dc1.lab 10.10.30.12 => true
+  ok SVC-DNS A db.dc1.lab 10.10.40.11 => true
+  ok SVC-DNS A db02.dc1.lab 10.10.40.12 => true
+  ok SVC-DNS A dns.dc1.lab 10.10.50.10 => true
+  ok SVC-DNS A monitor.dc1.lab 10.10.50.20 => true
+  ok SVC-DNS A www.internet.example 203.0.113.10 => true
+  ok SVC-DNS A www.dc1-corp.com 172.16.50.10 => true
+  SVC-DNS dns db size 0 -> 11 enabled true
+  ok DMZ-DNS dns enable => undefined
+  ok DMZ-DNS A www.dc1-corp.com 198.51.100.10 => true
+  DMZ-DNS dns db size 0 -> 1 enabled true
+  ok INET-SRV dns enable => undefined
+  ok INET-SRV A www.internet.example 203.0.113.10 => true
+  ok INET-SRV A www.dc1-corp.com 198.51.100.10 => true
+  INET-SRV dns db size 0 -> 2 enabled true
+== DHCP probe
+  DHCP proc keys: _parser,addExcludedAddress,addNewPool,addPool,getClassName,getExcludedAddressAt,getExcludedAddressCount,getObjectUuid,getOwnerDevice,getPool,getPoolAt,getPoolCount,isEnable,registerObjectEvent,removeExcludedAddress,removePool,setEnable,unregisterObjectEvent,updateNetworkReservation,registerEvent,registerDelegate,unregisterEvent,unregisterDelegate
+== Syslog / NTP
+  ok SVC-MON syslog enable => undefined
+  ok SVC-MON ntp enable => undefined
+  syslog enabled true ntp enabled true
+  AAA proc probe:  | 
+== HTTP pages
+  ok WEB-01 http enable => undefined
+  ok WEB-01 set index.html => undefined
+  WEB-01 index.html length now 500 (source 500)
+  ok WEB-02 http enable => undefined
+  ok WEB-02 set index.html => undefined
+  WEB-02 index.html length now 500 (source 500)
+  ok APP-01 http enable => undefined
+  ok APP-01 set index.html => undefined
+  APP-01 index.html length now 514 (source 514)
+  ok APP-02 http enable => undefined
+  ok APP-02 set index.html => undefined
+  APP-02 index.html length now 514 (source 514)
+  ok DB-01 http enable => undefined
+  ok DB-01 set index.html => undefined
+  DB-01 index.html length now 509 (source 509)
+  ok DB-02 http enable => undefined
+  ok DB-02 set index.html => undefined
+  DB-02 index.html length now 509 (source 509)
+  ok DMZ-WEB http enable => undefined
+  ok DMZ-WEB set index.html => undefined
+  DMZ-WEB index.html length now 518 (source 518)
+  ok INET-SRV http enable => undefined
+  ok INET-SRV set index.html => undefined
+  INET-SRV index.html length now 519 (source 519)

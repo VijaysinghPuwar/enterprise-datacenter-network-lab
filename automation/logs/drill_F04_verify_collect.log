@@ -1,0 +1,4 @@
+S5 | SERVICES -> Internet (PAT + BGP) | SVC-MON -> 203.0.113.10 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S7 | DMZ -> Internet (static NAT) | DMZ-DNS -> 203.0.113.10 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+S1 | MGMT -> WEB-01 (routed, HSRP) | NOC-PC -> 10.10.20.11 | expect permit | sent=8 received=8 lost=0 (100% delivered)
+TOTAL permitted-stream delivery: 24/24

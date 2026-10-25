@@ -1,0 +1,11 @@
+started D01-renew  NOC-PC> ipconfig /renew
+started D04a  APP-01> ping -n 4 10.10.40.11
+started D04b  APP-02> ping -n 4 10.10.40.12
+started D05  WEB-01> ping -n 4 10.10.40.11
+started D11a  DMZ-WEB> ping -n 4 10.10.10.2
+started D11b  DMZ-DNS> ping -n 4 10.255.0.2
+started D12  INET-SRV> ping -n 4 198.51.100.10
+started X01-inside-to-internet  SVC-MON> ping -n 4 203.0.113.10
+started X02-cross-rack-L2  WEB-02> ping -n 4 10.10.20.11
+started X03-db-to-services  DB-02> ping -n 4 10.10.50.10
+started X04-inside-to-dmz  SVC-DNS> ping -n 4 172.16.50.10

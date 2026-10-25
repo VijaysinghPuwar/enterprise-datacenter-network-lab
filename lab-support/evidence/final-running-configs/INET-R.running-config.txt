@@ -1,0 +1,114 @@
+Building configuration...
+
+Current configuration : 1408 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname INET-R
+!
+!
+!
+enable secret 5 $1$mERr$L/vk6gcdNyGnxou3vrULn0
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username netadmin privilege 15 secret 5 $1$mERr$L/vk6gcdNyGnxou3vrULn0
+!
+!
+license udi pid CISCO2911/K9 sn FTX15242E5Q-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip ssh authentication-retries 2
+ip ssh time-out 60
+no ip domain-lookup
+ip domain-name dc1.lab
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ description ISP1-R
+ ip address 100.64.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description ISP2-R
+ ip address 100.64.0.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ description INET-SRV
+ ip address 203.0.113.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router bgp 64500
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 100.64.0.2 remote-as 64501
+ neighbor 100.64.0.6 remote-as 64502
+ network 203.0.113.0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list standard MGMT-SSH
+ permit 10.10.10.0 0.0.0.255
+ deny any
+!
+banner motd ^CAUTHORIZED SIMULATOR LAB ONLY^C
+!
+!
+!
+!
+line con 0
+ exec-timeout 15 0
+ logging synchronous
+ login local
+!
+line aux 0
+!
+line vty 0 4
+ access-class MGMT-SSH in
+ login local
+ transport input ssh
+!
+!
+!
+end
+
+

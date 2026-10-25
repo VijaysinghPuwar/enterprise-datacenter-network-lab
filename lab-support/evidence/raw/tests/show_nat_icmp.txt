@@ -1,0 +1,31 @@
+### FW-1# show nat
+show nat
+Auto NAT Policies (Section 2)
+1 (dmz) to (outside) source static DMZ-DNS 198.51.100.11
+    translate_hits = 0, untranslate_hits = 0
+2 (dmz) to (outside) source static DMZ-WEB 198.51.100.10
+    translate_hits = 0, untranslate_hits = 0
+3 (inside) to (outside) source dynamic NAT-APP interface
+    translate_hits = 0, untranslate_hits = 0
+4 (inside) to (outside) source dynamic NAT-MGMT interface
+    translate_hits = 0, untranslate_hits = 0
+5 (inside) to (outside) source dynamic NAT-SVC interface
+    translate_hits = 0, untranslate_hits = 0
+6 (inside) to (outside) source dynamic NAT-WEB interface
+    translate_hits = 0, untranslate_hits = 0
+
+FW-1#
+### FW-1# show arp
+show arp
+        db 10.10.40.1 0030.F27D.C504
+        db 10.10.40.11 000A.F396.D05A
+        db 10.10.40.12 0002.176D.7E35
+        inside 10.255.0.2 00D0.581B.2206
+        inside 10.255.0.3 0007.EC7C.5406
+        inside 10.255.0.4 0030.F27D.C502
+        dmz 172.16.50.1 0030.F27D.C503
+        dmz 172.16.50.10 0001.64EE.BE4C
+        dmz 172.16.50.11 0030.F243.1EC5
+        outside 198.51.100.2 0030.F27D.C501
+        outside 203.0.113.10 0060.70B6.4403
+FW-1#

@@ -1,0 +1,50 @@
+### FW-1# show arp
+show arp
+        inside 10.10.30.11 00D0.581B.2206
+        db 10.10.40.1 0030.F27D.C504
+        db 10.10.40.11 000A.F396.D05A
+        db 10.10.40.12 0002.176D.7E35
+        inside 10.10.50.10 00D0.581B.2206
+        inside 10.10.50.20 00D0.581B.2206
+        inside 10.255.0.2 00D0.581B.2206
+        inside 10.255.0.3 0007.EC7C.5405
+        inside 10.255.0.4 0030.F27D.C502
+        dmz 172.16.50.1 0030.F27D.C503
+        dmz 172.16.50.10 0001.64EE.BE4C
+        dmz 172.16.50.11 0030.F243.1EC5
+        outside 198.51.100.2 0030.F27D.C501
+        outside 203.0.113.10 0060.70B6.4403
+FW-1#
+### ACC-2# show mac-address-table
+show mac-address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+  10    0007.ec7c.5401    DYNAMIC     Gig0/1
+  10    000c.cf3d.dc02    DYNAMIC     Gig0/1
+  10    00d0.581b.2201    DYNAMIC     Gig0/1
+  20    0006.2a86.3d6b    STATIC      Fa0/1
+  20    0007.ec7c.5402    DYNAMIC     Gig0/2
+  20    00d0.581b.2202    DYNAMIC     Gig0/2
+  20    00e0.a363.0502    DYNAMIC     Gig0/2
+  30    0002.16c9.391c    DYNAMIC     Gig0/1
+  30    0007.ec7c.5403    DYNAMIC     Gig0/1
+  30    000c.cf3d.dc02    DYNAMIC     Gig0/1
+  30    00d0.581b.2203    DYNAMIC     Gig0/1
+  30    00e0.f9ec.b62d    STATIC      Fa0/2
+  40    0002.176d.7e35    STATIC      Fa0/3
+  40    00e0.a363.0502    DYNAMIC     Gig0/2
+  50    0007.ec7c.5404    DYNAMIC     Gig0/1
+  50    000c.cf3d.dc02    DYNAMIC     Gig0/1
+  50    000d.bd10.4957    STATIC      Fa0/6
+  50    00d0.581b.2205    DYNAMIC     Gig0/1
+  50    00d0.bce7.39c7    STATIC      Fa0/5
+  99    00e0.a363.0502    DYNAMIC     Gig0/2
+ 900    0007.ec7c.5405    DYNAMIC     Gig0/1
+ 900    000c.cf3d.dc02    DYNAMIC     Gig0/1
+ 900    0030.f27d.c502    DYNAMIC     Gig0/1
+ 900    00d0.581b.2206    DYNAMIC     Gig0/1
+ACC-2#

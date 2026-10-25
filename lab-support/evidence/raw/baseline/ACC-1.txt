@@ -1,0 +1,261 @@
+### ACC-1# show ip interface brief
+show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/1        unassigned      YES manual up                    up 
+FastEthernet0/2        unassigned      YES manual up                    up 
+FastEthernet0/3        unassigned      YES manual up                    up 
+FastEthernet0/4        unassigned      YES manual administratively down down 
+FastEthernet0/5        unassigned      YES manual administratively down down 
+FastEthernet0/6        unassigned      YES manual administratively down down 
+FastEthernet0/7        unassigned      YES manual administratively down down 
+FastEthernet0/8        unassigned      YES manual administratively down down 
+FastEthernet0/9        unassigned      YES manual administratively down down 
+FastEthernet0/10       unassigned      YES manual up                    up 
+FastEthernet0/11       unassigned      YES manual administratively down down 
+FastEthernet0/12       unassigned      YES manual administratively down down 
+FastEthernet0/13       unassigned      YES manual administratively down down 
+FastEthernet0/14       unassigned      YES manual administratively down down 
+FastEthernet0/15       unassigned      YES manual administratively down down 
+FastEthernet0/16       unassigned      YES manual administratively down down 
+FastEthernet0/17       unassigned      YES manual administratively down down 
+FastEthernet0/18       unassigned      YES manual administratively down down 
+FastEthernet0/19       unassigned      YES manual administratively down down 
+FastEthernet0/20       unassigned      YES manual administratively down down 
+FastEthernet0/21       unassigned      YES manual administratively down down 
+ --More-- 
+### ACC-1# show vlan brief
+
+Use with CAUTION
+
+%Portfast has been configured on FastEthernet0/10 but will only
+have effect when the interface is in a non-trunking mode.
+ACC-1(config-if)#spanning-tree bpduguard enable
+ACC-1(config-if)#switchport port-security
+ACC-1(config-if)#switchport port-security maximum 2
+ACC-1(config-if)#switchport port-security mac-address sticky
+ACC-1(config-if)#switchport port-security violation restrict
+ACC-1(config-if)#no shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/4
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/5
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/6
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/7
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/8
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/9
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/11
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/12
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/13
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/14
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/15
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/16
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/17
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/18
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/19
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/20
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/21
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/22
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/23
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#interface FastEthernet0/24
+ACC-1(config-if)#description UNUSED-PARKED
+ACC-1(config-if)#switchport mode access
+ACC-1(config-if)#switchport access vlan 999
+ACC-1(config-if)#shutdown
+ACC-1(config-if)#exit
+ACC-1(config)#logging source-interface Vlan10
+                      ^
+% Invalid input detected at '^' marker.
+	
+ACC-1(config)#end
+ACC-1#write memory
+Building configuration...
+[OK]
+ACC-1#
+*Mar 01, 00:02:41.022: SYS-5-CONFIG_I: Configured from console by console
+ACC-1#terminal length 0
+               ^
+% Invalid input detected at '^' marker.
+	
+ACC-1#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/1        unassigned      YES manual up                    up 
+FastEthernet0/2        unassigned      YES manual up                    up 
+FastEthernet0/3        unassigned      YES manual up                    up 
+FastEthernet0/4        unassigned      YES manual administratively down down 
+FastEthernet0/5        unassigned      YES manual administratively down down 
+FastEthernet0/6        unassigned      YES manual administratively down down 
+FastEthernet0/7        unassigned      YES manual administratively down down 
+FastEthernet0/8        unassigned      YES manual administratively down down 
+FastEthernet0/9        unassigned      YES manual administratively down down 
+FastEthernet0/10       unassigned      YES manual up                    up 
+FastEthernet0/11       unassigned      YES manual administratively down down 
+FastEthernet0/12       unassigned      YES manual administratively down down 
+FastEthernet0/13       unassigned      YES manual administratively down down 
+FastEthernet0/14       unassigned      YES manual administratively down down 
+FastEthernet0/15       unassigned      YES manual administratively down down 
+FastEthernet0/16       unassigned      YES manual administratively down down 
+FastEthernet0/17       unassigned      YES manual administratively down down 
+FastEthernet0/18       unassigned      YES manual administratively down down 
+FastEthernet0/19       unassigned      YES manual administratively down down 
+FastEthernet0/20       unassigned      YES manual administratively down down 
+FastEthernet0/21       unassigned      YES manual administratively down down 
+
+ACC-1#how vlan brief
+          ^
+% Invalid input detected at '^' marker.
+	
+ACC-1#
+### ACC-1# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      99
+Gig0/2      on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40,50,99
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,20,30,50,99
+Gig0/2      20,40,99
+
+ACC-1#
+### ACC-1# show spanning-tree root
+show spanning-tree root
+                         ^
+% Invalid input detected at '^' marker.
+	
+ACC-1#
+### ACC-1# show spanning-tree blockedports
+show spanning-tree blockedports
+                         ^
+% Invalid input detected at '^' marker.
+	
+ACC-1#
+### ACC-1# show port-security
+show port-security
+Secure Port MaxSecureAddr CurrentAddr SecurityViolation Security Action
+               (Count)       (Count)        (Count)
+--------------------------------------------------------------------
+        Fa0/1        2          0                 0         Restrict
+        Fa0/2        2          0                 0         Restrict
+        Fa0/3        2          0                 0         Restrict
+       Fa0/10        2          0                 0         Restrict
+----------------------------------------------------------------------
+ACC-1#
+### ACC-1# show ip dhcp snooping
+show ip dhcp snooping
+Switch DHCP snooping is enabled
+DHCP snooping is configured on following VLANs:
+10
+Insertion of option 82 is disabled
+Option 82 on untrusted port is not allowed
+Verification of hwaddr field is enabled
+Interface                  Trusted    Rate limit (pps)
+-----------------------    -------    ----------------
+GigabitEthernet0/1         yes        unlimited       
+GigabitEthernet0/2         yes        unlimited       
+ACC-1#
+### ACC-1# show ip ssh
+show ip ssh
+SSH Enabled - version 2.0
+Authentication timeout: 60 secs; Authentication retries: 2
+ACC-1#

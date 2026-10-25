@@ -1,0 +1,5 @@
+FW-1 applied 9 lines; rejected: none
+ASA OSPF timers accepted: true
+CORE-1 applied 7 lines; rejected: none
+CORE-2 applied 7 lines; rejected: none
+FW-1 applied 2 lines; rejected: clear arp

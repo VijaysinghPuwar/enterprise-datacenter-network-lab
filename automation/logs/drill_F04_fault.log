@@ -1,0 +1,1 @@
+FAULT: EDGE-R1 :: configure terminal ; interface GigabitEthernet0/0/1 ; shutdown ; end @sim 4102526

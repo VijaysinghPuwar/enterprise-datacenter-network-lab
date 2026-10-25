@@ -1,0 +1,36 @@
+REJECT passive-interface db => passive-interface db ^ % Invalid input detected at '^' marker. FW-1(config-router)#
+show access-list
+access-list cached ACL log flows: total 0, denied 0 (deny-flow-max 4096) alert-interval 300
+access-list OUTSIDE_IN; 4 elements; name hash: 0xb23b0225
+access-list OUTSIDE_IN line 1 extended permit tcp any host 172.16.50.10 eq www(hitcnt=0) 0xd2ae560c
+access-list OUTSIDE_IN line 2 extended permit tcp any host 172.16.50.10 eq 443(hitcnt=0) 0x0bcb0b27
+access-list OUTSIDE_IN line 3 extended permit udp any host 172.16.50.11 eq domain(hitcnt=0) 0x75200986
+access-list OUTSIDE_IN line 4 extended permit tcp any host 172.16.50.11 eq domain(hitcnt=0) 0xe7152cc4
+access-list DMZ_IN; 4 elements; name hash: 0x79b8e2eb
+access-list DMZ_IN line 1 extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x0b87390a
+access-list DMZ_IN line 2 extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0(hitcnt=16) 0x727b7558
+access-list DMZ_IN line 3 extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0(hitcnt=4) 0xb5e32c5b
+access-list DMZ_IN line 4 extended permit ip 172.16.50.0 255.255.255.0 any(hitcnt=0) 0xc555cb83
+access-list INSIDE_IN; 5 elements; name hash: 0x832d0cce
+access-list INSIDE_IN line 1 extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=24) 0x07b4021b
+access-list INSIDE_IN line 2 extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=0) 0x76a84a4b
+access-list INSIDE_IN line 3 extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=12) 0x86c6d837
+access-list INSIDE_IN line 4 extended deny ip any 10.10.40.0 255.255.255.0(hitcnt=24) 0x9404cd4d
+access-list INSIDE_IN line 5 extended permit ip any any(hitcnt=3) 0x5735acc6
+access-list DB_IN; 5 elements; name hash: 0x391d9541
+access-list DB_IN line 1 extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply(hitcnt=0) 0x61d4a878
+access-list DB_IN line 2 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain(hitcnt=0) 0x38eb1135
+access-list DB_IN line 3 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x758a3b99
+access-list DB_IN line 4 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123(hitcnt=0) 0x459dbc08
+access-list DB_IN line 5 extended deny ip 10.10.40.0 255.255.255.0 any(hitcnt=0) 0x27e87753
+FW-1#
+show nat
+Auto NAT Policies (Section 2)
+1 (dmz) to (outside) source static DMZ-DNS 198.51.100.11
+    translate_hits = 0, untranslate_hits = 0
+2 (dmz) to (outside) source static DMZ-WEB 198.51.100.10
+    translate_hits = 0, untranslate_hits = 0
+3 (inside) to (outside) source dynamic INSIDE-NET interface
+    translate_hits = 4, untranslate_hits = 3
+
+FW-1#

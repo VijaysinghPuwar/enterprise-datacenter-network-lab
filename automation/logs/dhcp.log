@@ -1,0 +1,13 @@
+attempt 0 EXC IPC Call ERROR: DhcpServerProcess - Invalid arguments for IPC call "addNewPool"
+attempt 1 EXC IPC Call ERROR: DhcpServerProcess - Invalid arguments for IPC call "addNewPool"
+attempt 2 EXC IPC Call ERROR: DhcpServerProcess - Invalid arguments for IPC call "addNewPool"
+attempt 3 => undefined
+set network
+set mask
+FAIL mask1 IPC Call ERROR: DhcpPool - Invalid arguments for IPC call "setNetworkMask"
+set start
+set end
+set max
+set gw
+set dns
+MGMT pool: name MGMT net 10.10.10.0 mask 255.255.255.0 start 10.10.10.100 end 10.10.10.149 gw 10.10.10.1 dns 10.10.50.10 max 50 | dhcp enabled true

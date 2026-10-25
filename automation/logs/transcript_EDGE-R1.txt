@@ -1,0 +1,171 @@
+EDGE-R1# | enable
+    enable
+    EDGE-R1#
+EDGE-R1(config)# | configure terminal
+    configure terminal
+    Enter configuration commands, one per line.  End with CNTL/Z.
+    EDGE-R1(config)#
+EDGE-R1(config)# | hostname EDGE-R1
+    hostname EDGE-R1
+    EDGE-R1(config)#
+EDGE-R1(config)# | no ip domain-lookup
+    no ip domain-lookup
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip domain-name dc1.lab
+    ip domain-name dc1.lab
+    EDGE-R1(config)#
+EDGE-R1(config)# | service password-encryption
+    service password-encryption
+    EDGE-R1(config)#
+EDGE-R1(config)# | enable secret DcLabOnly2026!
+    enable secret DcLabOnly2026!
+    EDGE-R1(config)#
+EDGE-R1(config)# | username netadmin privilege 15 secret DcLabOnly2026!
+    username netadmin privilege 15 secret DcLabOnly2026!
+    EDGE-R1(config)#
+EDGE-R1(config)# | banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    EDGE-R1(config)#
+EDGE-R1(config)# | crypto key generate rsa general-keys modulus 1024
+    crypto key generate rsa general-keys modulus 1024
+    % You already have RSA keys defined named EDGE-R1.dc1.lab
+    % They will be replaced.
+    
+    % The key modulus size is 1024 bits
+    % Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+    *Mar 1 0:2:41.546: %SSH-5-ENABLED: SSH 2 has been enabled
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip ssh version 2
+    ip ssh version 2
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip ssh time-out 60
+    ip ssh time-out 60
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip ssh authentication-retries 2
+    ip ssh authentication-retries 2
+    EDGE-R1(config)#
+EDGE-R1(config-std-nacl)# | ip access-list standard MGMT-SSH
+    ip access-list standard MGMT-SSH
+    EDGE-R1(config-std-nacl)#
+EDGE-R1(config-std-nacl)# | permit 10.10.10.0 0.0.0.255
+    permit 10.10.10.0 0.0.0.255
+    EDGE-R1(config-std-nacl)#
+EDGE-R1(config-std-nacl)# | deny any
+    deny any
+    EDGE-R1(config-std-nacl)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1(config-line)# | line console 0
+    line console 0
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | logging synchronous
+    logging synchronous
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | exec-timeout 15 0
+    exec-timeout 15 0
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | login local
+    login local
+    EDGE-R1(config-line)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1(config-line)# | line vty 0 4
+    line vty 0 4
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | login local
+    login local
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | transport input ssh
+    transport input ssh
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | access-class MGMT-SSH in
+    access-class MGMT-SSH in
+    EDGE-R1(config-line)#
+EDGE-R1(config-line)# | exec-timeout 10 0
+    exec-timeout 10 0
+    EDGE-R1(config-line)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1(config-if)# | interface GigabitEthernet0/0/0
+    interface GigabitEthernet0/0/0
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | description ISP1-R
+    description ISP1-R
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | ip address 100.64.1.2 255.255.255.252
+    ip address 100.64.1.2 255.255.255.252
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | no shutdown
+    no shutdown
+    EDGE-R1(config-if)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1(config-if)# | interface GigabitEthernet0/0/1
+    interface GigabitEthernet0/0/1
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | description ISP2-R
+    description ISP2-R
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | ip address 100.64.2.2 255.255.255.252
+    ip address 100.64.2.2 255.255.255.252
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | no shutdown
+    no shutdown
+    EDGE-R1(config-if)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1(config-if)# | interface GigabitEthernet0/0/2
+    interface GigabitEthernet0/0/2
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | description FW-1-OUTSIDE
+    description FW-1-OUTSIDE
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | ip address 198.51.100.1 255.255.255.248
+    ip address 198.51.100.1 255.255.255.248
+    EDGE-R1(config-if)#
+EDGE-R1(config-if)# | no shutdown
+    no shutdown
+    EDGE-R1(config-if)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip route 198.51.100.0 255.255.255.0 198.51.100.2
+    ip route 198.51.100.0 255.255.255.0 198.51.100.2
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip route 0.0.0.0 0.0.0.0 100.64.1.1
+    ip route 0.0.0.0 0.0.0.0 100.64.1.1
+    EDGE-R1(config)#
+EDGE-R1(config)# | ip route 0.0.0.0 0.0.0.0 100.64.2.1 250
+    ip route 0.0.0.0 0.0.0.0 100.64.2.1 250
+    EDGE-R1(config)#
+EDGE-R1(config-router)# | router bgp 65010
+    router bgp 65010
+    EDGE-R1(config-router)#
+EDGE-R1(config-router)# | bgp log-neighbor-changes
+    bgp log-neighbor-changes
+    EDGE-R1(config-router)#
+EDGE-R1(config-router)# | neighbor 100.64.1.1 remote-as 64501
+    neighbor 100.64.1.1 remote-as 64501
+    EDGE-R1(config-router)#
+EDGE-R1(config-router)# | neighbor 100.64.2.1 remote-as 64502
+    neighbor 100.64.2.1 remote-as 64502
+    EDGE-R1(config-router)#
+EDGE-R1(config-router)# | network 198.51.100.0 mask 255.255.255.0
+    network 198.51.100.0 mask 255.255.255.0
+    EDGE-R1(config-router)#
+EDGE-R1(config)# | exit
+    exit
+    EDGE-R1(config)#
+EDGE-R1# | end
+    end
+    EDGE-R1#
+EDGE-R1# | write memory
+    write memory
+    Building configuration...
+    [OK]
+    EDGE-R1#

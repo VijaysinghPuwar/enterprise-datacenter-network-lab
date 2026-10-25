@@ -1,0 +1,121 @@
+### FW-1# show running-config policy-map
+show running-config policy-map
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map
+  inspect ftp 
+  inspect http 
+  inspect icmp 
+  inspect tftp 
+FW-1#
+### FW-1# show service-policy
+show service-policy
+           ^
+% Invalid input detected at '^' marker.
+	
+FW-1#
+### FW-1# show running-config service-policy
+show running-config service-policy
+                         ^
+% Invalid input detected at '^' marker.
+	
+FW-1#
+### FW-1# show access-list
+show access-list
+access-list cached ACL log flows: total 0, denied 0 (deny-flow-max 4096) alert-interval 300
+access-list OUTSIDE_IN; 6 elements; name hash: 0x65da6bd6
+access-list OUTSIDE_IN line 1 extended permit tcp any host 172.16.50.10 eq www(hitcnt=2) 0x61c73718
+access-list OUTSIDE_IN line 2 extended permit tcp any host 172.16.50.10 eq 443(hitcnt=0) 0x65d965c9
+access-list OUTSIDE_IN line 3 extended permit udp any host 172.16.50.11 eq domain(hitcnt=1) 0xd1352842
+access-list OUTSIDE_IN line 4 extended permit tcp any host 172.16.50.11 eq domain(hitcnt=0) 0xce0ed37b
+access-list OUTSIDE_IN line 5 extended permit tcp any eq www 10.10.0.0 255.255.0.0(hitcnt=1) 0x227c598b
+access-list OUTSIDE_IN line 6 extended permit tcp any eq 443 10.10.0.0 255.255.0.0(hitcnt=0) 0x69b51538
+access-list INSIDE_IN; 5 elements; name hash: 0x0d979397
+access-list INSIDE_IN line 1 extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=72) 0xe788ec67
+access-list INSIDE_IN line 2 extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=0) 0x6deea6a7
+access-list INSIDE_IN line 3 extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=48) 0xc368b109
+access-list INSIDE_IN line 4 extended deny ip any 10.10.40.0 255.255.255.0(hitcnt=49) 0x866703e1
+access-list INSIDE_IN line 5 extended permit ip any any(hitcnt=201) 0x84a92b31
+access-list DB_IN; 5 elements; name hash: 0x340caceb
+access-list DB_IN line 1 extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply(hitcnt=81) 0xd4880e85
+access-list DB_IN line 2 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain(hitcnt=0) 0x313e3d5a
+access-list DB_IN line 3 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x75710e47
+access-list DB_IN line 4 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123(hitcnt=0) 0x9e4793e1
+access-list DB_IN line 5 extended deny ip 10.10.40.0 255.255.255.0 any(hitcnt=25) 0x187185bb
+access-list DMZ_IN; 5 elements; name hash: 0xc3a436ab
+access-list DMZ_IN line 1 extended permit tcp 172.16.50.0 255.255.255.0 eq www 10.10.0.0 255.255.0.0(hitcnt=0) 0xaca40ed9
+access-list DMZ_IN line 2 extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x849437c4
+access-list DMZ_IN line 3 extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0(hitcnt=13) 0xb2189067
+access-list DMZ_IN line 4 extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0(hitcnt=0) 0x71c65e12
+access-list DMZ_IN line 5 extended permit ip 172.16.50.0 255.255.255.0 any(hitcnt=13) 0xbab82ea6
+FW-1#
+### ACC-2# show port-security
+show port-security
+Secure Port MaxSecureAddr CurrentAddr SecurityViolation Security Action
+               (Count)       (Count)        (Count)
+--------------------------------------------------------------------
+        Fa0/1        2          1                 0         Restrict
+        Fa0/2        2          1                 0         Restrict
+        Fa0/3        2          1                 0         Restrict
+        Fa0/5        2          1                 0         Restrict
+        Fa0/6        2          1                 0         Restrict
+----------------------------------------------------------------------
+ACC-2#
+### ACC-1# show port-security
+show port-security
+Secure Port MaxSecureAddr CurrentAddr SecurityViolation Security Action
+               (Count)       (Count)        (Count)
+--------------------------------------------------------------------
+        Fa0/1        2          1                 0         Restrict
+        Fa0/2        2          1                 0         Restrict
+        Fa0/3        2          1                 0         Restrict
+       Fa0/10        2          1                 0         Restrict
+----------------------------------------------------------------------
+ACC-1#
+### ACC-2# show spanning-tree vlan 40
+show spanning-tree vlan 40
+VLAN0040
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4136
+             Address     0007.EC7C.5484
+             Cost        19
+             Port        26(GigabitEthernet0/2)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32808  (priority 32768 sys-id-ext 40)
+             Address     000D.BD0A.96C4
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/3            Desg FWD 19        128.3    P2p
+Gi0/1            Altn BLK 19        128.25   P2p
+Gi0/2            Root FWD 19        128.26   P2p
+
+ACC-2#
+### ACC-1# show spanning-tree vlan 40
+show spanning-tree vlan 40
+VLAN0040
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4136
+             Address     0007.EC7C.5484
+             Cost        19
+             Port        26(GigabitEthernet0/2)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32808  (priority 32768 sys-id-ext 40)
+             Address     0030.A303.1450
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/3            Desg FWD 19        128.3    P2p
+Gi0/1            Altn BLK 19        128.25   P2p
+Gi0/2            Root FWD 19        128.26   P2p
+
+ACC-1#

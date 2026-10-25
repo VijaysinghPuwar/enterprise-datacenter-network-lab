@@ -1,0 +1,24 @@
+REJECT access-list DB_IN line 1 extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply access-list DB_IN line 1 extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply
+                               ^
+% Invalid input detected at '^' marker.
+	
+FW-1(config)#
+show nat
+Auto NAT Policies (Section 2)
+1 (db) to (outside) source dynamic DB-NET interface
+    translate_hits = 5, untranslate_hits = 0
+2 (dmz) to (outside) source static DMZ-DNS 198.51.100.11
+    translate_hits = 0, untranslate_hits = 0
+3 (dmz) to (outside) source static DMZ-WEB 198.51.100.10
+    translate_hits = 0, untranslate_hits = 0
+4 (inside) to (outside) source dynamic INSIDE-NET interface
+    translate_hits = 4, untranslate_hits = 3
+
+FW-1#
+show xlate
+2 in use, 2 most used
+Flags: D - DNS, e - extended, I - identity, i - dynamic, r - portmap, s - static, T - twice, N - net-to-net
+NAT from dmz:172.16.50.11/32 to outside:198.51.100.11/32 flags s idle 00:10:46,  timeout 0:00:00
+NAT from dmz:172.16.50.10/32 to outside:198.51.100.10/32 flags s idle 00:10:46,  timeout 0:00:00
+
+FW-1#

@@ -1,0 +1,162 @@
+INET-R# | enable
+    enable
+    INET-R#
+INET-R(config)# | configure terminal
+    configure terminal
+    Enter configuration commands, one per line.  End with CNTL/Z.
+    INET-R(config)#
+INET-R(config)# | hostname INET-R
+    hostname INET-R
+    INET-R(config)#
+INET-R(config)# | no ip domain-lookup
+    no ip domain-lookup
+    INET-R(config)#
+INET-R(config)# | ip domain-name dc1.lab
+    ip domain-name dc1.lab
+    INET-R(config)#
+INET-R(config)# | service password-encryption
+    service password-encryption
+    INET-R(config)#
+INET-R(config)# | enable secret DcLabOnly2026!
+    enable secret DcLabOnly2026!
+    INET-R(config)#
+INET-R(config)# | username netadmin privilege 15 secret DcLabOnly2026!
+    username netadmin privilege 15 secret DcLabOnly2026!
+    INET-R(config)#
+INET-R(config)# | banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    INET-R(config)#
+INET-R(config)# | crypto key generate rsa general-keys modulus 1024
+    crypto key generate rsa general-keys modulus 1024
+    % You already have RSA keys defined named INET-R.dc1.lab
+    % They will be replaced.
+    
+    % The key modulus size is 1024 bits
+    % Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+    *Mar 1 0:2:41.531: %SSH-5-ENABLED: SSH 2 has been enabled
+    INET-R(config)#
+INET-R(config)# | ip ssh version 2
+    ip ssh version 2
+    INET-R(config)#
+INET-R(config)# | ip ssh time-out 60
+    ip ssh time-out 60
+    INET-R(config)#
+INET-R(config)# | ip ssh authentication-retries 2
+    ip ssh authentication-retries 2
+    INET-R(config)#
+INET-R(config-std-nacl)# | ip access-list standard MGMT-SSH
+    ip access-list standard MGMT-SSH
+    INET-R(config-std-nacl)#
+INET-R(config-std-nacl)# | permit 10.10.10.0 0.0.0.255
+    permit 10.10.10.0 0.0.0.255
+    INET-R(config-std-nacl)#
+INET-R(config-std-nacl)# | deny any
+    deny any
+    INET-R(config-std-nacl)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R(config-line)# | line console 0
+    line console 0
+    INET-R(config-line)#
+INET-R(config-line)# | logging synchronous
+    logging synchronous
+    INET-R(config-line)#
+INET-R(config-line)# | exec-timeout 15 0
+    exec-timeout 15 0
+    INET-R(config-line)#
+INET-R(config-line)# | login local
+    login local
+    INET-R(config-line)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R(config-line)# | line vty 0 4
+    line vty 0 4
+    INET-R(config-line)#
+INET-R(config-line)# | login local
+    login local
+    INET-R(config-line)#
+INET-R(config-line)# | transport input ssh
+    transport input ssh
+    INET-R(config-line)#
+INET-R(config-line)# | access-class MGMT-SSH in
+    access-class MGMT-SSH in
+    INET-R(config-line)#
+INET-R(config-line)# | exec-timeout 10 0
+    exec-timeout 10 0
+    INET-R(config-line)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R(config-if)# | interface GigabitEthernet0/0
+    interface GigabitEthernet0/0
+    INET-R(config-if)#
+INET-R(config-if)# | description ISP1-R
+    description ISP1-R
+    INET-R(config-if)#
+INET-R(config-if)# | ip address 100.64.0.1 255.255.255.252
+    ip address 100.64.0.1 255.255.255.252
+    INET-R(config-if)#
+INET-R(config-if)# | no shutdown
+    no shutdown
+    INET-R(config-if)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    INET-R(config-if)#
+INET-R(config-if)# | description ISP2-R
+    description ISP2-R
+    INET-R(config-if)#
+INET-R(config-if)# | ip address 100.64.0.5 255.255.255.252
+    ip address 100.64.0.5 255.255.255.252
+    INET-R(config-if)#
+INET-R(config-if)# | no shutdown
+    no shutdown
+    INET-R(config-if)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R(config-if)# | interface GigabitEthernet0/2
+    interface GigabitEthernet0/2
+    INET-R(config-if)#
+INET-R(config-if)# | description INET-SRV
+    description INET-SRV
+    INET-R(config-if)#
+INET-R(config-if)# | ip address 203.0.113.1 255.255.255.0
+    ip address 203.0.113.1 255.255.255.0
+    INET-R(config-if)#
+INET-R(config-if)# | no shutdown
+    no shutdown
+    INET-R(config-if)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R(config-router)# | router bgp 64500
+    router bgp 64500
+    INET-R(config-router)#
+INET-R(config-router)# | bgp log-neighbor-changes
+    bgp log-neighbor-changes
+    INET-R(config-router)#
+INET-R(config-router)# | neighbor 100.64.0.2 remote-as 64501
+    neighbor 100.64.0.2 remote-as 64501
+    INET-R(config-router)#
+INET-R(config-router)# | neighbor 100.64.0.6 remote-as 64502
+    neighbor 100.64.0.6 remote-as 64502
+    INET-R(config-router)#
+INET-R(config-router)# | network 203.0.113.0 mask 255.255.255.0
+    network 203.0.113.0 mask 255.255.255.0
+    INET-R(config-router)#
+INET-R(config)# | exit
+    exit
+    INET-R(config)#
+INET-R# | end
+    end
+    INET-R#
+INET-R# | write memory
+    write memory
+    Building configuration...
+    [OK]
+    INET-R#

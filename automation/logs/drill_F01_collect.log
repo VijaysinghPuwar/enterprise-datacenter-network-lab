@@ -1,0 +1,7 @@
+S1 | MGMT -> WEB-01 (routed, HSRP) | NOC-PC -> 10.10.20.11 | expect permit | sent=40 received=40 lost=0 (100% delivered)
+S2 | APP -> WEB-02 (routed, cross-rack) | APP-02 -> 10.10.20.12 | expect permit | sent=40 received=40 lost=0 (100% delivered)
+S3 | APP -> DB-02 (through FW-1 db zone) | APP-01 -> 10.10.40.12 | expect permit | sent=40 received=40 lost=0 (100% delivered)
+S5 | SERVICES -> Internet (PAT + BGP) | SVC-MON -> 203.0.113.10 | expect permit | sent=40 received=40 lost=0 (100% delivered)
+S9 | DB-01 -> DB-02 (L2 cross-rack VLAN 40) | DB-01 -> 10.10.40.12 | expect permit | sent=40 received=39 lost=1 (98% delivered)
+S10 | WEB -> APP-01 (routed, cross-rack) | WEB-02 -> 10.10.30.11 | expect permit | sent=40 received=40 lost=0 (100% delivered)
+TOTAL permitted-stream delivery: 239/240

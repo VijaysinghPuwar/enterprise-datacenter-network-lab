@@ -1,0 +1,13 @@
+  terminal via getConsoleLine
+=== FW-1 start prompt: 'FW-1>'
+  FW-1: ready prompt 'FW-1>'
+  source automation/pt-adjusted/FW-1-remainder.cfg
+  diag 'enable' outLen 5195->5212 delta='enable Password: '
+  diag 'configure terminal' outLen 5218->5250 delta='configure terminal FW-1(config)#'
+  diag 'object network DMZ-WEB' outLen 5250->5301 delta='object network DMZ-WEB FW-1(config-network-object)#'
+  prompt after 'crypto key generate rsa modulus 1024': WARNING: You have a RSA keypair already defined named <Default-RSA-Key>.
+
+Do you really want to replace them? [yes/no]: 
+=== FW-1 sent=41 rejected=0 final prompt 'FW-1#'
+SUMMARY
+FW-1: sent 41, rejected 0

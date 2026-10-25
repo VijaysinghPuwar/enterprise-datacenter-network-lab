@@ -1,0 +1,11 @@
+D01-renew | NOC-PC -> ipconfig /renew | expect lease | OUTPUT CAPTURED
+D04a | APP-01 -> ping -n 4 10.10.40.11 | expect permit | PASS sent=4 received=2 lost=2 (50% success)
+D04b | APP-02 -> ping -n 4 10.10.40.12 | expect permit | PASS sent=4 received=2 lost=2 (50% success)
+D05 | WEB-01 -> ping -n 4 10.10.40.11 | expect deny | FAIL sent=4 received=3 lost=1 (75% success)
+D11a | DMZ-WEB -> ping -n 4 10.10.10.2 | expect deny | PASS sent=4 received=0 lost=4 (0% success)
+D11b | DMZ-DNS -> ping -n 4 10.255.0.2 | expect deny | PASS sent=4 received=0 lost=4 (0% success)
+D12 | INET-SRV -> ping -n 4 198.51.100.10 | expect deny | PASS sent=4 received=0 lost=4 (0% success)
+X01-inside-to-internet | SVC-MON -> ping -n 4 203.0.113.10 | expect permit | PASS sent=4 received=3 lost=1 (75% success)
+X02-cross-rack-L2 | WEB-02 -> ping -n 4 10.10.20.11 | expect permit | PASS sent=4 received=4 lost=0 (100% success)
+X03-db-to-services | DB-02 -> ping -n 4 10.10.50.10 | expect permit | PASS sent=4 received=3 lost=1 (75% success)
+X04-inside-to-dmz | SVC-DNS -> ping -n 4 172.16.50.10 | expect permit | PASS sent=4 received=4 lost=0 (100% success)

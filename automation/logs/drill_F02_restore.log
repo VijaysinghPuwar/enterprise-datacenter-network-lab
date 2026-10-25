@@ -1,0 +1,1 @@
+RESTORE: ACC-1 :: configure terminal ; interface GigabitEthernet0/1 ; no shutdown ; end @sim 3836247

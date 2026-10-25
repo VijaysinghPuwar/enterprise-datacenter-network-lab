@@ -1,0 +1,11 @@
+=== CORE-1 start prompt: 'Switch>'
+  CORE-1: ready prompt 'Switch>'
+  diag 'enable' outLen 5028->5042 delta='enable Switch#'
+  diag 'configure terminal' outLen 5042->5138 delta='configure terminal Enter configuration commands, one per line. End with CNTL/Z. Switch(config)#'
+  diag 'hostname CORE-1' outLen 5138->5169 delta='hostname CORE-1 CORE-1(config)#'
+  REJECTED line 31: logging trap informational  =>  logging trap informational ^ % Invalid input detected at '^' marker. CORE-1(config)#
+  REJECTED line 124: permit ip 10.10.30.0 0.0.0.255 10.10.40.0 0.0.0.255  =>   CORE-1(config-line)#logging synchronous CORE-1(config-line)#exec-timeout 15 0 CORE-1(config-line)#login local CORE-1(config-line)#exit CORE-1(config)#line vty 0 4 CORE-1(config-line)#login local CORE-1(config-line)#tran
+  REJECTED line 321: logging source-interface Vlan10  =>  logging source-interface Vlan10 ^ % Invalid input detected at '^' marker. CORE-1(config)#
+=== CORE-1 sent=323 rejected=3 final prompt 'CORE-1#'
+SUMMARY
+CORE-1: sent 323, rejected 3

@@ -1,0 +1,73 @@
+S9-retest | DB-01 -> ping -n 6 10.10.40.12 | expect permit | RUNNING/INCOMPLETE
+S5-retest | SVC-MON -> ping -n 6 203.0.113.10 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+S7-retest | DMZ-DNS -> ping -n 6 203.0.113.10 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+S1-check | NOC-PC -> ping -n 6 203.0.113.10 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+
+### S9-retest  DB-01> ping -n 6 10.10.40.12  [expect permit]
+ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+
+### S5-retest  SVC-MON> ping -n 6 203.0.113.10  [expect permit]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### S7-retest  DMZ-DNS> ping -n 6 203.0.113.10  [expect permit]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+
+### S1-check  NOC-PC> ping -n 6 203.0.113.10  [expect permit]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=7ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 7ms, Average = 1ms
+
+C:\>

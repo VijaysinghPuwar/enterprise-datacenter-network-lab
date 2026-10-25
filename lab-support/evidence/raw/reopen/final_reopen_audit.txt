@@ -1,0 +1,126 @@
+FW-1 GigabitEthernet1/1 proxyArp=true up=true
+FW-1 GigabitEthernet1/2 proxyArp=false up=true
+FW-1 GigabitEthernet1/3 proxyArp=true up=true
+FW-1 GigabitEthernet1/4 proxyArp=false up=true
+### FW-1# show interface ip brief
+show interface ip brief
+Interface              IP-Address      OK? Method Status                Protocol
+Virtual0               127.1.0.1       YES unset  up                    up
+GigabitEthernet1/1     198.51.100.2    YES manual up                    up
+GigabitEthernet1/2     10.255.0.4      YES manual up                    up
+GigabitEthernet1/3     172.16.50.1     YES manual up                    up
+GigabitEthernet1/4     10.10.40.1      YES manual up                    up
+GigabitEthernet1/5     unassigned      YES unset  administratively down down
+GigabitEthernet1/6     unassigned      YES unset  administratively down down
+GigabitEthernet1/7     unassigned      YES unset  administratively down down
+GigabitEthernet1/8     unassigned      YES unset  administratively down down
+Management1/1          unassigned      YES unset  administratively down down
+Internal-Control1/1    127.0.1.1       YES unset  up                    up
+Internal-Data1/1       unassigned      YES unset  up                    up
+Internal-Data1/2       unassigned      YES unset  up                    up
+Internal-Data1/3       unassigned      YES unset  up                    up
+FW-1#
+### FW-1# show route
+show route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 198.51.100.1 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 10 subnets, 3 masks
+C       10.0.0.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+C       10.0.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.10.10.0 255.255.255.0 [110/101] via 10.255.0.3, inside, 00:03:44, GigabitEthernet1/2
+O       10.10.20.0 255.255.255.0 [110/101] via 10.255.0.3, inside, 00:03:44, GigabitEthernet1/2
+O       10.10.30.0 255.255.255.0 [110/101] via 10.255.0.3, inside, 00:03:44, GigabitEthernet1/2
+C       10.10.40.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+O       10.10.50.0 255.255.255.0 [110/101] via 10.255.0.3, inside, 00:03:44, GigabitEthernet1/2
+C       10.255.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.255.255.1 255.255.255.255 [110/2] via 10.255.0.2, inside, 00:03:44, GigabitEthernet1/2
+O       10.255.255.2 255.255.255.255 [110/2] via 10.255.0.3, inside, 00:03:44, GigabitEthernet1/2
+     172.16.0.0/24 is subnetted, 2 subnets
+C       172.16.0.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+C       172.16.50.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+     198.51.100.0/29 is subnetted, 1 subnets
+C       198.51.100.0 255.255.255.248 is directly connected, outside, GigabitEthernet1/1
+S*   0.0.0.0/0 [1/0] via 198.51.100.1
+FW-1#
+### CORE-1# show etherchannel summary
+show etherchannel summary
+Flags:  D - down        P - in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+
+1      Po1(SU)           LACP   Gig0/1(P) Gig0/2(P) 
+CORE-1#
+### CORE-1# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   110 P Active   local           10.10.10.3      10.10.10.1     
+Vl20        20   100 P Standby  10.10.20.3      local           10.10.20.1     
+Vl30        30   110 P Active   local           10.10.30.3      10.10.30.1     
+Vl50        50   110 P Active   local           10.10.50.3      10.10.50.1     
+Vl900       900  110 P Active   local           10.255.0.3      10.255.0.1     
+CORE-1#
+### CORE-2# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   100 P Standby  10.10.10.2      local           10.10.10.1     
+Vl20        20   110 P Active   local           10.10.20.2      10.10.20.1     
+Vl30        30   100 P Standby  10.10.30.2      local           10.10.30.1     
+Vl50        50   100 P Standby  10.10.50.2      local           10.10.50.1     
+Vl900       900  100 P Standby  10.255.0.2      local           10.255.0.1     
+CORE-2#
+### CORE-1# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.2      1   FULL/BDR        00:00:02    10.255.0.3      Vlan900
+10.255.255.4      1   FULL/DR         00:00:02    10.255.0.4      Vlan900
+CORE-1#
+### EDGE-R1# show ip bgp summary
+show ip bgp summary
+BGP router identifier 198.51.100.1, local AS number 65010
+BGP table version is 4, main routing table version 6
+3 network entries using 396 bytes of memory
+3 path entries using 156 bytes of memory
+2/2 BGP path/bestpath attribute entries using 368 bytes of memory
+4 BGP AS-PATH entries using 96 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+Bitfield cache entries: current 1 (at peak 1) using 32 bytes of memory
+BGP using 1048 total bytes of memory
+BGP activity 2/0 prefixes, 3/0 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.64.1.1      4 64501       8       6        4    0    0 00:04:01        4
+100.64.2.1      4 64502       8       6        4    0    0 00:04:01        4
+
+EDGE-R1#
+SVC-DNS dns enabled=true records=11
+SVC-DNS dhcp enabled=true pools=2
+WEB-01 http index length=500
+SVC-MON syslog=true ntp=true
+devices=24 links=26

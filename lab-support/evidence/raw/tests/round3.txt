@@ -1,0 +1,96 @@
+D07-ssh-from-untrusted | WEB-01 -> ssh -l netadmin 10.10.10.11 | expect info | OUTPUT CAPTURED
+D10-public-dns | INET-SRV -> nslookup www.dc1-corp.com 198.51.100.11 | expect info | OUTPUT CAPTURED
+D03-internal-dns | SVC-MON -> nslookup web.dc1.lab | expect info | OUTPUT CAPTURED
+X10-tracert-internet | APP-02 -> tracert 203.0.113.10 | expect info | OUTPUT CAPTURED
+X11-tracert-db | APP-01 -> tracert 10.10.40.12 | expect info | OUTPUT CAPTURED
+D02b | WEB-02 -> ping -n 4 10.10.50.20 | expect permit | PASS sent=4 received=3 lost=1 (75% success)
+D06-ssh-core1 | NOC-PC -> ssh -l netadmin 10.10.10.2 | expect info | OUTPUT CAPTURED
+
+### D07-ssh-from-untrusted  WEB-01> ssh -l netadmin 10.10.10.11  [expect info]
+ssh -l netadmin 10.10.10.11
+
+
+[Connection to 10.10.10.11 closed by foreign host]
+C:\>
+
+### D10-public-dns  INET-SRV> nslookup www.dc1-corp.com 198.51.100.11  [expect info]
+nslookup www.dc1-corp.com 198.51.100.11
+
+Server: [198.51.100.11]
+Address:  198.51.100.11
+
+Non-authoritative answer:
+Name:   www.dc1-corp.com
+Address:   198.51.100.10
+           
+C:\>
+
+### D03-internal-dns  SVC-MON> nslookup web.dc1.lab  [expect info]
+nslookup web.dc1.lab
+
+Server: [10.10.50.10]
+Address:  10.10.50.10
+
+Non-authoritative answer:
+Name:   web.dc1.lab
+Address:   10.10.20.11
+           
+C:\>
+
+### X10-tracert-internet  APP-02> tracert 203.0.113.10  [expect info]
+tracert 203.0.113.10
+
+Tracing route to 203.0.113.10 over a maximum of 30 hops: 
+
+  1   0 ms      0 ms      0 ms      10.10.30.2
+  2   1 ms      0 ms      0 ms      10.255.0.4
+  3   *         *         *         Request timed out.
+  4   *         *         *         Request timed out.
+
+### X11-tracert-db  APP-01> tracert 10.10.40.12  [expect info]
+tracert 10.10.40.12
+
+Tracing route to 10.10.40.12 over a maximum of 30 hops: 
+
+  1   0 ms      0 ms      0 ms      10.10.30.2
+  2   0 ms      0 ms      0 ms      10.255.0.4
+  3   0 ms      0 ms      0 ms      10.10.40.12
+
+Trace complete.
+
+C:\>
+
+### D02b  WEB-02> ping -n 4 10.10.50.20  [expect permit]
+ping -n 4 10.10.50.20
+
+Pinging 10.10.50.20 with 32 bytes of data:
+
+Request timed out.
+Reply from 10.10.50.20: bytes=32 time<1ms TTL=127
+Reply from 10.10.50.20: bytes=32 time<1ms TTL=127
+Reply from 10.10.50.20: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.50.20:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+
+### D06-ssh-core1  NOC-PC> ssh -l netadmin 10.10.10.2  [expect info]
+ssh -l netadmin 10.10.10.2
+
+Password: 
+
+AUTHORIZED SIMULATOR LAB ONLY
+
+CORE-1#show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   110 P Active   local           10.10.10.3      10.10.10.1     
+Vl20        20   100 P Standby  10.10.20.3      local           10.10.20.1     
+Vl30        30   110 P Active   local           10.10.30.3      10.10.30.1     
+Vl50        50   110 P Active   local           10.10.50.3      10.10.50.1     
+Vl900       900  110 P Active   local           10.255.0.3      10.255.0.1     
+CORE-1#

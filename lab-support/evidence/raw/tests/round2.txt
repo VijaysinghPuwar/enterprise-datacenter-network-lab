@@ -1,0 +1,190 @@
+D04a | APP-01 -> ping -n 6 10.10.40.11 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+D04b | APP-02 -> ping -n 6 10.10.40.12 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+D05 | WEB-01 -> ping -n 6 10.10.40.11 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+D05b | WEB-02 -> ping -n 6 10.10.40.12 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+D02a | NOC-PC -> ping -n 6 10.10.20.11 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+X05-mgmt-to-db | SVC-MON -> ping -n 6 10.10.40.11 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+X06-db-to-app-initiated | DB-01 -> ping -n 6 10.10.30.11 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+X07-db-no-internet-egress | DB-02 -> ping -n 6 203.0.113.10 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+X08-dmz-to-db | DMZ-WEB -> ping -n 6 10.10.40.11 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+X09-services-to-app | SVC-DNS -> ping -n 6 10.10.30.12 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+
+### D04a  APP-01> ping -n 6 10.10.40.11  [expect permit]
+ping -n 6 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+
+### D04b  APP-02> ping -n 6 10.10.40.12  [expect permit]
+ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=2ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time=8ms TTL=126
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 8ms, Average = 2ms
+
+C:\>
+
+### D05  WEB-01> ping -n 6 10.10.40.11  [expect deny]
+ping -n 6 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### D05b  WEB-02> ping -n 6 10.10.40.12  [expect deny]
+ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### D02a  NOC-PC> ping -n 6 10.10.20.11  [expect permit]
+ping -n 6 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### X05-mgmt-to-db  SVC-MON> ping -n 6 10.10.40.11  [expect permit]
+ping -n 6 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time=2ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 2ms, Average = 0ms
+
+C:\>
+
+### X06-db-to-app-initiated  DB-01> ping -n 6 10.10.30.11  [expect deny]
+ping -n 6 10.10.30.11
+
+Pinging 10.10.30.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.30.11:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### X07-db-no-internet-egress  DB-02> ping -n 6 203.0.113.10  [expect deny]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### X08-dmz-to-db  DMZ-WEB> ping -n 6 10.10.40.11  [expect deny]
+ping -n 6 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### X09-services-to-app  SVC-DNS> ping -n 6 10.10.30.12  [expect permit]
+ping -n 6 10.10.30.12
+
+Pinging 10.10.30.12 with 32 bytes of data:
+
+Reply from 10.10.30.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.12: bytes=32 time=2ms TTL=127
+Reply from 10.10.30.12: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.30.12:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 2ms, Average = 0ms
+
+C:\>

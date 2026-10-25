@@ -1,0 +1,83 @@
+ Lost = 1 (3% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 25ms, Average = 2ms
+
+C:\>ping -n 8 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time=2ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time=7ms TTL=128
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 8, Received = 8, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 7ms, Average = 1ms
+
+C:\>ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>arp -d
+C:\>ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+C:\>arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.1            0030.f27d.c504        dynamic
+  10.10.40.12           0030.f27d.c504        dynamic
+
+C:\>
+C:\>arp -d
+C:\>ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time=7ms TTL=128
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 7ms, Average = 1ms
+
+C:\>
+C:\>arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.12           0002.176d.7e35        dynamic
+
+C:\>

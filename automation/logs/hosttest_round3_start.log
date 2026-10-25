@@ -1,0 +1,7 @@
+started D07-ssh-from-untrusted  WEB-01> ssh -l netadmin 10.10.10.11
+started D10-public-dns  INET-SRV> nslookup www.dc1-corp.com 198.51.100.11
+started D03-internal-dns  SVC-MON> nslookup web.dc1.lab
+started X10-tracert-internet  APP-02> tracert 203.0.113.10
+started X11-tracert-db  APP-01> tracert 10.10.40.12
+started D02b  WEB-02> ping -n 4 10.10.50.20
+started D06-ssh-core1  NOC-PC> ssh -l netadmin 10.10.10.2

@@ -1,0 +1,185 @@
+D01-renew | NOC-PC -> ipconfig /renew | expect lease | OUTPUT CAPTURED
+D04a | APP-01 -> ping -n 4 10.10.40.11 | expect permit | PASS sent=4 received=2 lost=2 (50% success)
+D04b | APP-02 -> ping -n 4 10.10.40.12 | expect permit | PASS sent=4 received=2 lost=2 (50% success)
+D05 | WEB-01 -> ping -n 4 10.10.40.11 | expect deny | FAIL sent=4 received=3 lost=1 (75% success)
+D11a | DMZ-WEB -> ping -n 4 10.10.10.2 | expect deny | PASS sent=4 received=0 lost=4 (0% success)
+D11b | DMZ-DNS -> ping -n 4 10.255.0.2 | expect deny | PASS sent=4 received=0 lost=4 (0% success)
+D12 | INET-SRV -> ping -n 4 198.51.100.10 | expect deny | PASS sent=4 received=0 lost=4 (0% success)
+X01-inside-to-internet | SVC-MON -> ping -n 4 203.0.113.10 | expect permit | PASS sent=4 received=3 lost=1 (75% success)
+X02-cross-rack-L2 | WEB-02 -> ping -n 4 10.10.20.11 | expect permit | PASS sent=4 received=4 lost=0 (100% success)
+X03-db-to-services | DB-02 -> ping -n 4 10.10.50.10 | expect permit | PASS sent=4 received=3 lost=1 (75% success)
+X04-inside-to-dmz | SVC-DNS -> ping -n 4 172.16.50.10 | expect permit | PASS sent=4 received=4 lost=0 (100% success)
+
+### D01-renew  NOC-PC> ipconfig /renew  [expect lease]
+ipconfig /renew
+
+   IP Address......................: 10.10.10.100
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: 10.10.10.1
+   DNS Server......................: 10.10.50.10
+
+C:\>
+
+### D04a  APP-01> ping -n 4 10.10.40.11  [expect permit]
+ping -n 4 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Reply from 10.10.40.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### D04b  APP-02> ping -n 4 10.10.40.12  [expect permit]
+ping -n 4 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=127
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+
+### D05  WEB-01> ping -n 4 10.10.40.11  [expect deny]
+ping -n 4 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Request timed out.
+Reply from 10.10.40.11: bytes=32 time=10ms TTL=127
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 10ms, Average = 3ms
+
+C:\>
+
+### D11a  DMZ-WEB> ping -n 4 10.10.10.2  [expect deny]
+ping -n 4 10.10.10.2
+
+Pinging 10.10.10.2 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.10.2:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+
+C:\>
+
+### D11b  DMZ-DNS> ping -n 4 10.255.0.2  [expect deny]
+ping -n 4 10.255.0.2
+
+Pinging 10.255.0.2 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.255.0.2:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+
+C:\>
+
+### D12  INET-SRV> ping -n 4 198.51.100.10  [expect deny]
+ping -n 4 198.51.100.10
+
+Pinging 198.51.100.10 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 198.51.100.10:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+
+C:\>
+
+### X01-inside-to-internet  SVC-MON> ping -n 4 203.0.113.10  [expect permit]
+ping -n 4 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Request timed out.
+Reply from 203.0.113.10: bytes=32 time=9ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 9ms, Average = 3ms
+
+C:\>
+
+### X02-cross-rack-L2  WEB-02> ping -n 4 10.10.20.11  [expect permit]
+ping -n 4 10.10.20.11
+
+Pinging 10.10.20.11 with 32 bytes of data:
+
+Reply from 10.10.20.11: bytes=32 time=1ms TTL=128
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=128
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=128
+Reply from 10.10.20.11: bytes=32 time<1ms TTL=128
+
+Ping statistics for 10.10.20.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### X03-db-to-services  DB-02> ping -n 4 10.10.50.10  [expect permit]
+ping -n 4 10.10.50.10
+
+Pinging 10.10.50.10 with 32 bytes of data:
+
+Request timed out.
+Reply from 10.10.50.10: bytes=32 time<1ms TTL=127
+Reply from 10.10.50.10: bytes=32 time<1ms TTL=127
+Reply from 10.10.50.10: bytes=32 time=5ms TTL=127
+
+Ping statistics for 10.10.50.10:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 5ms, Average = 1ms
+
+C:\>
+
+### X04-inside-to-dmz  SVC-DNS> ping -n 4 172.16.50.10  [expect permit]
+ping -n 4 172.16.50.10
+
+Pinging 172.16.50.10 with 32 bytes of data:
+
+Reply from 172.16.50.10: bytes=32 time=1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time<1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time<1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time=10ms TTL=126
+
+Ping statistics for 172.16.50.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 10ms, Average = 2ms
+
+C:\>

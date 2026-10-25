@@ -1,0 +1,3 @@
+enabled false pools 1
+pool 0 keys: _parser,getClassName,getDefaultRouter,getDhcpPoolName,getDnsServerIp,getDomainName,getEndIp,getLeaseAt,getMaxUsers,getNetworkAddress,getObjectUuid,getStartIp,getSubnetMask,getTftpAddress,getWlcAddress,registerObjectEvent,setDefaultRouter,setDnsServerIp,setEndIp,setMaxUsers,setNetworkAddress,setNetworkMask,setNextAvailableIpAddress,setStartIp,unregisterObjectEvent,registerEvent,registerDelegate,unregisterEvent,unregisterDelegate
+  name serverPool net 10.10.50.0 mask 255.255.255.0 start 10.10.50.0 end 10.10.51.255 gw 0.0.0.0 dns 0.0.0.0 max 512

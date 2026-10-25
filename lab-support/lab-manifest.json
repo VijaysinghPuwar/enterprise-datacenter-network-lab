@@ -1,0 +1,277 @@
+{
+  "status": "CONFIGURATION SOURCE - not proof of PT installation",
+  "hosts": [
+    {
+      "name": "WEB-01",
+      "ip": "10.10.20.11",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.20.1",
+      "dns": "10.10.50.10",
+      "vlan": 20
+    },
+    {
+      "name": "WEB-02",
+      "ip": "10.10.20.12",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.20.1",
+      "dns": "10.10.50.10",
+      "vlan": 20
+    },
+    {
+      "name": "APP-01",
+      "ip": "10.10.30.11",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.30.1",
+      "dns": "10.10.50.10",
+      "vlan": 30
+    },
+    {
+      "name": "APP-02",
+      "ip": "10.10.30.12",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.30.1",
+      "dns": "10.10.50.10",
+      "vlan": 30
+    },
+    {
+      "name": "DB-01",
+      "ip": "10.10.40.11",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.40.1",
+      "dns": "10.10.50.10",
+      "vlan": 40
+    },
+    {
+      "name": "DB-02",
+      "ip": "10.10.40.12",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.40.1",
+      "dns": "10.10.50.10",
+      "vlan": 40
+    },
+    {
+      "name": "SVC-DNS",
+      "ip": "10.10.50.10",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.50.1",
+      "dns": "10.10.50.10",
+      "vlan": 50
+    },
+    {
+      "name": "SVC-MON",
+      "ip": "10.10.50.20",
+      "mask": "255.255.255.0",
+      "gateway": "10.10.50.1",
+      "dns": "10.10.50.10",
+      "vlan": 50
+    },
+    {
+      "name": "DMZ-WEB",
+      "ip": "172.16.50.10",
+      "mask": "255.255.255.0",
+      "gateway": "172.16.50.1",
+      "dns": "172.16.50.11",
+      "vlan": 150
+    },
+    {
+      "name": "DMZ-DNS",
+      "ip": "172.16.50.11",
+      "mask": "255.255.255.0",
+      "gateway": "172.16.50.1",
+      "dns": "172.16.50.11",
+      "vlan": 150
+    },
+    {
+      "name": "INET-SRV",
+      "ip": "203.0.113.10",
+      "mask": "255.255.255.0",
+      "gateway": "203.0.113.1",
+      "dns": "203.0.113.10",
+      "vlan": null
+    }
+  ],
+  "links": [
+    {
+      "id": "L1",
+      "a": "INET-R",
+      "port_a": "GigabitEthernet0/0",
+      "b": "ISP1-R",
+      "port_b": "GigabitEthernet0/0"
+    },
+    {
+      "id": "L2",
+      "a": "INET-R",
+      "port_a": "GigabitEthernet0/1",
+      "b": "ISP2-R",
+      "port_b": "GigabitEthernet0/0"
+    },
+    {
+      "id": "L3",
+      "a": "INET-R",
+      "port_a": "GigabitEthernet0/2",
+      "b": "INET-SRV",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L4",
+      "a": "ISP1-R",
+      "port_a": "GigabitEthernet0/1",
+      "b": "EDGE-R1",
+      "port_b": "GigabitEthernet0/0/0"
+    },
+    {
+      "id": "L5",
+      "a": "ISP2-R",
+      "port_a": "GigabitEthernet0/1",
+      "b": "EDGE-R1",
+      "port_b": "GigabitEthernet0/0/1"
+    },
+    {
+      "id": "L6",
+      "a": "EDGE-R1",
+      "port_a": "GigabitEthernet0/0/2",
+      "b": "FW-1",
+      "port_b": "GigabitEthernet1/1"
+    },
+    {
+      "id": "L7",
+      "a": "FW-1",
+      "port_a": "GigabitEthernet1/2",
+      "b": "ACC-1",
+      "port_b": "FastEthernet0/24"
+    },
+    {
+      "id": "L8",
+      "a": "FW-1",
+      "port_a": "GigabitEthernet1/3",
+      "b": "DMZ-SW",
+      "port_b": "GigabitEthernet0/1"
+    },
+    {
+      "id": "L9",
+      "a": "CORE-1",
+      "port_a": "GigabitEthernet0/1",
+      "b": "CORE-2",
+      "port_b": "GigabitEthernet0/1"
+    },
+    {
+      "id": "L10",
+      "a": "CORE-1",
+      "port_a": "GigabitEthernet0/2",
+      "b": "CORE-2",
+      "port_b": "GigabitEthernet0/2"
+    },
+    {
+      "id": "L11",
+      "a": "CORE-1",
+      "port_a": "FastEthernet0/1",
+      "b": "ACC-1",
+      "port_b": "GigabitEthernet0/1"
+    },
+    {
+      "id": "L12",
+      "a": "CORE-2",
+      "port_a": "FastEthernet0/1",
+      "b": "ACC-1",
+      "port_b": "GigabitEthernet0/2"
+    },
+    {
+      "id": "L13",
+      "a": "CORE-1",
+      "port_a": "FastEthernet0/2",
+      "b": "ACC-2",
+      "port_b": "GigabitEthernet0/1"
+    },
+    {
+      "id": "L14",
+      "a": "CORE-2",
+      "port_a": "FastEthernet0/2",
+      "b": "ACC-2",
+      "port_b": "GigabitEthernet0/2"
+    },
+    {
+      "id": "L15",
+      "a": "ACC-1",
+      "port_a": "FastEthernet0/1",
+      "b": "WEB-01",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L16",
+      "a": "ACC-1",
+      "port_a": "FastEthernet0/2",
+      "b": "APP-01",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L17",
+      "a": "ACC-1",
+      "port_a": "FastEthernet0/3",
+      "b": "DB-01",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L18",
+      "a": "ACC-1",
+      "port_a": "FastEthernet0/10",
+      "b": "NOC-PC",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L19",
+      "a": "ACC-2",
+      "port_a": "FastEthernet0/1",
+      "b": "WEB-02",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L20",
+      "a": "ACC-2",
+      "port_a": "FastEthernet0/2",
+      "b": "APP-02",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L21",
+      "a": "ACC-2",
+      "port_a": "FastEthernet0/3",
+      "b": "DB-02",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L22",
+      "a": "ACC-2",
+      "port_a": "FastEthernet0/5",
+      "b": "SVC-DNS",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L23",
+      "a": "ACC-2",
+      "port_a": "FastEthernet0/6",
+      "b": "SVC-MON",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L24",
+      "a": "DMZ-SW",
+      "port_a": "FastEthernet0/1",
+      "b": "DMZ-WEB",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L25",
+      "a": "DMZ-SW",
+      "port_a": "FastEthernet0/2",
+      "b": "DMZ-DNS",
+      "port_b": "FastEthernet0"
+    },
+    {
+      "id": "L26",
+      "a": "FW-1",
+      "port_a": "GigabitEthernet1/4",
+      "b": "ACC-2",
+      "port_b": "FastEthernet0/24"
+    }
+  ]
+}

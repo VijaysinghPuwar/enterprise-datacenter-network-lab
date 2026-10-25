@@ -1,0 +1,39 @@
+### CORE-1# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   110 P Active   local           10.10.10.3      10.10.10.1     
+Vl20        20   100 P Active   local           unknown         10.10.20.1     
+Vl30        30   110 P Active   local           10.10.30.3      10.10.30.1     
+Vl50        50   110 P Active   local           10.10.50.3      10.10.50.1     
+Vl900       900  110 P Active   local           10.255.0.3      10.255.0.1     
+CORE-1#
+### CORE-1# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.2      1   FULL/DROTHER    00:00:28    10.255.0.3      Vlan900
+10.255.255.4      1   FULL/DR         00:00:32    10.255.0.4      Vlan900
+CORE-1#
+### CORE-1# show etherchannel summary
+show etherchannel summary
+Flags:  D - down        P - in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+
+1      Po1(SD)           LACP   Gig0/1(D) Gig0/2(D) 
+CORE-1#

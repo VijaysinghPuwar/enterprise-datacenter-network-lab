@@ -1,0 +1,192 @@
+### FW-1# show interface ip brief
+show interface ip brief
+Interface              IP-Address      OK? Method Status                Protocol
+Virtual0               127.1.0.1       YES unset  up                    up
+GigabitEthernet1/1     198.51.100.2    YES manual up                    up
+GigabitEthernet1/2     10.255.0.4      YES manual up                    up
+GigabitEthernet1/3     172.16.50.1     YES manual up                    up
+GigabitEthernet1/4     unassigned      YES unset  administratively down down
+GigabitEthernet1/5     unassigned      YES unset  administratively down down
+GigabitEthernet1/6     unassigned      YES unset  administratively down down
+GigabitEthernet1/7     unassigned      YES unset  administratively down down
+GigabitEthernet1/8     unassigned      YES unset  administratively down down
+Management1/1          unassigned      YES unset  administratively down down
+Internal-Control1/1    127.0.1.1       YES unset  up                    up
+Internal-Data1/1       unassigned      YES unset  up                    up
+Internal-Data1/2       unassigned      YES unset  up                    up
+Internal-Data1/3       unassigned      YES unset  up                    up
+FW-1#
+### FW-1# show route
+show route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 198.51.100.1 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 9 subnets, 3 masks
+C       10.0.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.10.10.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.20.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.30.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.40.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.50.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+<--- More --->
+### FW-1# show ospf neighbor
+
+FW-1(config)#access-list DMZ_IN extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514
+FW-1(config)#access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0
+FW-1(config)#access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0
+FW-1(config)#access-list DMZ_IN extended permit ip 172.16.50.0 255.255.255.0 any
+FW-1(config)#access-group DMZ_IN in interface dmz
+FW-1(config)#class-map inspection_default
+FW-1(config-cmap)#match default-inspection-traffic
+FW-1(config-cmap)#end
+FW-1#configure terminal
+FW-1(config)#policy-map global_policy
+FW-1(config-pmap)#class inspection_default
+FW-1(config-pmap-c)#inspect icmp
+FW-1(config-pmap-c)#inspect dns
+FW-1(config-pmap-c)#inspect http
+FW-1(config-pmap-c)#end
+FW-1#configure terminal
+FW-1(config)#service-policy global_policy global
+WARNING: Policy map global_policy is already configured as a service policy
+FW-1(config)#aaa authentication ssh console LOCAL
+FW-1(config)#ssh 10.10.10.0 255.255.255.0 inside
+FW-1(config)#ssh timeout 10
+FW-1(config)#crypto key generate rsa modulus 1024
+WARNING: You have a RSA keypair already defined named <Default-RSA-Key>.
+
+Do you really want to replace them? [yes/no]: no
+ERROR: Failed to create new RSA keys named <Default-RSA-Key>
+FW-1(config)#ntp server 10.10.50.20
+FW-1(config)#end
+FW-1#write memory
+Building configuration...
+Cryptochecksum: -449e1be 79ff5afc -4a3e015 -9423412
+
+2507  bytes copied in 1.739 secs (1441 bytes/sec)
+[OK]
+FW-1#terminal pager 0
+      ^
+% Invalid input detected at '^' marker.
+	
+FW-1#show interface ip brief
+Interface              IP-Address      OK? Method Status                Protocol
+Virtual0               127.1.0.1       YES unset  up                    up
+GigabitEthernet1/1     198.51.100.2    YES manual up                    up
+GigabitEthernet1/2     10.255.0.4      YES manual up                    up
+GigabitEthernet1/3     172.16.50.1     YES manual up                    up
+GigabitEthernet1/4     unassigned      YES unset  administratively down down
+GigabitEthernet1/5     unassigned      YES unset  administratively down down
+GigabitEthernet1/6     unassigned      YES unset  administratively down down
+GigabitEthernet1/7     unassigned      YES unset  administratively down down
+GigabitEthernet1/8     unassigned      YES unset  administratively down down
+Management1/1          unassigned      YES unset  administratively down down
+Internal-Control1/1    127.0.1.1       YES unset  up                    up
+Internal-Data1/1       unassigned      YES unset  up                    up
+Internal-Data1/2       unassigned      YES unset  up                    up
+Internal-Data1/3       unassigned      YES unset  up                    up
+FW-1#show route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 198.51.100.1 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 9 subnets, 3 masks
+C       10.0.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.10.10.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.20.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.30.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.40.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+O       10.10.50.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 00:01:57, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 00:01:57, GigabitEthernet1/2
+
+FW-1#how ospf neighbor
+     ^
+% Invalid input detected at '^' marker.
+	
+FW-1#
+### FW-1# show nat
+show nat
+Auto NAT Policies (Section 2)
+1 (dmz) to (outside) source static DMZ-DNS 198.51.100.11
+    translate_hits = 0, untranslate_hits = 0
+2 (dmz) to (outside) source static DMZ-WEB 198.51.100.10
+    translate_hits = 0, untranslate_hits = 0
+3 (inside) to (outside) source dynamic INSIDE-NET interface
+    translate_hits = 0, untranslate_hits = 0
+
+FW-1#
+### FW-1# show xlate
+show xlate
+2 in use, 2 most used
+Flags: D - DNS, e - extended, I - identity, i - dynamic, r - portmap, s - static, T - twice, N - net-to-net
+NAT from dmz:172.16.50.11/32 to outside:198.51.100.11/32 flags s idle 00:01:37,  timeout 0:00:00
+NAT from dmz:172.16.50.10/32 to outside:198.51.100.10/32 flags s idle 00:01:37,  timeout 0:00:00
+
+FW-1#
+### FW-1# show access-list
+show access-list
+access-list cached ACL log flows: total 0, denied 0 (deny-flow-max 4096) alert-interval 300
+access-list OUTSIDE_IN; 4 elements; name hash: 0xb61eed0e
+access-list OUTSIDE_IN line 1 extended permit tcp any host 172.16.50.10 eq www(hitcnt=0) 0x800a133e
+access-list OUTSIDE_IN line 2 extended permit tcp any host 172.16.50.10 eq 443(hitcnt=0) 0x6debd805
+access-list OUTSIDE_IN line 3 extended permit udp any host 172.16.50.11 eq domain(hitcnt=0) 0x21d00ad6
+access-list OUTSIDE_IN line 4 extended permit tcp any host 172.16.50.11 eq domain(hitcnt=0) 0x4d335135
+access-list DMZ_IN; 4 elements; name hash: 0xa380b890
+access-list DMZ_IN line 1 extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0xe17e1052
+access-list DMZ_IN line 2 extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0(hitcnt=0) 0xcbe5e982
+access-list DMZ_IN line 3 extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0(hitcnt=0) 0x4407c965
+access-list DMZ_IN line 4 extended permit ip 172.16.50.0 255.255.255.0 any(hitcnt=0) 0xd0040ddc
+FW-1#
+### FW-1# show service-policy
+show service-policy
+           ^
+% Invalid input detected at '^' marker.
+	
+FW-1#
+### FW-1# show running-config
+show running-config
+ASA Version 9.6(1)
+!
+hostname FW-1
+domain-name dc1.lab
+enable password xokyNC9ghSpWSVk9 encrypted
+names
+!
+interface GigabitEthernet1/1
+ nameif outside
+ security-level 0
+ ip address 198.51.100.2 255.255.255.248
+!
+interface GigabitEthernet1/2
+ nameif inside
+ security-level 100
+ ip address 10.255.0.4 255.255.255.248
+!
+interface GigabitEthernet1/3
+ nameif dmz
+ security-level 50
+ ip address 172.16.50.1 255.255.255.0
+!
+<--- More --->

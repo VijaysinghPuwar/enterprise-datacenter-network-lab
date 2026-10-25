@@ -1,0 +1,57 @@
+### ACC-1# show spanning-tree vlan 10
+show spanning-tree vlan 10
+VLAN0010
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4106
+             Address     00D0.581B.220B
+             Cost        22
+             Port        26(GigabitEthernet0/2)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32778  (priority 32768 sys-id-ext 10)
+             Address     0030.A303.1450
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/10           Desg FWD 19        128.10   P2p
+Gi0/2            Root FWD 19        128.26   P2p
+
+ACC-1#
+### ACC-1# show spanning-tree vlan 30
+show spanning-tree vlan 30
+VLAN0030
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4126
+             Address     00D0.581B.220B
+             Cost        22
+             Port        26(GigabitEthernet0/2)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32798  (priority 32768 sys-id-ext 30)
+             Address     0030.A303.1450
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Desg FWD 19        128.2    P2p
+Gi0/2            Root FWD 19        128.26   P2p
+
+ACC-1#
+### ACC-1# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/2      on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans allowed and active in management domain
+Gig0/2      10,20,30,40,50,99
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/2      10,20,30,40,50,99
+
+ACC-1#

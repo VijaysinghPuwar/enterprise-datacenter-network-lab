@@ -1,0 +1,29 @@
+REJECT sysopt noproxyarp db => sysopt noproxyarp db ^ % Invalid input detected at '^' marker. FW-1(config)#
+show access-list
+access-list cached ACL log flows: total 0, denied 0 (deny-flow-max 4096) alert-interval 300
+access-list OUTSIDE_IN; 6 elements; name hash: 0x1427432c
+access-list OUTSIDE_IN line 1 extended permit tcp any host 172.16.50.10 eq www(hitcnt=2) 0x94361b3d
+access-list OUTSIDE_IN line 2 extended permit tcp any host 172.16.50.10 eq 443(hitcnt=0) 0xc2a8b636
+access-list OUTSIDE_IN line 3 extended permit udp any host 172.16.50.11 eq domain(hitcnt=1) 0x12963301
+access-list OUTSIDE_IN line 4 extended permit tcp any host 172.16.50.11 eq domain(hitcnt=0) 0x5a638184
+access-list OUTSIDE_IN line 5 extended permit tcp any eq www 10.10.0.0 255.255.0.0(hitcnt=1) 0x545a23ec
+access-list OUTSIDE_IN line 6 extended permit tcp any eq 443 10.10.0.0 255.255.0.0(hitcnt=0) 0x02d8c468
+access-list INSIDE_IN; 5 elements; name hash: 0x17aec3c0
+access-list INSIDE_IN line 1 extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=72) 0x067e1420
+access-list INSIDE_IN line 2 extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=0) 0xb407ac34
+access-list INSIDE_IN line 3 extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=48) 0xa32dba38
+access-list INSIDE_IN line 4 extended deny ip any 10.10.40.0 255.255.255.0(hitcnt=66) 0xae9d303e
+access-list INSIDE_IN line 5 extended permit ip any any(hitcnt=218) 0xab743c34
+access-list DB_IN; 5 elements; name hash: 0x848ab34b
+access-list DB_IN line 1 extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply(hitcnt=81) 0x6e01b90b
+access-list DB_IN line 2 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain(hitcnt=0) 0x595ab0e7
+access-list DB_IN line 3 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x8154a0b6
+access-list DB_IN line 4 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123(hitcnt=0) 0x0905b984
+access-list DB_IN line 5 extended deny ip 10.10.40.0 255.255.255.0 any(hitcnt=42) 0x76c6741c
+access-list DMZ_IN; 5 elements; name hash: 0x47967578
+access-list DMZ_IN line 1 extended permit tcp 172.16.50.0 255.255.255.0 eq www 10.10.0.0 255.255.0.0(hitcnt=0) 0xd18146d2
+access-list DMZ_IN line 2 extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x6d163622
+access-list DMZ_IN line 3 extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0(hitcnt=30) 0x531a53c8
+access-list DMZ_IN line 4 extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0(hitcnt=0) 0xc3887a63
+access-list DMZ_IN line 5 extended permit ip 172.16.50.0 255.255.255.0 any(hitcnt=30) 0x697a03a2
+FW-1#

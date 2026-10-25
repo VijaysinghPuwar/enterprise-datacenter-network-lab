@@ -1,0 +1,212 @@
+R4-app-db | APP-01 -> ping -n 6 10.10.40.12 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+R4-web-db | WEB-01 -> ping -n 6 10.10.40.11 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+R4-svc-inet | SVC-MON -> ping -n 6 203.0.113.10 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+R4-dmz-inet | DMZ-DNS -> ping -n 6 203.0.113.10 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+R4-noc-dmz | NOC-PC -> ping -n 6 172.16.50.10 | expect permit | PASS sent=6 received=5 lost=1 (83% success)
+R4-db-db | DB-01 -> ping -n 6 10.10.40.12 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+R4-inet-pub | INET-SRV -> ping -n 6 198.51.100.10 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+R4-dmz-mgmt | DMZ-WEB -> ping -n 6 10.10.10.2 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+R4-web-app | WEB-02 -> ping -n 6 10.10.30.11 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+R4-svc-db | SVC-DNS -> ping -n 6 10.10.40.11 | expect permit | PASS sent=6 received=6 lost=0 (100% success)
+R4-db-noinet | DB-02 -> ping -n 6 203.0.113.10 | expect deny | PASS sent=6 received=0 lost=6 (0% success)
+
+### R4-app-db  APP-01> ping -n 6 10.10.40.12  [expect permit]
+ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=126
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### R4-web-db  WEB-01> ping -n 6 10.10.40.11  [expect deny]
+ping -n 6 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### R4-svc-inet  SVC-MON> ping -n 6 203.0.113.10  [expect permit]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time=1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+Reply from 203.0.113.10: bytes=32 time=3ms TTL=123
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=123
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 3ms, Average = 0ms
+
+C:\>
+
+### R4-dmz-inet  DMZ-DNS> ping -n 6 203.0.113.10  [expect permit]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+Reply from 203.0.113.10: bytes=32 time<1ms TTL=124
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+
+### R4-noc-dmz  NOC-PC> ping -n 6 172.16.50.10  [expect permit]
+ping -n 6 172.16.50.10
+
+Pinging 172.16.50.10 with 32 bytes of data:
+
+Request timed out.
+Reply from 172.16.50.10: bytes=32 time<1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time<1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time<1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time<1ms TTL=126
+Reply from 172.16.50.10: bytes=32 time=14ms TTL=126
+
+Ping statistics for 172.16.50.10:
+    Packets: Sent = 6, Received = 5, Lost = 1 (17% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 14ms, Average = 2ms
+
+C:\>
+
+### R4-db-db  DB-01> ping -n 6 10.10.40.12  [expect permit]
+ping -n 6 10.10.40.12
+
+Pinging 10.10.40.12 with 32 bytes of data:
+
+Reply from 10.10.40.12: bytes=32 time=1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+Reply from 10.10.40.12: bytes=32 time<1ms TTL=128
+
+Ping statistics for 10.10.40.12:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+
+### R4-inet-pub  INET-SRV> ping -n 6 198.51.100.10  [expect deny]
+ping -n 6 198.51.100.10
+
+Pinging 198.51.100.10 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 198.51.100.10:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### R4-dmz-mgmt  DMZ-WEB> ping -n 6 10.10.10.2  [expect deny]
+ping -n 6 10.10.10.2
+
+Pinging 10.10.10.2 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 10.10.10.2:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>
+
+### R4-web-app  WEB-02> ping -n 6 10.10.30.11  [expect permit]
+ping -n 6 10.10.30.11
+
+Pinging 10.10.30.11 with 32 bytes of data:
+
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time=6ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+Reply from 10.10.30.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 10.10.30.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 6ms, Average = 1ms
+
+C:\>
+
+### R4-svc-db  SVC-DNS> ping -n 6 10.10.40.11  [expect permit]
+ping -n 6 10.10.40.11
+
+Pinging 10.10.40.11 with 32 bytes of data:
+
+Reply from 10.10.40.11: bytes=32 time=1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time=3ms TTL=126
+Reply from 10.10.40.11: bytes=32 time=9ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+Reply from 10.10.40.11: bytes=32 time<1ms TTL=126
+
+Ping statistics for 10.10.40.11:
+    Packets: Sent = 6, Received = 6, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 9ms, Average = 2ms
+
+C:\>
+
+### R4-db-noinet  DB-02> ping -n 6 203.0.113.10  [expect deny]
+ping -n 6 203.0.113.10
+
+Pinging 203.0.113.10 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 203.0.113.10:
+    Packets: Sent = 6, Received = 0, Lost = 6 (100% loss),
+
+C:\>

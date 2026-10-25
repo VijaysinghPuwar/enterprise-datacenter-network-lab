@@ -1,0 +1,90 @@
+show running-config | include access-group
+CORE-2#
+> configure terminal :: configure terminal Enter configuration commands, one per line. End with CNTL/Z. CORE-2(config)#
+> interface Vlan40 :: interface Vlan40 CORE-2(config-if)#
+> ip access-group DB-PROTECT out :: ip access-group DB-PROTECT out CORE-2(config-if)#
+> exit :: exit CORE-2(config)#
+> ip access-list extended WEB-TIER-IN :: ip access-list extended WEB-TIER-IN CORE-2(config-ext-nacl)#
+> remark Web tier may not open sessions to the DB tier (PT 3560 does not bind outbound SVI ACLs) :: remark Web tier may not open sessions to the DB tier (PT 3560 does not bind outbound SVI ACLs) CORE-2(config-ext-nacl)#
+> permit tcp 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 established :: permit tcp 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 established CORE-2(config-ext-nacl)#
+> permit icmp 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 echo-reply :: permit icmp 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 echo-reply CORE-2(config-ext-nacl)#
+> deny ip 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 :: deny ip 10.10.20.0 0.0.0.255 10.10.40.0 0.0.0.255 CORE-2(config-ext-nacl)#
+> permit ip any any :: permit ip any any CORE-2(config-ext-nacl)#
+> exit :: exit CORE-2(config)#
+> interface Vlan20 :: interface Vlan20 CORE-2(config-if)#
+> ip access-group WEB-TIER-IN in :: ip access-group WEB-TIER-IN in CORE-2(config-if)#
+> end :: end CORE-2#
+show ip interface Vlan20
+Vlan20 is up, line protocol is up
+  Internet address is 10.10.20.3/24
+  Broadcast address is 255.255.255.255 
+  Address determined by setup command 
+  MTU is 1500 bytes 
+  Helper address is not set
+  Directed broadcast forwarding is disabled 
+  Outgoing access list is not set 
+  Inbound  access list is not set 
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled 
+  Security level is default 
+  Split horizon is enabled 
+  ICMP redirects are always sent 
+  ICMP unreachables are always sent 
+  ICMP mask replies are never sent 
+  IP fast switching is disabled 
+  IP fast switching on the same interface is disabled 
+  IP Null turbo vector 
+  IP multicast fast switching is disabled 
+  IP multicast distributed fast switching is disabled 
+  IP route-cache flags are None 
+  Router Discovery is disabled 
+  IP output packet accounting is disabled 
+  IP access violation accounting is disabled 
+  TCP/IP header compression is disabled 
+  RTP/IP header compression is disabled 
+  Probe proxy name replies are disabled 
+  Policy routing is disabled 
+  Network address translation is disable 
+  WCCP Redirect outbound is disabled 
+  WCCP Redirect inbound is disabled 
+  WCCP Redirect exclude is disabled 
+  BGP Policy Mapping is disabled 
+
+CORE-2#
+show ip interface Vlan40
+Vlan40 is up, line protocol is up
+  Internet address is 10.10.40.3/24
+  Broadcast address is 255.255.255.255 
+  Address determined by setup command 
+  MTU is 1500 bytes 
+  Helper address is not set
+  Directed broadcast forwarding is disabled 
+  Outgoing access list is not set 
+  Inbound  access list is not set 
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled 
+  Security level is default 
+  Split horizon is enabled 
+  ICMP redirects are always sent 
+  ICMP unreachables are always sent 
+  ICMP mask replies are never sent 
+  IP fast switching is disabled 
+  IP fast switching on the same interface is disabled 
+  IP Null turbo vector 
+  IP multicast fast switching is disabled 
+  IP multicast distributed fast switching is disabled 
+  IP route-cache flags are None 
+  Router Discovery is disabled 
+  IP output packet accounting is disabled 
+  IP access violation accounting is disabled 
+  TCP/IP header compression is disabled 
+  RTP/IP header compression is disabled 
+  Probe proxy name replies are disabled 
+  Policy routing is disabled 
+  Network address translation is disable 
+  WCCP Redirect outbound is disabled 
+  WCCP Redirect inbound is disabled 
+  WCCP Redirect exclude is disabled 
+  BGP Policy Mapping is disabled 
+
+CORE-2#

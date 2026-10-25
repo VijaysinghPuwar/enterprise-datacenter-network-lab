@@ -1,0 +1,71 @@
+removed Router0
+removed Power Distribution Device0
+removed Router1
+removed ASA0
+removed Multilayer Switch0
+removed Switch0
+removed Server0
+removed PC1
+existing note {b30dd41c-78eb-456b-bff0-3cf237d219f7} text='NOTE-TEST-A'
+  removed note
+device INET-SRV (Server-PT) <- Server1
+device INET-R (2911) <- Router2
+device ISP1-R (2911) <- Router3
+device ISP2-R (2911) <- Router4
+device EDGE-R1 (ISR4331) <- Router5
+device FW-1 (5506-X) <- ASA1
+device DMZ-SW (2960-24TT) <- Switch1
+device DMZ-WEB (Server-PT) <- Server2
+device DMZ-DNS (Server-PT) <- Server3
+device CORE-1 (3560-24PS) <- Multilayer Switch1
+device CORE-2 (3560-24PS) <- Multilayer Switch2
+device ACC-1 (2960-24TT) <- Switch2
+device ACC-2 (2960-24TT) <- Switch3
+device WEB-01 (Server-PT) <- Server4
+device APP-01 (Server-PT) <- Server5
+device DB-01 (Server-PT) <- Server6
+device WEB-02 (Server-PT) <- Server7
+device APP-02 (Server-PT) <- Server8
+device DB-02 (Server-PT) <- Server9
+device SVC-DNS (Server-PT) <- Server10
+device SVC-MON (Server-PT) <- Server11
+device NOC-PC (PC-PT) reused from PC0
+link L1 INET-R GigabitEthernet0/0 <-> ISP1-R GigabitEthernet0/0 cable cross => true
+link L2 INET-R GigabitEthernet0/1 <-> ISP2-R GigabitEthernet0/0 cable cross => true
+link L3 INET-R GigabitEthernet0/2 <-> INET-SRV FastEthernet0 cable cross => true
+link L4 ISP1-R GigabitEthernet0/1 <-> EDGE-R1 GigabitEthernet0/0/0 cable cross => true
+link L5 ISP2-R GigabitEthernet0/1 <-> EDGE-R1 GigabitEthernet0/0/1 cable cross => true
+link L6 EDGE-R1 GigabitEthernet0/0/2 <-> FW-1 GigabitEthernet1/1 cable cross => true
+link L7 FW-1 GigabitEthernet1/2 <-> CORE-1 FastEthernet0/24 cable straight => true
+link L8 FW-1 GigabitEthernet1/3 <-> DMZ-SW GigabitEthernet0/1 cable straight => true
+link L9 CORE-1 GigabitEthernet0/1 <-> CORE-2 GigabitEthernet0/1 cable cross => true
+link L10 CORE-1 GigabitEthernet0/2 <-> CORE-2 GigabitEthernet0/2 cable cross => true
+link L11 CORE-1 FastEthernet0/1 <-> ACC-1 GigabitEthernet0/1 cable cross => true
+link L12 CORE-2 FastEthernet0/1 <-> ACC-1 GigabitEthernet0/2 cable cross => true
+link L13 CORE-1 FastEthernet0/2 <-> ACC-2 GigabitEthernet0/1 cable cross => true
+link L14 CORE-2 FastEthernet0/2 <-> ACC-2 GigabitEthernet0/2 cable cross => true
+link L15 ACC-1 FastEthernet0/1 <-> WEB-01 FastEthernet0 cable straight => true
+link L16 ACC-1 FastEthernet0/2 <-> APP-01 FastEthernet0 cable straight => true
+link L17 ACC-1 FastEthernet0/3 <-> DB-01 FastEthernet0 cable straight => true
+link L18 ACC-1 FastEthernet0/10 <-> NOC-PC FastEthernet0 cable straight => true
+link L19 ACC-2 FastEthernet0/1 <-> WEB-02 FastEthernet0 cable straight => true
+link L20 ACC-2 FastEthernet0/2 <-> APP-02 FastEthernet0 cable straight => true
+link L21 ACC-2 FastEthernet0/3 <-> DB-02 FastEthernet0 cable straight => true
+link L22 ACC-2 FastEthernet0/5 <-> SVC-DNS FastEthernet0 cable straight => true
+link L23 ACC-2 FastEthernet0/6 <-> SVC-MON FastEthernet0 cable straight => true
+link L24 DMZ-SW FastEthernet0/1 <-> DMZ-WEB FastEthernet0 cable straight => true
+link L25 DMZ-SW FastEthernet0/2 <-> DMZ-DNS FastEthernet0 cable straight => true
+links created 25/25
+host WEB-01 10.10.20.11/255.255.255.0 gw 10.10.20.1 dns 10.10.50.10
+host WEB-02 10.10.20.12/255.255.255.0 gw 10.10.20.1 dns 10.10.50.10
+host APP-01 10.10.30.11/255.255.255.0 gw 10.10.30.1 dns 10.10.50.10
+host APP-02 10.10.30.12/255.255.255.0 gw 10.10.30.1 dns 10.10.50.10
+host DB-01 10.10.40.11/255.255.255.0 gw 10.10.40.1 dns 10.10.50.10
+host DB-02 10.10.40.12/255.255.255.0 gw 10.10.40.1 dns 10.10.50.10
+host SVC-DNS 10.10.50.10/255.255.255.0 gw 10.10.50.1 dns 10.10.50.10
+host SVC-MON 10.10.50.20/255.255.255.0 gw 10.10.50.1 dns 10.10.50.10
+host DMZ-WEB 172.16.50.10/255.255.255.0 gw 172.16.50.1 dns 172.16.50.11
+host DMZ-DNS 172.16.50.11/255.255.255.0 gw 172.16.50.1 dns 172.16.50.11
+host INET-SRV 203.0.113.10/255.255.255.0 gw 203.0.113.1 dns 203.0.113.10
+host NOC-PC DHCP client
+BUILD COMPLETE devices=24 links=25

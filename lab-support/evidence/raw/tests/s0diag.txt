@@ -1,0 +1,24 @@
+db01-arp | DB-01 -> arp -a | expect info | OUTPUT CAPTURED
+db01-ipcfg | DB-01 -> ipconfig | expect info | OUTPUT CAPTURED
+db02-ipcfg | DB-02 -> ipconfig | expect info | OUTPUT CAPTURED
+
+### db01-arp  DB-01> arp -a  [expect info]
+(command not found in buffer)
+
+### db01-ipcfg  DB-01> ipconfig  [expect info]
+(command not found in buffer)
+
+### db02-ipcfg  DB-02> ipconfig  [expect info]
+ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Link-local IPv6 Address.........: FE80::202:17FF:FE6D:7E35
+   IPv6 Address....................: ::
+   IPv4 Address....................: 10.10.40.12
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     10.10.40.1
+
+C:\>

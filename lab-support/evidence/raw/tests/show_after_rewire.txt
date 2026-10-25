@@ -1,0 +1,56 @@
+### CORE-1# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.2      1   FULL/DR         00:00:31    10.255.0.3      Vlan900
+CORE-1#
+### FW-1# show route
+show route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 198.51.100.1 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 8 subnets, 2 masks
+C       10.0.0.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+C       10.0.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+S       10.10.10.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+S       10.10.20.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+S       10.10.30.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+C       10.10.40.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+S       10.10.50.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+C       10.255.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+     172.16.0.0/24 is subnetted, 2 subnets
+C       172.16.0.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+C       172.16.50.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+     198.51.100.0/29 is subnetted, 1 subnets
+C       198.51.100.0 255.255.255.248 is directly connected, outside, GigabitEthernet1/1
+S*   0.0.0.0/0 [1/0] via 198.51.100.1
+FW-1#
+### ACC-1# show spanning-tree vlan 900
+show spanning-tree vlan 900
+VLAN0900
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    33668
+             Address     0030.A303.1450
+             This bridge is the root
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    33668  (priority 32768 sys-id-ext 900)
+             Address     0030.A303.1450
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/24           Desg FWD 19        128.24   P2p
+Gi0/1            Desg FWD 19        128.25   P2p
+Gi0/2            Desg FWD 19        128.26   P2p
+
+ACC-1#

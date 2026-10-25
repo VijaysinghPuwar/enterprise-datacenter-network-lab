@@ -1,0 +1,11 @@
+started R4-app-db  APP-01> ping -n 6 10.10.40.12
+started R4-web-db  WEB-01> ping -n 6 10.10.40.11
+started R4-svc-inet  SVC-MON> ping -n 6 203.0.113.10
+started R4-dmz-inet  DMZ-DNS> ping -n 6 203.0.113.10
+started R4-noc-dmz  NOC-PC> ping -n 6 172.16.50.10
+started R4-db-db  DB-01> ping -n 6 10.10.40.12
+started R4-inet-pub  INET-SRV> ping -n 6 198.51.100.10
+started R4-dmz-mgmt  DMZ-WEB> ping -n 6 10.10.10.2
+started R4-web-app  WEB-02> ping -n 6 10.10.30.11
+started R4-svc-db  SVC-DNS> ping -n 6 10.10.40.11
+started R4-db-noinet  DB-02> ping -n 6 203.0.113.10

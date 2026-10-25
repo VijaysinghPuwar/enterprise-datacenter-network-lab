@@ -1,0 +1,10 @@
+started D04a  APP-01> ping -n 6 10.10.40.11
+started D04b  APP-02> ping -n 6 10.10.40.12
+started D05  WEB-01> ping -n 6 10.10.40.11
+started D05b  WEB-02> ping -n 6 10.10.40.12
+started D02a  NOC-PC> ping -n 6 10.10.20.11
+started X05-mgmt-to-db  SVC-MON> ping -n 6 10.10.40.11
+started X06-db-to-app-initiated  DB-01> ping -n 6 10.10.30.11
+started X07-db-no-internet-egress  DB-02> ping -n 6 203.0.113.10
+started X08-dmz-to-db  DMZ-WEB> ping -n 6 10.10.40.11
+started X09-services-to-app  SVC-DNS> ping -n 6 10.10.30.12

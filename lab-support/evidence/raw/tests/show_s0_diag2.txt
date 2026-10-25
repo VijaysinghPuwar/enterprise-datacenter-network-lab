@@ -1,0 +1,226 @@
+### EDGE-R1# show ip bgp summary
+show ip bgp summary
+BGP router identifier 198.51.100.1, local AS number 65010
+BGP table version is 4, main routing table version 6
+3 network entries using 396 bytes of memory
+3 path entries using 156 bytes of memory
+2/2 BGP path/bestpath attribute entries using 368 bytes of memory
+4 BGP AS-PATH entries using 96 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+Bitfield cache entries: current 1 (at peak 1) using 32 bytes of memory
+BGP using 1048 total bytes of memory
+BGP activity 2/0 prefixes, 3/0 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.64.1.1      4 64501      30      28        4    0    0 00:26:12        4
+100.64.2.1      4 64502      30      28        4    0    0 00:26:12        4
+
+EDGE-R1#
+### EDGE-R1# show ip route
+show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 100.64.1.1 to network 0.0.0.0
+
+     100.0.0.0/8 is variably subnetted, 4 subnets, 2 masks
+C       100.64.1.0/30 is directly connected, GigabitEthernet0/0/0
+L       100.64.1.2/32 is directly connected, GigabitEthernet0/0/0
+C       100.64.2.0/30 is directly connected, GigabitEthernet0/0/1
+L       100.64.2.2/32 is directly connected, GigabitEthernet0/0/1
+     198.51.100.0/24 is variably subnetted, 3 subnets, 3 masks
+S       198.51.100.0/24 [1/0] via 198.51.100.2
+C       198.51.100.0/29 is directly connected, GigabitEthernet0/0/2
+L       198.51.100.1/32 is directly connected, GigabitEthernet0/0/2
+B    203.0.113.0/24 [20/0] via 100.64.1.1, 00:00:00
+S*   0.0.0.0/0 [1/0] via 100.64.1.1
+
+EDGE-R1#
+### INET-R# show ip bgp
+show ip bgp
+BGP table version is 4, local router ID is 203.0.113.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*  198.51.100.0/24   100.64.0.2               0     0     0 64501 65010 i
+*>                   100.64.0.6               0     0     0 64502 65010 i
+*> 203.0.113.0/24    0.0.0.0                  0     0 32768 i
+
+INET-R#
+### FW-1# show running-config
+show running-config
+ASA Version 9.6(1)
+!
+hostname FW-1
+domain-name dc1.lab
+enable password xokyNC9ghSpWSVk9 encrypted
+names
+!
+interface GigabitEthernet1/1
+ nameif outside
+ security-level 0
+ ip address 198.51.100.2 255.255.255.248
+!
+interface GigabitEthernet1/2
+ nameif inside
+ security-level 100
+ ip address 10.255.0.4 255.255.255.248
+!
+interface GigabitEthernet1/3
+ nameif dmz
+ security-level 50
+ ip address 172.16.50.1 255.255.255.0
+!
+interface GigabitEthernet1/4
+ nameif db
+ security-level 90
+ ip address 10.10.40.1 255.255.255.0
+!
+interface GigabitEthernet1/5
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/6
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/7
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/8
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface Management1/1
+ management-only
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+object network DMZ-DNS
+ host 172.16.50.11
+ nat (dmz,outside) static 198.51.100.11
+object network DMZ-WEB
+ host 172.16.50.10
+ nat (dmz,outside) static 198.51.100.10
+object network INSIDE-NET
+ subnet 10.10.0.0 255.255.0.0
+ nat (inside,outside) dynamic interface
+!
+route outside 0.0.0.0 0.0.0.0 198.51.100.1 1
+!
+access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq www
+access-list OUTSIDE_IN extended permit tcp any host 172.16.50.10 eq 443
+access-list OUTSIDE_IN extended permit udp any host 172.16.50.11 eq domain
+access-list OUTSIDE_IN extended permit tcp any host 172.16.50.11 eq domain
+access-list OUTSIDE_IN extended permit tcp any eq www 10.10.0.0 255.255.0.0
+access-list OUTSIDE_IN extended permit tcp any eq 443 10.10.0.0 255.255.0.0
+access-list INSIDE_IN extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended deny ip any 10.10.40.0 255.255.255.0
+access-list INSIDE_IN extended permit ip any any
+access-list DB_IN extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply
+access-list DB_IN extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain
+access-list DB_IN extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514
+access-list DB_IN extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123
+access-list DB_IN extended deny ip 10.10.40.0 255.255.255.0 any
+access-list DMZ_IN extended permit tcp 172.16.50.0 255.255.255.0 eq www 10.10.0.0 255.255.0.0
+access-list DMZ_IN extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514
+access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0
+access-list DMZ_IN extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0
+access-list DMZ_IN extended permit ip 172.16.50.0 255.255.255.0 any
+!
+!
+access-group OUTSIDE_IN in interface outside
+access-group INSIDE_IN in interface inside
+access-group DB_IN in interface db
+access-group DMZ_IN in interface dmz
+aaa authentication ssh console LOCAL
+!
+ntp server 10.10.50.20
+username netadmin password xokyNC9ghSpWSVk9 encrypted
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map
+  inspect ftp 
+  inspect http 
+  inspect icmp 
+  inspect tftp 
+!
+service-policy global_policy global
+!
+telnet timeout 5
+ssh 10.10.10.0 255.255.255.0 inside
+ssh timeout 10
+!
+!
+!
+!
+router ospf 10
+ router-id 10.255.255.4
+ log-adjacency-changes
+ network 10.255.0.0 255.255.255.248 area 0
+ network 10.10.40.0 255.255.255.0 area 0
+ default-information originate
+!
+FW-1#
+### FW-1# show route
+show route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 198.51.100.1 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 10 subnets, 3 masks
+C       10.0.0.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+C       10.0.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.10.10.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 18:41:00, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 18:41:00, GigabitEthernet1/2
+O       10.10.20.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 18:41:00, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 18:41:00, GigabitEthernet1/2
+O       10.10.30.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 18:41:00, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 18:41:00, GigabitEthernet1/2
+C       10.10.40.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+O       10.10.50.0 255.255.255.0 [110/2] via 10.255.0.2, inside, 18:41:00, GigabitEthernet1/2
+                                 [110/2] via 10.255.0.3, inside, 18:41:00, GigabitEthernet1/2
+C       10.255.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.255.255.1 255.255.255.255 [110/2] via 10.255.0.2, inside, 18:41:00, GigabitEthernet1/2
+O       10.255.255.2 255.255.255.255 [110/2] via 10.255.0.3, inside, 18:41:00, GigabitEthernet1/2
+     172.16.0.0/24 is subnetted, 2 subnets
+C       172.16.0.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+C       172.16.50.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+     198.51.100.0/29 is subnetted, 1 subnets
+C       198.51.100.0 255.255.255.248 is directly connected, outside, GigabitEthernet1/1
+S*   0.0.0.0/0 [1/0] via 198.51.100.1
+FW-1#

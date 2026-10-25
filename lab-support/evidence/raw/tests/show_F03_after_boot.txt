@@ -1,0 +1,84 @@
+### CORE-2# show etherchannel summary
+show etherchannel summary
+Flags:  D - down        P - in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+
+1      Po1(SU)           LACP   Gig0/1(P) Gig0/2(P) 
+CORE-2#
+### CORE-2# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   100 P Standby  10.10.10.2      local           10.10.10.1     
+Vl20        20   110 P Active   local           10.10.20.2      10.10.20.1     
+Vl30        30   100 P Standby  10.10.30.2      local           10.10.30.1     
+Vl50        50   100 P Standby  10.10.50.2      local           10.10.50.1     
+Vl900       900  100 P Standby  10.255.0.2      local           10.255.0.1     
+CORE-2#
+### CORE-1# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   110 P Active   local           10.10.10.3      10.10.10.1     
+Vl20        20   100 P Standby  10.10.20.3      local           10.10.20.1     
+Vl30        30   110 P Active   local           10.10.30.3      10.10.30.1     
+Vl50        50   110 P Active   local           10.10.50.3      10.10.50.1     
+Vl900       900  110 P Active   local           10.255.0.3      10.255.0.1     
+CORE-1#
+### CORE-2# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.4      1   FULL/DR         00:00:34    10.255.0.4      Vlan900
+10.255.255.1      1   FULL/DROTHER    00:00:39    10.255.0.2      Vlan900
+CORE-2#
+### CORE-2# show spanning-tree summary
+show spanning-tree summary
+Switch is in rapid-pvst mode
+Root bridge for: WEB DB NATIVE-UNUSED
+Extended system ID           is enabled
+Portfast Default             is disabled
+PortFast BPDU Guard Default  is disabled
+Portfast BPDU Filter Default is disabled
+Loopguard Default            is disabled
+EtherChannel misconfig guard is disabled
+UplinkFast                   is disabled
+BackboneFast                 is disabled
+Configured Pathcost method used is short
+
+Name                   Blocking Listening Learning Forwarding STP Active
+---------------------- -------- --------- -------- ---------- ----------
+VLAN0010                     3         0        0          3          6
+VLAN0020                     3         0        0          3          6
+VLAN0030                     3         0        0          3          6
+VLAN0040                     2         0        0          4          6
+VLAN0050                     3         0        0          3          6
+VLAN0099                     3         0        0          3          6
+VLAN0900                     5         0        0          1          6
+
+---------------------- -------- --------- -------- ---------- ----------
+9 vlans                     22         0        0         20         42
+
+CORE-2#
+### CORE-2# show interfaces FastEthernet0/24 status
+show interfaces FastEthernet0/24 status
+Port      Name               Status       Vlan       Duplex  Speed Type
+Fa0/24    FW-1-DB-ZONE       connected    40         a-full  a-100 10/100BaseTX
+
+CORE-2#

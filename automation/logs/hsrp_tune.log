@@ -1,0 +1,7 @@
+CORE-1 HSRP timers 1/3 applied
+CORE-2 HSRP timers 1/3 applied
+show standby Vlan10
+                    ^
+% Invalid input detected at '^' marker.
+	
+CORE-1#

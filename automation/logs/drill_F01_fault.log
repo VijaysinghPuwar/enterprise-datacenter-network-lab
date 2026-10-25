@@ -1,0 +1,1 @@
+FAULT: CORE-1 :: configure terminal ; interface GigabitEthernet0/1 ; shutdown ; end @sim 3676953

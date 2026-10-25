@@ -1,0 +1,3 @@
+started db01-arp  DB-01> arp -a
+started db01-ipcfg  DB-01> ipconfig
+started db02-ipcfg  DB-02> ipconfig

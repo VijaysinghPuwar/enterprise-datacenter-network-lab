@@ -1,0 +1,86 @@
+{
+  "voice": "en-US-AndrewMultilingualNeural",
+  "rate": "+0%",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "Welcome",
+      "text": "Welcome. In this video, I'll walk you through D C one, a complete enterprise data center network built and tested in Cisco Packet Tracer. I'll explain it the way I would to a new engineer on my team. For every part, you'll hear three things: what it is, why we use it, and why it matters. Then we'll prove it works, and break it on purpose to see how it recovers."
+    },
+    {
+      "id": "s02",
+      "title": "The big picture",
+      "text": "First, the big picture. A data center is a room full of servers: the computers that run websites, applications and databases. The data center network connects those servers to each other, to the people who manage them, and to the internet. Every good design answers three questions. One: does it stay up when something fails? That's redundancy. Two: does it keep different systems apart, so one problem can't spread everywhere? That's segmentation. Three: is it secure and easy to manage? That's control. Every design choice in this network serves one of those three goals. The lab has twenty two devices and twenty six cables: two internet providers, an edge router, a firewall, a public zone called the D M Z, two core switches, two rack switches, and the servers."
+    },
+    {
+      "id": "s03",
+      "title": "A tour from top to bottom",
+      "text": "Here's the whole network. We'll read it from top to bottom, the way traffic arrives from the internet. At the top is a simulated internet: a router and a server standing in for the outside world. Below it are two internet service providers. We use two so that if one fails, the business stays online. Next is the edge router: our front door to the internet. It connects to both providers. Under it is the firewall. Its job is to inspect every packet moving between zones and allow only what we permit. To the right is the D M Z: a separate zone for the only servers the public may reach, our public website and public D N S server. In the middle are the two core switches. They route traffic between all internal networks, and each one can take over for the other. At the bottom are two server racks. Each rack has a top of rack switch, with one cable to each core. So if a core switch fails, no rack is cut off. In the racks are web, application and database servers, a D N S and D H C P server, a monitoring server, and a management P C for the network team."
+    },
+    {
+      "id": "s04",
+      "title": "VLANs and trunks",
+      "text": "Let's start with VLANs. What is a VLAN? A virtual LAN splits one physical switch into several separate networks. Why do we use them? Devices in different VLANs can't talk directly. Their traffic must pass through a router or firewall, where we decide what's allowed. Why does it matter? If one server is compromised, the damage stays inside its own VLAN. We use five server VLANs: ten for management, twenty for web servers, thirty for application servers, forty for databases, and fifty for shared services like D N S, D H C P, logging and time. Each VLAN has its own subnet. Web servers, for example, live in ten dot ten dot twenty. Between the switches we use trunks. A trunk is one cable that carries many VLANs by tagging every frame with its VLAN number. It saves cables and keeps the VLANs separate. Finally, every unused switch port is shut down and placed in a dead end VLAN. That stops anyone from plugging in a device and joining the network."
+    },
+    {
+      "id": "s05",
+      "title": "Spanning tree and EtherChannel",
+      "text": "Next, spanning tree. What is it? A protocol that stops switching loops. Why do we need it? Redundant cables create more than one path between switches, and without protection, traffic would circle forever and crash the network. Spanning tree keeps one path active and holds the others in standby. If the active path fails, it switches to a backup automatically. That's why it matters: we get the safety of extra cables without the loops. We run Rapid Spanning Tree, the faster version, and we set which switch is the root for each VLAN. Core one is root for most VLANs, and core two for the web and database VLANs, so both cores carry traffic. Now, EtherChannel. What is it? Several physical cables combined into one logical link, negotiated by a protocol called L A C P. Why use it? More bandwidth, and if one cable fails, the link stays up. Our two cores are joined by a two cable EtherChannel, port channel one. On screen, both members are active."
+    },
+    {
+      "id": "s06",
+      "title": "HSRP: a gateway that never dies",
+      "text": "Next, the default gateway. Every server sends traffic for other networks to its default gateway. If that gateway is a single switch and it fails, every server behind it loses connectivity. H S R P, the Hot Standby Router Protocol, fixes that. What is it? Two switches share one virtual gateway address. One is active and forwards traffic. The other is standby, listening. Why does it matter? If the active switch stops responding, the standby takes over the same address, and the servers keep working without any change. In our network, core one is active for management, applications, services and the firewall transit network, and core two is active for the web VLAN. So the work is shared, and each core backs up the other. The command show standby brief confirms it."
+    },
+    {
+      "id": "s07",
+      "title": "OSPF: routing inside the data center",
+      "text": "Next, routing with O S P F. What is it? A routing protocol that lets routers and switches share the networks they know about, automatically. Why use it instead of typing routes by hand? Because when something fails, O S P F finds a new path on its own. Static routes don't. The cores and the firewall meet on a small transit network, VLAN nine hundred. The firewall advertises the default route, meaning: send internet traffic to me. The cores advertise every server network to the firewall. We tuned O S P F to check its neighbors every second, and to declare one dead after three seconds, so failures are noticed fast. We also made core two's routes slightly more expensive. So the firewall uses core one normally, and moves to core two by itself if core one fails."
+    },
+    {
+      "id": "s08",
+      "title": "BGP: two internet providers",
+      "text": "Next, the internet edge, and B G P. What is it? The Border Gateway Protocol, the routing protocol that connects networks across the internet. Each organization has an autonomous system number. Ours is sixty five thousand and ten, and our two providers are sixty four thousand five hundred and one, and sixty four thousand five hundred and two. Why use it? Our edge router tells both providers where our public addresses live, and learns from them how to reach the rest of the internet. Why does it matter? Because we learn the internet's routes from two providers, if one link fails, B G P moves traffic to the other automatically. On screen, the edge router has both providers connected and two paths to the internet. The greater than sign marks the path in use."
+    },
+    {
+      "id": "s09",
+      "title": "The firewall: zones and rules",
+      "text": "Now the firewall, where most of the security lives. What is it? A Cisco A S A that sits between zones and checks every packet against our rules. It has four zones, and each has a trust level from zero to one hundred. Outside, facing the internet, is zero, the least trusted. The D M Z is fifty. The database zone is ninety. Inside, our servers and management, is one hundred. Each zone also has an access list: allow and deny rules, checked from top to bottom. Here's what the rules do, and why. Application, management and service servers may reach the databases, because they need the data. Web servers may not. So if a web server is hacked, the attacker still can't reach the data. Databases can't start new connections, except for D N S, logging and time, and they can't reach the internet at all. That blocks data from being sent out. The D M Z can't reach internal networks, so a hacked public server stays contained. And from the internet, only web and D N S traffic to our public servers is allowed in. One design note: the database rules were first placed on the core switches, but testing showed the simulator didn't enforce them. So the database tier was moved behind the firewall, where the rules are enforced and tested."
+    },
+    {
+      "id": "s10",
+      "title": "NAT, the DMZ and public DNS",
+      "text": "Next, NAT. What is it? Network address translation. Our servers use private addresses, like ten dot ten dot twenty dot eleven, which can't be used on the internet. When a server goes out to the internet, the firewall replaces its private address with the firewall's public address. That's port address translation. Why does it matter? It lets many servers share one public address, and it hides the internal addresses from the outside. The D M Z servers work differently. The public needs to reach them, so each gets its own fixed public address, using static NAT. The public website is one ninety eight dot fifty one dot one hundred dot ten, and the public D N S server is dot eleven. Here's the proof: from the internet server, the browser opens that public address and loads the D M Z web page. And our public D N S server returns that same address for www dot D C one dash corp dot com."
+    },
+    {
+      "id": "s11",
+      "title": "Everyday services and secure management",
+      "text": "Next, the core services. D H C P: what is it? A service that gives devices their address automatically. Why use it? No manual setup, and no duplicate addresses. The D H C P server is in the services VLAN, so the core switches relay requests to it. Here, the management P C received ten dot ten dot ten dot one hundred, with the correct gateway and D N S server. D N S: what is it? The service that turns names into addresses, so people use names, not numbers. Here, web dot D C one dot lab resolves to the web server, and the page loads. Now, management security. Remote logins use S S H, which is encrypted, never Telnet, which sends passwords in clear text. And logins are only allowed from the management VLAN. From the management P C, login to core one works. From a web server, it's refused. The rack switches also use port security, which limits which devices can use a port; B P D U guard, which shuts a port if someone connects a rogue switch; and D H C P snooping, which blocks fake D H C P servers. Finally, switches send logs to a central syslog server and sync their clocks with N T P, so events from every device line up when troubleshooting."
+    },
+    {
+      "id": "s12",
+      "title": "Proving the policy with real traffic",
+      "text": "Rules only matter if they work, so we test them with real traffic. From an application server, we ping a database. Replies come back: allowed, as designed. From a web server, we ping the same database. Every request times out: blocked, as designed. The final acceptance test runs twelve traffic flows at once: eight that must work, and four that must be blocked. All twelve behaved correctly, before the lab was saved and again after the saved file was reopened. Testing the saved file matters, because that's what someone else will actually open."
+    },
+    {
+      "id": "s13",
+      "title": "Breaking things on purpose",
+      "text": "Next, failure testing. What is it? Breaking parts of the network on purpose while traffic is running. Why do it? Because redundancy is only a claim until it's tested. For each drill, we ran continuous pings, caused a failure, and counted how many packets got through. Test one: one of the two cables between the cores was removed. The EtherChannel stayed up, and two hundred thirty nine of two hundred forty packets arrived. Test two: a rack switch lost its main uplink. Spanning tree switched to the backup, with zero packets lost. Test three: the link to our active internet provider went down. B G P moved traffic to the other provider, losing about ten packets per stream, then everything recovered. Tests four and five: a whole core switch was powered off, first core one, then core two. Each time, the other core took over every gateway, the firewall moved its routes, and all traffic recovered after six to eight lost packets. These tests also found real problems. Early on, the database zone went offline when core two failed, because the firewall's database cable plugged straight into that core. Both firewall cables were moved to the rack switches, which connect to both cores. Static routes also behaved badly during a failover, so they were replaced with O S P F. The final design is stronger because the first tests failed."
+    },
+    {
+      "id": "s14",
+      "title": "Three lessons",
+      "text": "Three lessons from this project. One: a command that's accepted isn't always applied. Faster H S R P timers were configured without errors, but comparing the running configurations with the source files showed they were missing. The simulator saves that setting incorrectly, so it's lost after a reload. Always verify what the device is actually running. Two: test the saved file, not just the live session. After reopening, one test failed. The firewall had answered address requests on behalf of the databases, a behavior called proxy A R P, and one server kept the wrong answer. A small script inside the lab file now fixes that every time the file opens. Three: never weaken security to get a passing test. The simulated firewall doesn't track replies for some outbound web connections. Opening extra holes would make those tests pass, but would weaken the design. So those two tests are documented as simulator limits instead."
+    },
+    {
+      "id": "s15",
+      "title": "Limits",
+      "text": "Be clear about what a design doesn't do. This is a simulation, so the results show behavior, not real speed. There's one firewall and one edge router, so those are still single points of failure. This is core and path redundancy, not a fully redundant site. And features like V X LAN, E V P N, v P C, or firewall failover pairs aren't available in Packet Tracer, so they aren't claimed. Every limit is recorded in the results file, next to the evidence."
+    },
+    {
+      "id": "s16",
+      "title": "Wrap-up",
+      "text": "To sum up: a redundant core, racks connected to both cores, a four zone firewall with a D M Z, two internet providers with B G P, central services, secure management, and tests that prove it all, including during failures. Everything is on GitHub: the Packet Tracer file, every device configuration, the test plan, the results and evidence, and the automation scripts. To try it, open the file in Packet Tracer nine, wait a minute or two for the network to settle, and follow the demo steps in the read me. Then break something, and watch it recover. Thanks for watching."
+    }
+  ]
+}

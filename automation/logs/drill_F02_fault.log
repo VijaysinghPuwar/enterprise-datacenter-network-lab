@@ -1,0 +1,1 @@
+FAULT: ACC-1 :: configure terminal ; interface GigabitEthernet0/1 ; shutdown ; end @sim 3789125

@@ -1,0 +1,28 @@
+show access-list
+access-list cached ACL log flows: total 0, denied 0 (deny-flow-max 4096) alert-interval 300
+access-list OUTSIDE_IN; 6 elements; name hash: 0x6291285e
+access-list OUTSIDE_IN line 1 extended permit tcp any host 172.16.50.10 eq www(hitcnt=2) 0xe03ba5ea
+access-list OUTSIDE_IN line 2 extended permit tcp any host 172.16.50.10 eq 443(hitcnt=0) 0xc7b47d5a
+access-list OUTSIDE_IN line 3 extended permit udp any host 172.16.50.11 eq domain(hitcnt=1) 0x5a862072
+access-list OUTSIDE_IN line 4 extended permit tcp any host 172.16.50.11 eq domain(hitcnt=0) 0xa3184c7b
+access-list OUTSIDE_IN line 5 extended permit tcp any eq www 10.10.0.0 255.255.0.0(hitcnt=0) 0x0754a5c6
+access-list OUTSIDE_IN line 6 extended permit tcp any eq 443 10.10.0.0 255.255.0.0(hitcnt=0) 0x6318c1c2
+access-list INSIDE_IN; 5 elements; name hash: 0x8da031ab
+access-list INSIDE_IN line 1 extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=42) 0x7d0675d1
+access-list INSIDE_IN line 2 extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=0) 0x8447db0a
+access-list INSIDE_IN line 3 extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=18) 0x37e69c94
+access-list INSIDE_IN line 4 extended deny ip any 10.10.40.0 255.255.255.0(hitcnt=36) 0xa96ee4ea
+access-list INSIDE_IN line 5 extended permit ip any any(hitcnt=183) 0x27765dae
+access-list DB_IN; 5 elements; name hash: 0xe66c6685
+access-list DB_IN line 1 extended permit icmp 10.10.40.0 255.255.255.0 any echo-reply(hitcnt=21) 0x4a8260a2
+access-list DB_IN line 2 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain(hitcnt=0) 0xec811881
+access-list DB_IN line 3 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0xce922427
+access-list DB_IN line 4 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123(hitcnt=0) 0xaa963354
+access-list DB_IN line 5 extended deny ip 10.10.40.0 255.255.255.0 any(hitcnt=12) 0x99d3a2d3
+access-list DMZ_IN; 5 elements; name hash: 0xcd820212
+access-list DMZ_IN line 1 extended permit tcp 172.16.50.0 255.255.255.0 eq www 10.10.0.0 255.255.0.0(hitcnt=0) 0x83ecba09
+access-list DMZ_IN line 2 extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x3b21571c
+access-list DMZ_IN line 3 extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0(hitcnt=0) 0x2c6e7a85
+access-list DMZ_IN line 4 extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0(hitcnt=0) 0x54b93d3d
+access-list DMZ_IN line 5 extended permit ip 172.16.50.0 255.255.255.0 any(hitcnt=0) 0xb9c84599
+FW-1#

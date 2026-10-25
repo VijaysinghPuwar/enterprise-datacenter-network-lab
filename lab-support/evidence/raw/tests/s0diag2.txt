@@ -1,0 +1,18 @@
+db01-arp | DB-01 -> arp -a | expect info | OUTPUT CAPTURED
+db02-arp | DB-02 -> arp -a | expect info | OUTPUT CAPTURED
+
+### db01-arp  DB-01> arp -a  [expect info]
+arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.1            0030.f27d.c504        dynamic
+  10.10.40.12           0030.f27d.c504        dynamic
+
+C:\>
+
+### db02-arp  DB-02> arp -a  [expect info]
+arp -a
+  Internet Address      Physical Address      Type
+  10.10.40.1            0030.f27d.c504        dynamic
+  10.10.40.11           000a.f396.d05a        dynamic
+
+C:\>

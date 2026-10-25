@@ -1,0 +1,144 @@
+ISP2-R# | enable
+    enable
+    ISP2-R#
+ISP2-R(config)# | configure terminal
+    configure terminal
+    Enter configuration commands, one per line.  End with CNTL/Z.
+    ISP2-R(config)#
+ISP2-R(config)# | hostname ISP2-R
+    hostname ISP2-R
+    ISP2-R(config)#
+ISP2-R(config)# | no ip domain-lookup
+    no ip domain-lookup
+    ISP2-R(config)#
+ISP2-R(config)# | ip domain-name dc1.lab
+    ip domain-name dc1.lab
+    ISP2-R(config)#
+ISP2-R(config)# | service password-encryption
+    service password-encryption
+    ISP2-R(config)#
+ISP2-R(config)# | enable secret DcLabOnly2026!
+    enable secret DcLabOnly2026!
+    ISP2-R(config)#
+ISP2-R(config)# | username netadmin privilege 15 secret DcLabOnly2026!
+    username netadmin privilege 15 secret DcLabOnly2026!
+    ISP2-R(config)#
+ISP2-R(config)# | banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    ISP2-R(config)#
+ISP2-R(config)# | crypto key generate rsa general-keys modulus 1024
+    crypto key generate rsa general-keys modulus 1024
+    % You already have RSA keys defined named ISP2-R.dc1.lab
+    % They will be replaced.
+    
+    % The key modulus size is 1024 bits
+    % Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+    *Mar 1 0:2:41.542: %SSH-5-ENABLED: SSH 2 has been enabled
+    ISP2-R(config)#
+ISP2-R(config)# | ip ssh version 2
+    ip ssh version 2
+    ISP2-R(config)#
+ISP2-R(config)# | ip ssh time-out 60
+    ip ssh time-out 60
+    ISP2-R(config)#
+ISP2-R(config)# | ip ssh authentication-retries 2
+    ip ssh authentication-retries 2
+    ISP2-R(config)#
+ISP2-R(config-std-nacl)# | ip access-list standard MGMT-SSH
+    ip access-list standard MGMT-SSH
+    ISP2-R(config-std-nacl)#
+ISP2-R(config-std-nacl)# | permit 10.10.10.0 0.0.0.255
+    permit 10.10.10.0 0.0.0.255
+    ISP2-R(config-std-nacl)#
+ISP2-R(config-std-nacl)# | deny any
+    deny any
+    ISP2-R(config-std-nacl)#
+ISP2-R(config)# | exit
+    exit
+    ISP2-R(config)#
+ISP2-R(config-line)# | line console 0
+    line console 0
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | logging synchronous
+    logging synchronous
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | exec-timeout 15 0
+    exec-timeout 15 0
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | login local
+    login local
+    ISP2-R(config-line)#
+ISP2-R(config)# | exit
+    exit
+    ISP2-R(config)#
+ISP2-R(config-line)# | line vty 0 4
+    line vty 0 4
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | login local
+    login local
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | transport input ssh
+    transport input ssh
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | access-class MGMT-SSH in
+    access-class MGMT-SSH in
+    ISP2-R(config-line)#
+ISP2-R(config-line)# | exec-timeout 10 0
+    exec-timeout 10 0
+    ISP2-R(config-line)#
+ISP2-R(config)# | exit
+    exit
+    ISP2-R(config)#
+ISP2-R(config-if)# | interface GigabitEthernet0/0
+    interface GigabitEthernet0/0
+    ISP2-R(config-if)#
+ISP2-R(config-if)# | description INET-R
+    description INET-R
+    ISP2-R(config-if)#
+ISP2-R(config-if)# | ip address 100.64.0.6 255.255.255.252
+    ip address 100.64.0.6 255.255.255.252
+    ISP2-R(config-if)#
+ISP2-R(config-if)# | no shutdown
+    no shutdown
+    ISP2-R(config-if)#
+ISP2-R(config)# | exit
+    exit
+    ISP2-R(config)#
+ISP2-R(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    ISP2-R(config-if)#
+ISP2-R(config-if)# | description EDGE-R1
+    description EDGE-R1
+    ISP2-R(config-if)#
+ISP2-R(config-if)# | ip address 100.64.2.1 255.255.255.252
+    ip address 100.64.2.1 255.255.255.252
+    ISP2-R(config-if)#
+ISP2-R(config-if)# | no shutdown
+    no shutdown
+    ISP2-R(config-if)#
+ISP2-R(config)# | exit
+    exit
+    ISP2-R(config)#
+ISP2-R(config-router)# | router bgp 64502
+    router bgp 64502
+    ISP2-R(config-router)#
+ISP2-R(config-router)# | bgp log-neighbor-changes
+    bgp log-neighbor-changes
+    ISP2-R(config-router)#
+ISP2-R(config-router)# | neighbor 100.64.0.5 remote-as 64500
+    neighbor 100.64.0.5 remote-as 64500
+    ISP2-R(config-router)#
+ISP2-R(config-router)# | neighbor 100.64.2.2 remote-as 65010
+    neighbor 100.64.2.2 remote-as 65010
+    ISP2-R(config-router)#
+ISP2-R(config)# | exit
+    exit
+    ISP2-R(config)#
+ISP2-R# | end
+    end
+    ISP2-R#
+ISP2-R# | write memory
+    write memory
+    Building configuration...
+    [OK]
+    ISP2-R#

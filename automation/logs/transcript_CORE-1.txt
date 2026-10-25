@@ -1,0 +1,1249 @@
+Switch# | enable
+    enable
+    Switch#
+Switch(config)# | configure terminal
+    configure terminal
+    Enter configuration commands, one per line.  End with CNTL/Z.
+    Switch(config)#
+CORE-1(config)# | hostname CORE-1
+    hostname CORE-1
+    CORE-1(config)#
+CORE-1(config)# | no ip domain-lookup
+    no ip domain-lookup
+    CORE-1(config)#
+CORE-1(config)# | ip domain-name dc1.lab
+    ip domain-name dc1.lab
+    CORE-1(config)#
+CORE-1(config)# | service password-encryption
+    service password-encryption
+    CORE-1(config)#
+CORE-1(config)# | enable secret DcLabOnly2026!
+    enable secret DcLabOnly2026!
+    CORE-1(config)#
+CORE-1(config)# | username netadmin privilege 15 secret DcLabOnly2026!
+    username netadmin privilege 15 secret DcLabOnly2026!
+    CORE-1(config)#
+CORE-1(config)# | banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    CORE-1(config)#
+CORE-1(config)# | crypto key generate rsa general-keys modulus 1024
+    crypto key generate rsa general-keys modulus 1024
+    The name for the keys will be: CORE-1.dc1.lab
+    
+    % The key modulus size is 1024 bits
+    % Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+    *Mar 1 0:2:6.725: %SSH-5-ENABLED: SSH 1.99 has been enabled
+    CORE-1(config)#
+CORE-1(config)# | ip ssh version 2
+    ip ssh version 2
+    CORE-1(config)#
+CORE-1(config)# | ip ssh time-out 60
+    ip ssh time-out 60
+    CORE-1(config)#
+CORE-1(config)# | ip ssh authentication-retries 2
+    ip ssh authentication-retries 2
+    CORE-1(config)#
+CORE-1(config-std-nacl)# | ip access-list standard MGMT-SSH
+    ip access-list standard MGMT-SSH
+    CORE-1(config-std-nacl)#
+CORE-1(config-std-nacl)# | permit 10.10.10.0 0.0.0.255
+    permit 10.10.10.0 0.0.0.255
+    CORE-1(config-std-nacl)#
+CORE-1(config-std-nacl)# | deny any
+    deny any
+    CORE-1(config-std-nacl)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-line)# | line console 0
+    line console 0
+    CORE-1(config-line)#
+CORE-1(config-line)# | logging synchronous
+    logging synchronous
+    CORE-1(config-line)#
+CORE-1(config-line)# | exec-timeout 15 0
+    exec-timeout 15 0
+    CORE-1(config-line)#
+CORE-1(config-line)# | login local
+    login local
+    CORE-1(config-line)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-line)# | line vty 0 4
+    line vty 0 4
+    CORE-1(config-line)#
+CORE-1(config-line)# | login local
+    login local
+    CORE-1(config-line)#
+CORE-1(config-line)# | transport input ssh
+    transport input ssh
+    CORE-1(config-line)#
+CORE-1(config-line)# | access-class MGMT-SSH in
+    access-class MGMT-SSH in
+    CORE-1(config-line)#
+CORE-1(config-line)# | exec-timeout 10 0
+    exec-timeout 10 0
+    CORE-1(config-line)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | service timestamps log datetime msec
+    service timestamps log datetime msec
+    CORE-1(config)#
+CORE-1(config)# | logging 10.10.50.20
+    logging 10.10.50.20
+    CORE-1(config)#
+CORE-1(config)# | logging trap informational
+    logging trap informational
+                                ^
+    % Invalid input detected at '^' marker.
+    	
+    CORE-1(config)#
+CORE-1(config)# | ntp server 10.10.50.20
+    ntp server 10.10.50.20
+    CORE-1(config)#
+CORE-1(config)# | ip routing
+    ip routing
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 10
+    vlan 10
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name MGMT
+    name MGMT
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 20
+    vlan 20
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name WEB
+    name WEB
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 30
+    vlan 30
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name APP
+    name APP
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 40
+    vlan 40
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name DB
+    name DB
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 50
+    vlan 50
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name SERVICES
+    name SERVICES
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 99
+    vlan 99
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name NATIVE-UNUSED
+    name NATIVE-UNUSED
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 900
+    vlan 900
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name FW-TRANSIT
+    name FW-TRANSIT
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-vlan)# | vlan 999
+    vlan 999
+    CORE-1(config-vlan)#
+CORE-1(config-vlan)# | name BLACKHOLE
+    name BLACKHOLE
+    CORE-1(config-vlan)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | vtp mode transparent
+    vtp mode transparent
+    Setting device to VTP TRANSPARENT mode.
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree mode rapid-pvst
+    spanning-tree mode rapid-pvst
+    CORE-1(config)#
+CORE-1(config-if)# | interface Vlan10
+    interface Vlan10
+    CORE-1(config-if)#
+CORE-1(config-if)# | description MGMT
+    description MGMT
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.10.10.2 255.255.255.0
+    ip address 10.10.10.2 255.255.255.0
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby version 2
+    standby version 2
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 10 ip 10.10.10.1
+    standby 10 ip 10.10.10.1
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 10 priority 110
+    standby 10 priority 110
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 10 preempt
+    standby 10 preempt
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip helper-address 10.10.50.10
+    ip helper-address 10.10.50.10
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree vlan 10 priority 4096
+    spanning-tree vlan 10 priority 4096
+    CORE-1(config)#
+CORE-1(config-if)# | interface Vlan20
+    interface Vlan20
+    CORE-1(config-if)#
+CORE-1(config-if)# | description WEB
+    description WEB
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.10.20.2 255.255.255.0
+    ip address 10.10.20.2 255.255.255.0
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby version 2
+    standby version 2
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 20 ip 10.10.20.1
+    standby 20 ip 10.10.20.1
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 20 priority 100
+    standby 20 priority 100
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 20 preempt
+    standby 20 preempt
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree vlan 20 priority 8192
+    spanning-tree vlan 20 priority 8192
+    CORE-1(config)#
+CORE-1(config-if)# | interface Vlan30
+    interface Vlan30
+    CORE-1(config-if)#
+CORE-1(config-if)# | description APP
+    description APP
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.10.30.2 255.255.255.0
+    ip address 10.10.30.2 255.255.255.0
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby version 2
+    standby version 2
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 30 ip 10.10.30.1
+    standby 30 ip 10.10.30.1
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 30 priority 110
+    standby 30 priority 110
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 30 preempt
+    standby 30 preempt
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree vlan 30 priority 4096
+    spanning-tree vlan 30 priority 4096
+    CORE-1(config)#
+CORE-1(config-if)# | interface Vlan40
+    interface Vlan40
+    CORE-1(config-if)#
+CORE-1(config-if)# | description DB
+    description DB
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.10.40.2 255.255.255.0
+    ip address 10.10.40.2 255.255.255.0
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby version 2
+    standby version 2
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 40 ip 10.10.40.1
+    standby 40 ip 10.10.40.1
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 40 priority 100
+    standby 40 priority 100
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 40 preempt
+    standby 40 preempt
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip access-group DB-PROTECT out
+    ip access-group DB-PROTECT out
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree vlan 40 priority 8192
+    spanning-tree vlan 40 priority 8192
+    CORE-1(config)#
+CORE-1(config-if)# | interface Vlan50
+    interface Vlan50
+    CORE-1(config-if)#
+CORE-1(config-if)# | description SERVICES
+    description SERVICES
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.10.50.2 255.255.255.0
+    ip address 10.10.50.2 255.255.255.0
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby version 2
+    standby version 2
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 50 ip 10.10.50.1
+    standby 50 ip 10.10.50.1
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 50 priority 110
+    standby 50 priority 110
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 50 preempt
+    standby 50 preempt
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree vlan 50 priority 4096
+    spanning-tree vlan 50 priority 4096
+    CORE-1(config)#
+CORE-1(config-if)# | interface Vlan900
+    interface Vlan900
+    CORE-1(config-if)#
+CORE-1(config-if)# | description FW-TRANSIT
+    description FW-TRANSIT
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.255.0.2 255.255.255.248
+    ip address 10.255.0.2 255.255.255.248
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby version 2
+    standby version 2
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 900 ip 10.255.0.1
+    standby 900 ip 10.255.0.1
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 900 priority 110
+    standby 900 priority 110
+    CORE-1(config-if)#
+CORE-1(config-if)# | standby 900 preempt
+    standby 900 preempt
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | spanning-tree vlan 900 priority 4096
+    spanning-tree vlan 900 priority 4096
+    CORE-1(config)#
+CORE-1(config-ext-nacl)# | ip access-list extended DB-PROTECT
+    ip access-list extended DB-PROTECT
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | remark Stateless lab policy - permits application and administration sources
+    remark Stateless lab policy - permits application and administration sources
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | permit ip 10.10.30.0 0.0.0.255 10.10.40.0 0.0.0.255
+    
+    CORE-1(config-line)#logging synchronous
+    CORE-1(config-line)#exec-timeout 15 0
+    CORE-1(config-line)#login local
+    CORE-1(config-line)#exit
+    CORE-1(config)#line vty 0 4
+    CORE-1(config-line)#login local
+    CORE-1(config-line)#transport input ssh
+    CORE-1(config-line)#access-class MGMT-SSH in
+    CORE-1(config-line)#exec-timeout 10 0
+    CORE-1(config-line)#exit
+    CORE-1(config)#service timestamps log datetime msec
+    CORE-1(config)#logging 10.10.50.20
+    CORE-1(config)#logging trap informational
+                                ^
+    % Invalid input detected at '^' marker.
+    	
+    CORE-1(config)#ntp server 10.10.50.20
+    CORE-1(config)#ip routing
+    CORE-1(config)#vlan 10
+    CORE-1(config-vlan)#name MGMT
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 20
+    CORE-1(config-vlan)#name WEB
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 30
+    CORE-1(config-vlan)#name APP
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 40
+    CORE-1(config-vlan)#name DB
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 50
+    CORE-1(config-vlan)#name SERVICES
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 99
+    CORE-1(config-vlan)#name NATIVE-UNUSED
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 900
+    CORE-1(config-vlan)#name FW-TRANSIT
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vlan 999
+    CORE-1(config-vlan)#name BLACKHOLE
+    CORE-1(config-vlan)#exit
+    CORE-1(config)#vtp mode transparent
+    Setting device to VTP TRANSPARENT mode.
+    CORE-1(config)#spanning-tree mode rapid-pvst
+    CORE-1(config)#interface Vlan10
+    CORE-1(config-if)#description MGMT
+    CORE-1(config-if)#ip address 10.10.10.2 255.255.255.0
+    CORE-1(config-if)#standby version 2
+    CORE-1(config-if)#standby 10 ip 10.10.10.1
+    CORE-1(config-if)#standby 10 priority 110
+    CORE-1(config-if)#standby 10 preempt
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#ip helper-address 10.10.50.10
+    CORE-1(config-if)#exit
+    CORE-1(config)#spanning-tree vlan 10 priority 4096
+    CORE-1(config)#interface Vlan20
+    CORE-1(config-if)#description WEB
+    CORE-1(config-if)#ip address 10.10.20.2 255.255.255.0
+    CORE-1(config-if)#standby version 2
+    CORE-1(config-if)#standby 20 ip 10.10.20.1
+    CORE-1(config-if)#standby 20 priority 100
+    CORE-1(config-if)#standby 20 preempt
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#exit
+    CORE-1(config)#spanning-tree vlan 20 priority 8192
+    CORE-1(config)#interface Vlan30
+    CORE-1(config-if)#description APP
+    CORE-1(config-if)#ip address 10.10.30.2 255.255.255.0
+    CORE-1(config-if)#standby version 2
+    CORE-1(config-if)#standby 30 ip 10.10.30.1
+    CORE-1(config-if)#standby 30 priority 110
+    CORE-1(config-if)#standby 30 preempt
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#exit
+    CORE-1(config)#spanning-tree vlan 30 priority 4096
+    CORE-1(config)#interface Vlan40
+    CORE-1(config-if)#description DB
+    CORE-1(config-if)#ip address 10.10.40.2 255.255.255.0
+    CORE-1(config-if)#standby version 2
+    CORE-1(config-if)#standby 40 ip 10.10.40.1
+    CORE-1(config-if)#standby 40 priority 100
+    CORE-1(config-if)#standby 40 preempt
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#ip access-group DB-PROTECT out
+    CORE-1(config-if)#exit
+    CORE-1(config)#spanning-tree vlan 40 priority 8192
+    CORE-1(config)#interface Vlan50
+    CORE-1(config-if)#description SERVICES
+    CORE-1(config-if)#ip address 10.10.50.2 255.255.255.0
+    CORE-1(config-if)#standby version 2
+    CORE-1(config-if)#standby 50 ip 10.10.50.1
+    CORE-1(config-if)#standby 50 priority 110
+    CORE-1(config-if)#standby 50 preempt
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#exit
+    CORE-1(config)#spanning-tree vlan 50 priority 4096
+    CORE-1(config)#interface Vlan900
+    CORE-1(config-if)#description FW-TRANSIT
+    CORE-1(config-if)#ip address 10.255.0.2 255.255.255.248
+    CORE-1(config-if)#standby version 2
+    CORE-1(config-if)#standby 900 ip 10.255.0.1
+    CORE-1(config-if)#standby 900 priority 110
+    CORE-1(config-if)#standby 900 preempt
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#exit
+    CORE-1(config)#spanning-tree vlan 900 priority 4096
+    CORE-1(config)#ip access-list extended DB-PROTECT
+    CORE-1(config-ext-nacl)#remark Stateless lab policy - permits application and administration sources
+    CORE-1(config-ext-nacl)#permit ip 10.10.30.0 0.0.0.255 10.10.40.0 0.0.0.255
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | permit ip 10.10.10.0 0.0.0.255 10.10.40.0 0.0.0.255
+    permit ip 10.10.10.0 0.0.0.255 10.10.40.0 0.0.0.255
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | permit ip 10.10.50.0 0.0.0.255 10.10.40.0 0.0.0.255
+    permit ip 10.10.50.0 0.0.0.255 10.10.40.0 0.0.0.255
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | permit tcp any 10.10.40.0 0.0.0.255 established
+    permit tcp any 10.10.40.0 0.0.0.255 established
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | permit icmp any 10.10.40.0 0.0.0.255 echo-reply
+    permit icmp any 10.10.40.0 0.0.0.255 echo-reply
+    CORE-1(config-ext-nacl)#
+CORE-1(config-ext-nacl)# | deny ip any 10.10.40.0 0.0.0.255
+    deny ip any 10.10.40.0 0.0.0.255
+    CORE-1(config-ext-nacl)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/1
+    interface FastEthernet0/1
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk encapsulation dot1q
+    switchport trunk encapsulation dot1q
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99
+    switchport trunk allowed vlan 10,20,30,40,50,99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/2
+    interface FastEthernet0/2
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk encapsulation dot1q
+    switchport trunk encapsulation dot1q
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99
+    switchport trunk allowed vlan 10,20,30,40,50,99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk encapsulation dot1q
+    switchport trunk encapsulation dot1q
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99,900
+    switchport trunk allowed vlan 10,20,30,40,50,99,900
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    CORE-1(config-if)#
+CORE-1(config-if)# | channel-group 1 mode active
+    channel-group 1 mode active
+    %EC-5-L3DONTBNDL2: Gig0/1 suspended: LACP currently not enabled on the remote port.
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface GigabitEthernet0/2
+    interface GigabitEthernet0/2
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk encapsulation dot1q
+    switchport trunk encapsulation dot1q
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99,900
+    switchport trunk allowed vlan 10,20,30,40,50,99,900
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface GigabitEthernet0/2
+    interface GigabitEthernet0/2
+    CORE-1(config-if)#
+CORE-1(config-if)# | channel-group 1 mode active
+    channel-group 1 mode active
+    %EC-5-L3DONTBNDL2: Gig0/2 suspended: LACP currently not enabled on the remote port.
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface Port-channel1
+    interface Port-channel1
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk encapsulation dot1q
+    switchport trunk encapsulation dot1q
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99,900
+    switchport trunk allowed vlan 10,20,30,40,50,99,900
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/24
+    interface FastEthernet0/24
+    CORE-1(config-if)#
+CORE-1(config-if)# | description FW-1-INSIDE
+    description FW-1-INSIDE
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 900
+    switchport access vlan 900
+    CORE-1(config-if)#
+CORE-1(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/24 but will only
+    have effect when the interface is in a non-trunking mode.
+    CORE-1(config-if)#
+CORE-1(config-if)# | no shutdown
+    no shutdown
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/3
+    interface FastEthernet0/3
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/3, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/4
+    interface FastEthernet0/4
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/4, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/5
+    interface FastEthernet0/5
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/5, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/6
+    interface FastEthernet0/6
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/6, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/7
+    interface FastEthernet0/7
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/7, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/8
+    interface FastEthernet0/8
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/8, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/9
+    interface FastEthernet0/9
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/9, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/10
+    interface FastEthernet0/10
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/10, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/11
+    interface FastEthernet0/11
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/11, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/12
+    interface FastEthernet0/12
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    
+    CORE-1(config-if)#channel-group 1 mode active
+    %EC-5-L3DONTBNDL2: Gig0/2 suspended: LACP currently not enabled on the remote port.
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface Port-channel1
+    CORE-1(config-if)#switchport trunk encapsulation dot1q
+    CORE-1(config-if)#switchport mode trunk
+    CORE-1(config-if)#switchport trunk native vlan 99
+    CORE-1(config-if)#switchport trunk allowed vlan 10,20,30,40,50,99,900
+    CORE-1(config-if)#switchport nonegotiate
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/24
+    CORE-1(config-if)#description FW-1-INSIDE
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 900
+    CORE-1(config-if)#spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/24 but will only
+    have effect when the interface is in a non-trunking mode.
+    CORE-1(config-if)#no shutdown
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/3
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/3, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/4
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/4, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/5
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/5, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/6
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/6, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/7
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/7, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/8
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/8, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/9
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/9, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/10
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/10, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/11
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#switchport mode access
+    CORE-1(config-if)#switchport access vlan 999
+    CORE-1(config-if)#shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/11, changed state to administratively down
+    CORE-1(config-if)#exit
+    CORE-1(config)#interface FastEthernet0/12
+    CORE-1(config-if)#description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/12, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/13
+    interface FastEthernet0/13
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/13, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/14
+    interface FastEthernet0/14
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/14, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/15
+    interface FastEthernet0/15
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/15, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/16
+    interface FastEthernet0/16
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/16, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/17
+    interface FastEthernet0/17
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/17, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/18
+    interface FastEthernet0/18
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/18, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/19
+    interface FastEthernet0/19
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/19, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/20
+    interface FastEthernet0/20
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/20, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/21
+    interface FastEthernet0/21
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/21, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/22
+    interface FastEthernet0/22
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/22, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface FastEthernet0/23
+    interface FastEthernet0/23
+    CORE-1(config-if)#
+CORE-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport mode access
+    switchport mode access
+    CORE-1(config-if)#
+CORE-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    CORE-1(config-if)#
+CORE-1(config-if)# | shutdown
+    shutdown
+    
+    %LINK-5-CHANGED: Interface FastEthernet0/23, changed state to administratively down
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-if)# | interface Loopback0
+    interface Loopback0
+    
+    CORE-1(config-if)#
+CORE-1(config-if)# | ip address 10.255.255.1 255.255.255.255
+    ip address 10.255.255.1 255.255.255.255
+    CORE-1(config-if)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config-router)# | router ospf 10
+    router ospf 10
+    CORE-1(config-router)#
+CORE-1(config-router)# | router-id 10.255.255.1
+    router-id 10.255.255.1
+    CORE-1(config-router)#
+CORE-1(config-router)# | passive-interface default
+    passive-interface default
+    CORE-1(config-router)#
+CORE-1(config-router)# | no passive-interface Vlan900
+    no passive-interface Vlan900
+    CORE-1(config-router)#
+CORE-1(config-router)# | network 10.10.0.0 0.0.255.255 area 0
+    network 10.10.0.0 0.0.255.255 area 0
+    CORE-1(config-router)#
+CORE-1(config-router)# | network 10.255.0.0 0.0.0.7 area 0
+    network 10.255.0.0 0.0.0.7 area 0
+    CORE-1(config-router)#
+CORE-1(config-router)# | network 10.255.255.1 0.0.0.0 area 0
+    network 10.255.255.1 0.0.0.0 area 0
+    CORE-1(config-router)#
+CORE-1(config)# | exit
+    exit
+    CORE-1(config)#
+CORE-1(config)# | logging source-interface Vlan10
+    logging source-interface Vlan10
+                           ^
+    % Invalid input detected at '^' marker.
+    	
+    CORE-1(config)#
+CORE-1# | end
+    end
+    CORE-1#
+CORE-1# | write memory
+    write memory
+    Building configuration...
+    [OK]
+    CORE-1#

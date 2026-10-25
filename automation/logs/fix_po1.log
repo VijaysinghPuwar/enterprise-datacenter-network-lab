@@ -1,0 +1,11 @@
+CORE-1 Po1 members bounced
+CORE-2 Po1 members bounced
+CORE-1 'logging trap debugging' => accepted
+CORE-1 write memory => write memory Building configuration... [OK] CORE-1#
+CORE-2 'logging trap debugging' => accepted
+CORE-2 write memory => write memory Building configuration... [OK] CORE-2#
+ACC-1 'logging trap debugging' => accepted
+ACC-1 write memory => write memory Building configuration... [OK] ACC-1#
+ACC-2 'logging trap debugging' => accepted
+ACC-2 write memory => write memory Building configuration... [OK] ACC-2#
+paging test length 2818 has More: false ends with:  YES manual up up Vlan900 10.255.0.2 YES manual up up CORE-1#

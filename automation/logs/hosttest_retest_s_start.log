@@ -1,0 +1,4 @@
+started S9-retest  DB-01> ping -n 6 10.10.40.12
+started S5-retest  SVC-MON> ping -n 6 203.0.113.10
+started S7-retest  DMZ-DNS> ping -n 6 203.0.113.10
+started S1-check  NOC-PC> ping -n 6 203.0.113.10

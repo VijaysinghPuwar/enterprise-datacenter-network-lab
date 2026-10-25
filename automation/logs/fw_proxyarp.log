@@ -1,0 +1,4 @@
+FW-1 GigabitEthernet1/1 proxyArp before=true after=true
+FW-1 GigabitEthernet1/2 proxyArp before=false after=false
+FW-1 GigabitEthernet1/3 proxyArp before=true after=true
+FW-1 GigabitEthernet1/4 proxyArp before=false after=false

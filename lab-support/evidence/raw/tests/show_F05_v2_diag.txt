@@ -1,0 +1,108 @@
+### CORE-2# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.4      1   FULL/DR         00:00:31    10.255.0.4      Vlan900
+CORE-2#
+### CORE-2# show spanning-tree vlan 900
+show spanning-tree vlan 900
+VLAN0900
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    9092
+             Address     0007.EC7C.5484
+             This bridge is the root
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    9092  (priority 8192 sys-id-ext 900)
+             Address     0007.EC7C.5484
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+
+CORE-2#
+### ACC-1# show spanning-tree vlan 900
+show spanning-tree vlan 900
+VLAN0900
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    9092
+             Address     0007.EC7C.5484
+             Cost        19
+             Port        26(GigabitEthernet0/2)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    33668  (priority 32768 sys-id-ext 900)
+             Address     0030.A303.1450
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/24           Desg FWD 19        128.24   P2p
+Gi0/2            Root FWD 19        128.26   P2p
+
+ACC-1#
+### CORE-2# show interfaces trunk
+show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Fa0/1       on           802.1q         trunking      99
+Fa0/2       on           802.1q         trunking      99
+
+Port        Vlans allowed on trunk
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+Port        Vlans allowed and active in management domain
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       10,20,30,40,50,99,900
+Fa0/2       10,20,30,40,50,99,900
+
+CORE-2#
+### FW-1# show arp
+show arp
+        inside 10.10.10.100 00D0.581B.2206
+        inside 10.10.30.11 00D0.581B.2206
+        db 10.10.40.1 0030.F27D.C504
+        db 10.10.40.11 000A.F396.D05A
+        db 10.10.40.12 0002.176D.7E35
+        inside 10.10.50.10 00D0.581B.2206
+        inside 10.10.50.20 00D0.581B.2206
+        inside 10.255.0.2 00D0.581B.2206
+        inside 10.255.0.3 0007.EC7C.5405
+        inside 10.255.0.4 0030.F27D.C502
+        dmz 172.16.50.1 0030.F27D.C503
+        dmz 172.16.50.10 0001.64EE.BE4C
+        dmz 172.16.50.11 0030.F243.1EC5
+        outside 198.51.100.2 0030.F27D.C501
+        outside 203.0.113.10 0060.70B6.4403
+FW-1#
+### CORE-2# show ip route
+show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 10.255.0.4 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 7 subnets, 3 masks
+C       10.10.10.0/24 is directly connected, Vlan10
+C       10.10.20.0/24 is directly connected, Vlan20
+C       10.10.30.0/24 is directly connected, Vlan30
+O       10.10.40.0/24 [110/2] via 10.255.0.4, 19:11:45, Vlan900
+C       10.10.50.0/24 is directly connected, Vlan50
+C       10.255.0.0/29 is directly connected, Vlan900
+C       10.255.255.2/32 is directly connected, Loopback0
+O*E2 0.0.0.0/0 [110/1] via 10.255.0.4, 19:11:45, Vlan900
+
+CORE-2#

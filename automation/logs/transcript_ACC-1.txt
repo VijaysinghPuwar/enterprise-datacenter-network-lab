@@ -1,0 +1,806 @@
+ACC-1# | enable
+    enable
+    ACC-1#
+ACC-1(config)# | configure terminal
+    configure terminal
+    Enter configuration commands, one per line.  End with CNTL/Z.
+    ACC-1(config)#
+ACC-1(config)# | hostname ACC-1
+    hostname ACC-1
+    ACC-1(config)#
+ACC-1(config)# | no ip domain-lookup
+    no ip domain-lookup
+    ACC-1(config)#
+ACC-1(config)# | ip domain-name dc1.lab
+    ip domain-name dc1.lab
+    ACC-1(config)#
+ACC-1(config)# | service password-encryption
+    service password-encryption
+    ACC-1(config)#
+ACC-1(config)# | enable secret DcLabOnly2026!
+    enable secret DcLabOnly2026!
+    ACC-1(config)#
+ACC-1(config)# | username netadmin privilege 15 secret DcLabOnly2026!
+    username netadmin privilege 15 secret DcLabOnly2026!
+    ACC-1(config)#
+ACC-1(config)# | banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    banner motd #AUTHORIZED SIMULATOR LAB ONLY#
+    ACC-1(config)#
+ACC-1(config)# | crypto key generate rsa general-keys modulus 1024
+    crypto key generate rsa general-keys modulus 1024
+    % You already have RSA keys defined named ACC-1.dc1.lab
+    % They will be replaced.
+    
+    % The key modulus size is 1024 bits
+    % Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+    *Mar 1 0:2:41.461: %SSH-5-ENABLED: SSH 2 has been enabled
+    ACC-1(config)#
+ACC-1(config)# | ip ssh version 2
+    ip ssh version 2
+    ACC-1(config)#
+ACC-1(config)# | ip ssh time-out 60
+    ip ssh time-out 60
+    ACC-1(config)#
+ACC-1(config)# | ip ssh authentication-retries 2
+    ip ssh authentication-retries 2
+    ACC-1(config)#
+ACC-1(config-std-nacl)# | ip access-list standard MGMT-SSH
+    ip access-list standard MGMT-SSH
+    ACC-1(config-std-nacl)#
+ACC-1(config-std-nacl)# | permit 10.10.10.0 0.0.0.255
+    permit 10.10.10.0 0.0.0.255
+    ACC-1(config-std-nacl)#
+ACC-1(config-std-nacl)# | deny any
+    deny any
+    ACC-1(config-std-nacl)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-line)# | line console 0
+    line console 0
+    ACC-1(config-line)#
+ACC-1(config-line)# | logging synchronous
+    logging synchronous
+    ACC-1(config-line)#
+ACC-1(config-line)# | exec-timeout 15 0
+    exec-timeout 15 0
+    ACC-1(config-line)#
+ACC-1(config-line)# | login local
+    login local
+    ACC-1(config-line)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-line)# | line vty 0 4
+    line vty 0 4
+    ACC-1(config-line)#
+ACC-1(config-line)# | login local
+    login local
+    ACC-1(config-line)#
+ACC-1(config-line)# | transport input ssh
+    transport input ssh
+    ACC-1(config-line)#
+ACC-1(config-line)# | access-class MGMT-SSH in
+    access-class MGMT-SSH in
+    ACC-1(config-line)#
+ACC-1(config-line)# | exec-timeout 10 0
+    exec-timeout 10 0
+    ACC-1(config-line)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config)# | service timestamps log datetime msec
+    service timestamps log datetime msec
+    ACC-1(config)#
+ACC-1(config)# | logging 10.10.50.20
+    logging 10.10.50.20
+    ACC-1(config)#
+ACC-1(config)# | logging trap informational
+    logging trap informational
+                               ^
+    % Invalid input detected at '^' marker.
+    	
+    ACC-1(config)#
+ACC-1(config)# | ntp server 10.10.50.20
+    ntp server 10.10.50.20
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 10
+    vlan 10
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name MGMT
+    name MGMT
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 20
+    vlan 20
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name WEB
+    name WEB
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 30
+    vlan 30
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name APP
+    name APP
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 40
+    vlan 40
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name DB
+    name DB
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 50
+    vlan 50
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name SERVICES
+    name SERVICES
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 99
+    vlan 99
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name NATIVE-UNUSED
+    name NATIVE-UNUSED
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-vlan)# | vlan 999
+    vlan 999
+    ACC-1(config-vlan)#
+ACC-1(config-vlan)# | name BLACKHOLE
+    name BLACKHOLE
+    ACC-1(config-vlan)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config)# | vtp mode transparent
+    vtp mode transparent
+    Device mode already VTP TRANSPARENT.
+    ACC-1(config)#
+ACC-1(config)# | spanning-tree mode rapid-pvst
+    spanning-tree mode rapid-pvst
+    ACC-1(config)#
+ACC-1(config-if)# | interface Vlan10
+    interface Vlan10
+    ACC-1(config-if)#
+ACC-1(config-if)# | ip address 10.10.10.11 255.255.255.0
+    ip address 10.10.10.11 255.255.255.0
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config)# | ip default-gateway 10.10.10.1
+    ip default-gateway 10.10.10.1
+    ACC-1(config)#
+ACC-1(config)# | ip dhcp snooping
+    ip dhcp snooping
+    ACC-1(config)#
+ACC-1(config)# | ip dhcp snooping vlan 10
+    ip dhcp snooping vlan 10
+    ACC-1(config)#
+ACC-1(config)# | no ip dhcp snooping information option
+    no ip dhcp snooping information option
+    ACC-1(config)#
+ACC-1(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99
+    switchport trunk allowed vlan 10,20,30,40,50,99
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface GigabitEthernet0/1
+    interface GigabitEthernet0/1
+    ACC-1(config-if)#
+ACC-1(config-if)# | ip dhcp snooping trust
+    ip dhcp snooping trust
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface GigabitEthernet0/2
+    interface GigabitEthernet0/2
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode trunk
+    switchport mode trunk
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport trunk native vlan 99
+    switchport trunk native vlan 99
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport trunk allowed vlan 10,20,30,40,50,99
+    switchport trunk allowed vlan 10,20,30,40,50,99
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport nonegotiate
+    switchport nonegotiate
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface GigabitEthernet0/2
+    interface GigabitEthernet0/2
+    ACC-1(config-if)#
+ACC-1(config-if)# | ip dhcp snooping trust
+    ip dhcp snooping trust
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/1
+    interface FastEthernet0/1
+    ACC-1(config-if)#
+ACC-1(config-if)# | description WEB-01
+    description WEB-01
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 20
+    switchport access vlan 20
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/1 but will only
+    have effect when the interface is in a non-trunking mode.
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree bpduguard enable
+    spanning-tree bpduguard enable
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security
+    switchport port-security
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security maximum 2
+    switchport port-security maximum 2
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security mac-address sticky
+    switchport port-security mac-address sticky
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security violation restrict
+    switchport port-security violation restrict
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/2
+    interface FastEthernet0/2
+    ACC-1(config-if)#
+ACC-1(config-if)# | description APP-01
+    description APP-01
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 30
+    switchport access vlan 30
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/2 but will only
+    have effect when the interface is in a non-trunking mode.
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree bpduguard enable
+    spanning-tree bpduguard enable
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security
+    switchport port-security
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security maximum 2
+    switchport port-security maximum 2
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security mac-address sticky
+    switchport port-security mac-address sticky
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security violation restrict
+    switchport port-security violation restrict
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/3
+    interface FastEthernet0/3
+    ACC-1(config-if)#
+ACC-1(config-if)# | description DB-01
+    description DB-01
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 40
+    switchport access vlan 40
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/3 but will only
+    have effect when the interface is in a non-trunking mode.
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree bpduguard enable
+    spanning-tree bpduguard enable
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security
+    switchport port-security
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security maximum 2
+    switchport port-security maximum 2
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security mac-address sticky
+    switchport port-security mac-address sticky
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security violation restrict
+    switchport port-security violation restrict
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/10
+    interface FastEthernet0/10
+    ACC-1(config-if)#
+ACC-1(config-if)# | description NOC-PC
+    description NOC-PC
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 10
+    switchport access vlan 10
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree portfast
+    spanning-tree portfast
+    %Warning: portfast should only be enabled on ports connected to a single
+    host. Connecting hubs, concentrators, switches, bridges, etc... to this
+    interface  when portfast is enabled, can cause temporary bridging loops.
+    Use with CAUTION
+    
+    %Portfast has been configured on FastEthernet0/10 but will only
+    have effect when the interface is in a non-trunking mode.
+    ACC-1(config-if)#
+ACC-1(config-if)# | spanning-tree bpduguard enable
+    spanning-tree bpduguard enable
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security
+    switchport port-security
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security maximum 2
+    switchport port-security maximum 2
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security mac-address sticky
+    switchport port-security mac-address sticky
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport port-security violation restrict
+    switchport port-security violation restrict
+    ACC-1(config-if)#
+ACC-1(config-if)# | no shutdown
+    no shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/4
+    interface FastEthernet0/4
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/5
+    interface FastEthernet0/5
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/6
+    interface FastEthernet0/6
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/7
+    interface FastEthernet0/7
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/8
+    interface FastEthernet0/8
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/9
+    interface FastEthernet0/9
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/11
+    interface FastEthernet0/11
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/12
+    interface FastEthernet0/12
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/13
+    interface FastEthernet0/13
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/14
+    interface FastEthernet0/14
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/15
+    interface FastEthernet0/15
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/16
+    interface FastEthernet0/16
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/17
+    interface FastEthernet0/17
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/18
+    interface FastEthernet0/18
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/19
+    interface FastEthernet0/19
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/20
+    interface FastEthernet0/20
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/21
+    interface FastEthernet0/21
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/22
+    interface FastEthernet0/22
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/23
+    interface FastEthernet0/23
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config-if)# | interface FastEthernet0/24
+    interface FastEthernet0/24
+    ACC-1(config-if)#
+ACC-1(config-if)# | description UNUSED-PARKED
+    description UNUSED-PARKED
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport mode access
+    switchport mode access
+    ACC-1(config-if)#
+ACC-1(config-if)# | switchport access vlan 999
+    switchport access vlan 999
+    ACC-1(config-if)#
+ACC-1(config-if)# | shutdown
+    shutdown
+    ACC-1(config-if)#
+ACC-1(config)# | exit
+    exit
+    ACC-1(config)#
+ACC-1(config)# | logging source-interface Vlan10
+    logging source-interface Vlan10
+                          ^
+    % Invalid input detected at '^' marker.
+    	
+    ACC-1(config)#
+ACC-1# | end
+    end
+    ACC-1#
+ACC-1# | write memory
+    write memory
+    Building configuration...
+    [OK]
+    ACC-1#

@@ -1,0 +1,11 @@
+CORE-1 core links restored + saved
+CORE-2 core links restored + saved
+ACC-1 write memory: write memory Building configuration... [OK] ACC-1#
+ACC-2 write memory: write memory Building configuration... [OK] ACC-2#
+DMZ-SW write memory: write memory Building configuration... [OK] DMZ-SW#
+INET-R write memory: write memory Building configuration... [OK] INET-R#
+ISP1-R write memory: write memory Building configuration... [OK] ISP1-R#
+ISP2-R write memory: write memory Building configuration... [OK] ISP2-R#
+EDGE-R1 write memory: write memory Building configuration... [OK] EDGE-R1#
+FW-1 write memory:  FW-1#rite memory ^ % Invalid input detected at '^' marker. FW-1#
+simtime 1712683

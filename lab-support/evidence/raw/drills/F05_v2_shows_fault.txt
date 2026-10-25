@@ -1,0 +1,73 @@
+### CORE-2# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   100 P Active   local           unknown         10.10.10.1     
+Vl20        20   110 P Active   local           10.10.20.2      10.10.20.1     
+Vl30        30   100 P Active   local           unknown         10.10.30.1     
+Vl50        50   100 P Active   local           unknown         10.10.50.1     
+Vl900       900  100 P Active   local           unknown         10.255.0.1     
+CORE-2#
+### CORE-2# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.1      1   FULL/BDR        00:00:27    10.255.0.2      Vlan900
+10.255.255.4      1   FULL/DR         00:00:36    10.255.0.4      Vlan900
+CORE-2#
+### CORE-2# show ip route
+show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 10.255.0.4 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 8 subnets, 3 masks
+C       10.10.10.0/24 is directly connected, Vlan10
+C       10.10.20.0/24 is directly connected, Vlan20
+C       10.10.30.0/24 is directly connected, Vlan30
+O       10.10.40.0/24 [110/2] via 10.255.0.4, 00:00:43, Vlan900
+C       10.10.50.0/24 is directly connected, Vlan50
+C       10.255.0.0/29 is directly connected, Vlan900
+O       10.255.255.1/32 [110/2] via 10.255.0.2, 00:00:43, Vlan900
+C       10.255.255.2/32 is directly connected, Loopback0
+O*E2 0.0.0.0/0 [110/1] via 10.255.0.4, 00:00:43, Vlan900
+
+CORE-2#
+### FW-1# show route
+show route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 198.51.100.1 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 10 subnets, 3 masks
+C       10.0.0.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+C       10.0.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+S       10.10.10.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+S       10.10.20.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+S       10.10.30.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+C       10.10.40.0 255.255.255.0 is directly connected, db, GigabitEthernet1/4
+S       10.10.50.0 255.255.255.0 [1/0] via 10.255.0.1, inside
+C       10.255.0.0 255.255.255.248 is directly connected, inside, GigabitEthernet1/2
+O       10.255.255.1 255.255.255.255 [110/2] via 10.255.0.2, inside, 00:06:20, GigabitEthernet1/2
+O       10.255.255.2 255.255.255.255 [110/2] via 10.255.0.3, inside, 00:00:54, GigabitEthernet1/2
+     172.16.0.0/24 is subnetted, 2 subnets
+C       172.16.0.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+C       172.16.50.0 255.255.255.0 is directly connected, dmz, GigabitEthernet1/3
+     198.51.100.0/29 is subnetted, 1 subnets
+C       198.51.100.0 255.255.255.248 is directly connected, outside, GigabitEthernet1/1
+S*   0.0.0.0/0 [1/0] via 198.51.100.1
+FW-1#

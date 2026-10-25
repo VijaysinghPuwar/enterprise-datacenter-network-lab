@@ -1,0 +1,5 @@
+set_true FW-1 GigabitEthernet1/1 proxyArp=true
+set_true FW-1 GigabitEthernet1/2 proxyArp=true
+set_true FW-1 GigabitEthernet1/3 proxyArp=true
+set_true FW-1 GigabitEthernet1/4 proxyArp=true
+devices=24 links=26 time=Sat Oct 24 19:43:45 2026 GMT-0400

@@ -1,0 +1,102 @@
+### CORE-1# show access-lists
+show access-lists
+Standard IP access list MGMT-SSH
+    10 permit 10.10.10.0 0.0.0.255
+    20 deny any
+Extended IP access list DB-PROTECT
+    10 permit ip 10.10.30.0 0.0.0.255 10.10.40.0 0.0.0.255
+    20 permit ip 10.10.10.0 0.0.0.255 10.10.40.0 0.0.0.255
+    30 permit ip 10.10.50.0 0.0.0.255 10.10.40.0 0.0.0.255
+    40 permit tcp any 10.10.40.0 0.0.0.255 established
+    50 permit icmp any 10.10.40.0 0.0.0.255 echo-reply
+    60 deny ip any 10.10.40.0 0.0.0.255
+
+CORE-1#
+### CORE-2# show access-lists
+show access-lists
+Standard IP access list MGMT-SSH
+    10 permit 10.10.10.0 0.0.0.255
+    20 deny any
+Extended IP access list DB-PROTECT
+    10 permit ip 10.10.30.0 0.0.0.255 10.10.40.0 0.0.0.255
+    20 permit ip 10.10.10.0 0.0.0.255 10.10.40.0 0.0.0.255
+    30 permit ip 10.10.50.0 0.0.0.255 10.10.40.0 0.0.0.255
+    40 permit tcp any 10.10.40.0 0.0.0.255 established
+    50 permit icmp any 10.10.40.0 0.0.0.255 echo-reply
+    60 deny ip any 10.10.40.0 0.0.0.255
+
+CORE-2#
+### CORE-2# show ip interface Vlan40
+show ip interface Vlan40
+Vlan40 is up, line protocol is up
+  Internet address is 10.10.40.3/24
+  Broadcast address is 255.255.255.255 
+  Address determined by setup command 
+  MTU is 1500 bytes 
+  Helper address is not set
+  Directed broadcast forwarding is disabled 
+  Outgoing access list is not set 
+  Inbound  access list is not set 
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled 
+  Security level is default 
+  Split horizon is enabled 
+  ICMP redirects are always sent 
+  ICMP unreachables are always sent 
+  ICMP mask replies are never sent 
+  IP fast switching is disabled 
+  IP fast switching on the same interface is disabled 
+  IP Null turbo vector 
+  IP multicast fast switching is disabled 
+  IP multicast distributed fast switching is disabled 
+  IP route-cache flags are None 
+  Router Discovery is disabled 
+  IP output packet accounting is disabled 
+  IP access violation accounting is disabled 
+  TCP/IP header compression is disabled 
+  RTP/IP header compression is disabled 
+  Probe proxy name replies are disabled 
+  Policy routing is disabled 
+  Network address translation is disable 
+  WCCP Redirect outbound is disabled 
+  WCCP Redirect inbound is disabled 
+  WCCP Redirect exclude is disabled 
+  BGP Policy Mapping is disabled 
+
+CORE-2#
+### CORE-2# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   100 P Standby  10.10.10.2      local           10.10.10.1     
+Vl20        20   110 P Active   local           10.10.20.2      10.10.20.1     
+Vl30        30   100 P Standby  10.10.30.2      local           10.10.30.1     
+Vl40        40   110 P Active   local           10.10.40.2      10.10.40.1     
+Vl50        50   100 P Standby  10.10.50.2      local           10.10.50.1     
+Vl900       900  100 P Standby  10.255.0.2      local           10.255.0.1     
+CORE-2#
+### CORE-2# show ip route
+show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is 10.255.0.4 to network 0.0.0.0
+
+     10.0.0.0/8 is variably subnetted, 8 subnets, 3 masks
+C       10.10.10.0/24 is directly connected, Vlan10
+C       10.10.20.0/24 is directly connected, Vlan20
+C       10.10.30.0/24 is directly connected, Vlan30
+C       10.10.40.0/24 is directly connected, Vlan40
+C       10.10.50.0/24 is directly connected, Vlan50
+C       10.255.0.0/29 is directly connected, Vlan900
+O       10.255.255.1/32 [110/2] via 10.255.0.2, 18:23:05, Vlan900
+C       10.255.255.2/32 is directly connected, Loopback0
+O*E2 0.0.0.0/0 [110/1] via 10.255.0.4, 00:01:33, Vlan900
+
+CORE-2#

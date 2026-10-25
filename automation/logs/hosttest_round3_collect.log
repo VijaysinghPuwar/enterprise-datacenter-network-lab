@@ -1,0 +1,7 @@
+D07-ssh-from-untrusted | WEB-01 -> ssh -l netadmin 10.10.10.11 | expect info | OUTPUT CAPTURED
+D10-public-dns | INET-SRV -> nslookup www.dc1-corp.com 198.51.100.11 | expect info | OUTPUT CAPTURED
+D03-internal-dns | SVC-MON -> nslookup web.dc1.lab | expect info | OUTPUT CAPTURED
+X10-tracert-internet | APP-02 -> tracert 203.0.113.10 | expect info | OUTPUT CAPTURED
+X11-tracert-db | APP-01 -> tracert 10.10.40.12 | expect info | OUTPUT CAPTURED
+D02b | WEB-02 -> ping -n 4 10.10.50.20 | expect permit | PASS sent=4 received=3 lost=1 (75% success)
+D06-ssh-core1 | NOC-PC -> ssh -l netadmin 10.10.10.2 | expect info | OUTPUT CAPTURED

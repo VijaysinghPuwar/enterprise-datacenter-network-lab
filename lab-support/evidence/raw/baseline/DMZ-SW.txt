@@ -1,0 +1,266 @@
+### DMZ-SW# show ip interface brief
+show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/1        unassigned      YES manual up                    up 
+FastEthernet0/2        unassigned      YES manual up                    up 
+FastEthernet0/3        unassigned      YES manual administratively down down 
+FastEthernet0/4        unassigned      YES manual administratively down down 
+FastEthernet0/5        unassigned      YES manual administratively down down 
+FastEthernet0/6        unassigned      YES manual administratively down down 
+FastEthernet0/7        unassigned      YES manual administratively down down 
+FastEthernet0/8        unassigned      YES manual administratively down down 
+FastEthernet0/9        unassigned      YES manual administratively down down 
+FastEthernet0/10       unassigned      YES manual administratively down down 
+FastEthernet0/11       unassigned      YES manual administratively down down 
+FastEthernet0/12       unassigned      YES manual administratively down down 
+FastEthernet0/13       unassigned      YES manual administratively down down 
+FastEthernet0/14       unassigned      YES manual administratively down down 
+FastEthernet0/15       unassigned      YES manual administratively down down 
+FastEthernet0/16       unassigned      YES manual administratively down down 
+FastEthernet0/17       unassigned      YES manual administratively down down 
+FastEthernet0/18       unassigned      YES manual administratively down down 
+FastEthernet0/19       unassigned      YES manual administratively down down 
+FastEthernet0/20       unassigned      YES manual administratively down down 
+FastEthernet0/21       unassigned      YES manual administratively down down 
+ --More-- 
+### DMZ-SW# show vlan brief
+
+%Warning: portfast should only be enabled on ports connected to a single
+host. Connecting hubs, concentrators, switches, bridges, etc... to this
+interface  when portfast is enabled, can cause temporary bridging loops.
+Use with CAUTION
+
+%Portfast has been configured on FastEthernet0/2 but will only
+have effect when the interface is in a non-trunking mode.
+DMZ-SW(config-if)#spanning-tree bpduguard enable
+DMZ-SW(config-if)#switchport port-security
+DMZ-SW(config-if)#switchport port-security maximum 2
+DMZ-SW(config-if)#switchport port-security mac-address sticky
+DMZ-SW(config-if)#switchport port-security violation restrict
+DMZ-SW(config-if)#no shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/3
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/4
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/5
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/6
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/7
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/8
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/9
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/10
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/11
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/12
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/13
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/14
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/15
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/16
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/17
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/18
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/19
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/20
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/21
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/22
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/23
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface FastEthernet0/24
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#interface GigabitEthernet0/2
+DMZ-SW(config-if)#description UNUSED-PARKED
+DMZ-SW(config-if)#switchport mode access
+DMZ-SW(config-if)#switchport access vlan 999
+DMZ-SW(config-if)#shutdown
+DMZ-SW(config-if)#exit
+DMZ-SW(config)#end
+DMZ-SW#write memory
+Building configuration...
+[OK]
+DMZ-SW#
+%SYS-5-CONFIG_I: Configured from console by console
+
+DMZ-SW#
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+
+DMZ-SW#terminal length 0
+                ^
+% Invalid input detected at '^' marker.
+	
+DMZ-SW#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/1        unassigned      YES manual up                    up 
+FastEthernet0/2        unassigned      YES manual up                    up 
+FastEthernet0/3        unassigned      YES manual administratively down down 
+FastEthernet0/4        unassigned      YES manual administratively down down 
+FastEthernet0/5        unassigned      YES manual administratively down down 
+FastEthernet0/6        unassigned      YES manual administratively down down 
+FastEthernet0/7        unassigned      YES manual administratively down down 
+FastEthernet0/8        unassigned      YES manual administratively down down 
+FastEthernet0/9        unassigned      YES manual administratively down down 
+FastEthernet0/10       unassigned      YES manual administratively down down 
+FastEthernet0/11       unassigned      YES manual administratively down down 
+FastEthernet0/12       unassigned      YES manual administratively down down 
+FastEthernet0/13       unassigned      YES manual administratively down down 
+FastEthernet0/14       unassigned      YES manual administratively down down 
+FastEthernet0/15       unassigned      YES manual administratively down down 
+FastEthernet0/16       unassigned      YES manual administratively down down 
+FastEthernet0/17       unassigned      YES manual administratively down down 
+FastEthernet0/18       unassigned      YES manual administratively down down 
+FastEthernet0/19       unassigned      YES manual administratively down down 
+FastEthernet0/20       unassigned      YES manual administratively down down 
+FastEthernet0/21       unassigned      YES manual administratively down down 
+
+DMZ-SW#how vlan brief
+           ^
+% Invalid input detected at '^' marker.
+	
+DMZ-SW#
+### DMZ-SW# show interfaces trunk
+show interfaces trunk
+
+
+DMZ-SW#
+### DMZ-SW# show spanning-tree root
+show spanning-tree root
+                          ^
+% Invalid input detected at '^' marker.
+	
+DMZ-SW#
+### DMZ-SW# show spanning-tree blockedports
+show spanning-tree blockedports
+                          ^
+% Invalid input detected at '^' marker.
+	
+DMZ-SW#
+### DMZ-SW# show port-security
+show port-security
+Secure Port MaxSecureAddr CurrentAddr SecurityViolation Security Action
+               (Count)       (Count)        (Count)
+--------------------------------------------------------------------
+        Fa0/1        2          0                 0         Restrict
+        Fa0/2        2          0                 0         Restrict
+----------------------------------------------------------------------
+DMZ-SW#
+### DMZ-SW# show ip dhcp snooping
+show ip dhcp snooping
+Switch DHCP snooping is disabled
+DHCP snooping is configured on following VLANs:
+none
+Insertion of option 82 is enabled
+Option 82 on untrusted port is not allowed
+Verification of hwaddr field is enabled
+Interface                  Trusted    Rate limit (pps)
+-----------------------    -------    ----------------
+DMZ-SW#
+### DMZ-SW# show ip ssh
+show ip ssh
+SSH Enabled - version 2.0
+Authentication timeout: 60 secs; Authentication retries: 2
+DMZ-SW#

@@ -1,0 +1,84 @@
+### CORE-2# show etherchannel summary
+show etherchannel summary
+Flags:  D - down        P - in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+
+1      Po1(SU)           LACP   Gig0/1(P) Gig0/2(P) 
+CORE-2#
+### CORE-2# show standby brief
+show standby brief
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State    Active          Standby         Virtual IP
+Vl10        10   100 P Standby  10.10.10.2      local           10.10.10.1     
+Vl20        20   110 P Active   local           10.10.20.2      10.10.20.1     
+Vl30        30   100 P Standby  10.10.30.2      local           10.10.30.1     
+Vl50        50   100 P Standby  10.10.50.2      local           10.10.50.1     
+Vl900       900  100 P Standby  10.255.0.2      local           10.255.0.1     
+CORE-2#
+### CORE-2# show ip ospf neighbor
+show ip ospf neighbor
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.255.1      1   FULL/BDR        00:00:32    10.255.0.2      Vlan900
+10.255.255.4      1   FULL/DR         00:00:31    10.255.0.4      Vlan900
+CORE-2#
+### ACC-1# show spanning-tree vlan 900
+show spanning-tree vlan 900
+VLAN0900
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4996
+             Address     00D0.581B.220B
+             Cost        19
+             Port        25(GigabitEthernet0/1)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    33668  (priority 32768 sys-id-ext 900)
+             Address     0030.A303.1450
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/24           Desg FWD 19        128.24   P2p
+Gi0/1            Root FWD 19        128.25   P2p
+Gi0/2            Altn BLK 19        128.26   P2p
+
+ACC-1#
+### ACC-2# show spanning-tree vlan 40
+show spanning-tree vlan 40
+VLAN0040
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4136
+             Address     0007.EC7C.5484
+             Cost        19
+             Port        26(GigabitEthernet0/2)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32808  (priority 32768 sys-id-ext 40)
+             Address     000D.BD0A.96C4
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/3            Desg FWD 19        128.3    P2p
+Fa0/24           Desg FWD 19        128.24   P2p
+Gi0/1            Altn BLK 19        128.25   P2p
+Gi0/2            Root FWD 19        128.26   P2p
+
+ACC-2#

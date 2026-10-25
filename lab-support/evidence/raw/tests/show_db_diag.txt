@@ -1,0 +1,53 @@
+### CORE-2# show interfaces FastEthernet0/24 status
+show interfaces FastEthernet0/24 status
+Port      Name               Status       Vlan       Duplex  Speed Type
+Fa0/24    FW-1-DB-ZONE       connected    40         a-full  a-100 10/100BaseTX
+
+CORE-2#
+### CORE-2# show mac address-table vlan 40
+show mac address-table vlan 40
+                              ^
+% Invalid input detected at '^' marker.
+	
+CORE-2#
+### FW-1# show arp
+show arp
+        db 10.10.40.1 0030.F27D.C504
+        db 10.10.40.11 000A.F396.D05A
+        db 10.10.40.12 0002.176D.7E35
+        inside 10.255.0.2 00D0.581B.2206
+        inside 10.255.0.3 0007.EC7C.5406
+        inside 10.255.0.4 0030.F27D.C502
+        dmz 172.16.50.1 0030.F27D.C503
+        dmz 172.16.50.10 0001.64EE.BE4C
+        dmz 172.16.50.11 0030.F243.1EC5
+        outside 198.51.100.2 0030.F27D.C501
+        outside 203.0.113.10 0060.70B6.4403
+FW-1#
+### FW-1# show access-list
+show access-list
+access-list cached ACL log flows: total 0, denied 0 (deny-flow-max 4096) alert-interval 300
+access-list OUTSIDE_IN; 4 elements; name hash: 0xeb828094
+access-list OUTSIDE_IN line 1 extended permit tcp any host 172.16.50.10 eq www(hitcnt=0) 0x8d039ca1
+access-list OUTSIDE_IN line 2 extended permit tcp any host 172.16.50.10 eq 443(hitcnt=0) 0xe39dcdd0
+access-list OUTSIDE_IN line 3 extended permit udp any host 172.16.50.11 eq domain(hitcnt=0) 0xccac6ce1
+access-list OUTSIDE_IN line 4 extended permit tcp any host 172.16.50.11 eq domain(hitcnt=0) 0x12438c74
+access-list DMZ_IN; 4 elements; name hash: 0xc9b0cd50
+access-list DMZ_IN line 1 extended permit udp 172.16.50.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0xc8a3c476
+access-list DMZ_IN line 2 extended deny ip 172.16.50.0 255.255.255.0 10.10.0.0 255.255.0.0(hitcnt=10) 0xdc278553
+access-list DMZ_IN line 3 extended deny ip 172.16.50.0 255.255.255.0 10.255.0.0 255.255.0.0(hitcnt=4) 0x92635c5d
+access-list DMZ_IN line 4 extended permit ip 172.16.50.0 255.255.255.0 any(hitcnt=0) 0x583d336c
+access-list INSIDE_IN; 5 elements; name hash: 0x64801dd7
+access-list INSIDE_IN line 1 extended permit ip 10.10.30.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=12) 0x1e5c7d3a
+access-list INSIDE_IN line 2 extended permit ip 10.10.10.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=0) 0x184cc6c4
+access-list INSIDE_IN line 3 extended permit ip 10.10.50.0 255.255.255.0 10.10.40.0 255.255.255.0(hitcnt=6) 0x5d19acce
+access-list INSIDE_IN line 4 extended deny ip any 10.10.40.0 255.255.255.0(hitcnt=12) 0xd0d969c8
+access-list INSIDE_IN line 5 extended permit ip any any(hitcnt=3) 0xc23eb3e7
+access-list DB_IN; 6 elements; name hash: 0x74a381da
+access-list DB_IN line 1 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.10 eq domain(hitcnt=0) 0x1b816783
+access-list DB_IN line 2 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 514(hitcnt=0) 0x67d86848
+access-list DB_IN line 3 extended permit udp 10.10.40.0 255.255.255.0 host 10.10.50.20 eq 123(hitcnt=0) 0x7b5c5730
+access-list DB_IN line 4 extended deny ip 10.10.40.0 255.255.255.0 10.0.0.0 255.0.0.0(hitcnt=20) 0xea3a1448
+access-list DB_IN line 5 extended deny ip 10.10.40.0 255.255.255.0 172.16.0.0 255.240.0.0(hitcnt=0) 0xda9dad42
+access-list DB_IN line 6 extended permit ip 10.10.40.0 255.255.255.0 any(hitcnt=5) 0xd84707b8
+FW-1#
